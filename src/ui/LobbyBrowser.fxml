@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" fx:controller="ui.LobbyBrowserController" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Region layoutX="386.0" layoutY="13.0" prefHeight="328.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" />
+      <Region layoutX="386.0" layoutY="13.0" prefHeight="306.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" />
       <Label alignment="CENTER" layoutX="386.0" layoutY="14.0" prefHeight="17.0" prefWidth="200.0" text="Filter Options">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -23,5 +23,6 @@
       <ListView layoutX="13.0" layoutY="13.0" prefHeight="373.0" prefWidth="357.0" />
       <Button layoutX="390.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="192.0" text="Join Selected Lobby" />
       <CheckBox layoutX="411.0" layoutY="83.0" mnemonicParsing="false" text="Show games in progress" />
+      <Button fx:id="btnGoToMain" layoutX="391.0" layoutY="327.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="192.0" text="Back to main menu" />
    </children>
 </AnchorPane>

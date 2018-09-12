@@ -1,138 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: E5322B;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.FourPlayerController">
    <children>
-      <AnchorPane layoutX="5.0" layoutY="5.0" prefHeight="590.0" prefWidth="590.0" style="-fx-background-color: FEF5B2;">
+       <ImageView fitHeight="609.0" fitWidth="699.0" layoutX="259.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+           <Image url="@Images/parchment-texture.jpg" />
+       </ImageView>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: E5322B;">
          <children>
-            <Circle fill="WHITE" layoutX="295.0" layoutY="45.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="GREEN" layoutX="95.0" layoutY="295.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="295.0" layoutY="545.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="45.0" layoutY="295.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="545.0" layoutY="295.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="RED" layoutX="345.0" layoutY="45.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="245.0" layoutY="45.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="345.0" layoutY="545.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="YELLOW" layoutX="245.0" layoutY="545.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="545.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="DODGERBLUE" layoutX="545.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="GREEN" layoutX="45.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="45.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="345.0" layoutY="95.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="345.0" layoutY="145.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="345.0" layoutY="195.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="495.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="445.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="395.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="345.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="345.0" layoutY="495.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="345.0" layoutY="445.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="345.0" layoutY="395.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="495.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="445.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="395.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="345.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="245.0" layoutY="95.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="245.0" layoutY="145.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="245.0" layoutY="195.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="245.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="195.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="145.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="95.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="245.0" layoutY="495.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="245.0" layoutY="445.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="245.0" layoutY="395.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="245.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="195.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="145.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="95.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="GREEN" layoutX="147.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="GREEN" layoutX="195.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="GREEN" layoutX="245.0" layoutY="295.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="RED" layoutX="295.0" layoutY="95.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="RED" layoutX="295.0" layoutY="145.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="RED" layoutX="295.0" layoutY="195.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="RED" layoutX="295.0" layoutY="245.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="DODGERBLUE" layoutX="345.0" layoutY="295.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="DODGERBLUE" layoutX="395.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="DODGERBLUE" layoutX="445.0" layoutY="295.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="DODGERBLUE" layoutX="495.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="YELLOW" layoutX="295.0" layoutY="495.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="YELLOW" layoutX="295.0" layoutY="445.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="YELLOW" layoutX="295.0" layoutY="395.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="YELLOW" layoutX="295.0" layoutY="345.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="GREEN" layoutX="90.0" layoutY="90.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="DODGERBLUE" layoutX="500.0" layoutY="500.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="YELLOW" layoutX="90.0" layoutY="500.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
-             <Circle fill="RED" layoutX="500.0" layoutY="90.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="LIGHTGREEN" layoutX="66.0" layoutY="69.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="LIGHTGREEN" layoutX="116.0" layoutY="69.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="LIGHTGREEN" layoutX="66.0" layoutY="114.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="LIGHTGREEN" layoutX="116.0" layoutY="114.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-             <Circle fill="SALMON" layoutX="474.0" layoutY="69.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-             <Circle fill="SALMON" layoutX="524.0" layoutY="69.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-             <Circle fill="SALMON" layoutX="474.0" layoutY="114.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-             <Circle fill="SALMON" layoutX="524.0" layoutY="114.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-             <Circle fill="LIGHTBLUE" layoutX="476.0" layoutY="478.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-             <Circle fill="LIGHTBLUE" layoutX="526.0" layoutY="478.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-             <Circle fill="LIGHTBLUE" layoutX="476.0" layoutY="523.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-             <Circle fill="LIGHTBLUE" layoutX="526.0" layoutY="523.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-             <Circle fill="LIGHTYELLOw" layoutX="65.0" layoutY="478.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-             <Circle fill="LIGHTYELLOw" layoutX="115.0" layoutY="478.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-             <Circle fill="LIGHTYELLOw" layoutX="65.0" layoutY="523.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-             <Circle fill="LIGHTYELLOw" layoutX="115.0" layoutY="523.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label alignment="CENTER" layoutX="137.0" layoutY="158.0" prefHeight="35.0" prefWidth="77.0" text="MENS">
-               <font>
-                  <Font name="Bauhaus 93" size="24.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="377.0" layoutY="158.0" prefHeight="35.0" prefWidth="77.0" text="ERGER">
-               <font>
-                  <Font name="Bauhaus 93" size="24.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="137.0" layoutY="398.0" prefHeight="35.0" prefWidth="77.0" text="JE">
-               <font>
-                  <Font name="Bauhaus 93" size="24.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="377.0" layoutY="398.0" prefHeight="35.0" prefWidth="77.0" text="NIET">
-               <font>
-                  <Font name="Bauhaus 93" size="24.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="40.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-               <image>
-                  <Image url="@Images/arrow-35.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="185.0" layoutY="498.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-               <image>
-                  <Image url="@Images/arrow-35.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="499.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Images/arrow-35.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="355.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-               <image>
-                  <Image url="@Images/arrow-35.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="265.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true" >
-            <image>
-                <Image url="@Images/DiceOne.png" />
-            </image>
-            </ImageView>
-         </children></AnchorPane>
-
+            <AnchorPane layoutX="5.0" layoutY="5.0" prefHeight="590.0" prefWidth="590.0" style="-fx-background-color: FEF5B2;">
+               <children>
+                  <!--All Tiles belonging to the Green Quadrant-->
+                  <Circle fx:id="GR01" fill="GREEN" layoutX="45.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GR02" fill="WHITE" layoutX="95.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GR03" fill="WHITE" layoutX="145.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GR04" fill="WHITE" layoutX="195.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GR05" fill="WHITE" layoutX="245.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GR06" fill="WHITE" layoutX="245.0" layoutY="195.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GR07" fill="WHITE" layoutX="245.0" layoutY="145.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GR08" fill="WHITE" layoutX="245.0" layoutY="95.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GR09" fill="WHITE" layoutX="245.0" layoutY="45.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GR10" fill="WHITE" layoutX="295.0" layoutY="45.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                   <!--Tiles for the Green Homebase-->
+                  <Circle fx:id="GRH1" fill="GREEN" layoutX="95.0" layoutY="295.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GRH2" fill="GREEN" layoutX="147.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GRH3" fill="GREEN" layoutX="195.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GRH4" fill="GREEN" layoutX="245.0" layoutY="295.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                   <!--Tiles for the Green starting base-->
+                  <Circle fill="GREEN" layoutX="90.0" layoutY="90.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GRS1" fill="LIGHTGREEN" layoutX="66.0" layoutY="69.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GRS2" fill="LIGHTGREEN" layoutX="116.0" layoutY="69.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GRS3" fill="LIGHTGREEN" layoutX="66.0" layoutY="114.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="GRS4" fill="LIGHTGREEN" layoutX="116.0" layoutY="114.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      
+      
+                  <!--All Tiles belonging to the Blue Quadrant-->
+                  <Circle fx:id="BL01" fill="DODGERBLUE" layoutX="545.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BL02" fill="WHITE" layoutX="495.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BL03" fill="WHITE" layoutX="445.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BL04" fill="WHITE" layoutX="395.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BL05" fill="WHITE" layoutX="345.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BL06" fill="WHITE" layoutX="345.0" layoutY="395.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BL07" fill="WHITE" layoutX="345.0" layoutY="445.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BL08" fill="WHITE" layoutX="345.0" layoutY="495.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BL09" fill="WHITE" layoutX="345.0" layoutY="545.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BL10" fill="WHITE" layoutX="295.0" layoutY="545.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                   <!--Tiles for the Blue Homebase-->
+                  <Circle fx:id="BLH1" fill="DODGERBLUE" layoutX="495.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BLH2" fill="DODGERBLUE" layoutX="445.0" layoutY="295.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BLH3" fill="DODGERBLUE" layoutX="395.0" layoutY="294.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BLH4" fill="DODGERBLUE" layoutX="345.0" layoutY="295.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                   <!--Tiles for the Blue starting base-->
+                  <Circle fill="DODGERBLUE" layoutX="500.0" layoutY="500.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BLS1" fill="LIGHTBLUE" layoutX="476.0" layoutY="478.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BLS2" fill="LIGHTBLUE" layoutX="526.0" layoutY="478.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BLS3" fill="LIGHTBLUE" layoutX="476.0" layoutY="523.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="BLS4" fill="LIGHTBLUE" layoutX="526.0" layoutY="523.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      
+      
+                  <!--All Tiles belonging to the Yellow Quadrant-->
+                  <Circle fx:id="YE01" fill="YELLOW" layoutX="245.0" layoutY="545.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YE02" fill="WHITE" layoutX="245.0" layoutY="495.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YE03" fill="WHITE" layoutX="245.0" layoutY="445.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YE04" fill="WHITE" layoutX="245.0" layoutY="395.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YE05" fill="WHITE" layoutX="245.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YE06" fill="WHITE" layoutX="195.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YE07" fill="WHITE" layoutX="145.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YE08" fill="WHITE" layoutX="95.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YE09" fill="WHITE" layoutX="45.0" layoutY="345.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YE10" fill="WHITE" layoutX="45.0" layoutY="295.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <!--Tiles for the Yellow Homebase-->
+                  <Circle fx:id="YEH1" fill="YELLOW" layoutX="295.0" layoutY="495.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YEH2" fill="YELLOW" layoutX="295.0" layoutY="445.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YEH3" fill="YELLOW" layoutX="295.0" layoutY="395.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YEH4" fill="YELLOW" layoutX="295.0" layoutY="345.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                   <!--Tiles for the Yellow starting base-->
+                  <Circle fill="YELLOW" layoutX="90.0" layoutY="500.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YES1" fill="LIGHTYELLOw" layoutX="65.0" layoutY="478.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YES2" fill="LIGHTYELLOw" layoutX="115.0" layoutY="478.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YES3" fill="LIGHTYELLOw" layoutX="65.0" layoutY="523.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="YES4" fill="LIGHTYELLOw" layoutX="115.0" layoutY="523.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      
+      
+                  <!--All Tiles belonging to the Red Quadrant-->
+                  <Circle fx:id="RE01" fill="RED" layoutX="345.0" layoutY="45.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="RE02" fill="WHITE" layoutX="345.0" layoutY="95.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="RE03" fill="WHITE" layoutX="345.0" layoutY="145.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="RE04" fill="WHITE" layoutX="345.0" layoutY="195.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="RE05" fill="WHITE" layoutX="345.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="RE06" fill="WHITE" layoutX="395.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="RE07" fill="WHITE" layoutX="445.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="RE08" fill="WHITE" layoutX="495.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="RE09" fill="WHITE" layoutX="545.0" layoutY="245.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="RE10" fill="WHITE" layoutX="545.0" layoutY="295.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                   <!--Tiles for the Red Homebase-->
+                  <Circle fx:id="REH1" fill="RED" layoutX="295.0" layoutY="95.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="REH2" fill="RED" layoutX="295.0" layoutY="145.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="REH3" fill="RED" layoutX="295.0" layoutY="195.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="REH4" fill="RED" layoutX="295.0" layoutY="245.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                   <!--Tiles for the Red starting base-->
+                  <Circle fill="RED" layoutX="500.0" layoutY="90.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="RES1" fill="SALMON" layoutX="474.0" layoutY="69.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="RES2" fill="SALMON" layoutX="524.0" layoutY="69.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="RES3" fill="SALMON" layoutX="474.0" layoutY="114.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="RES4" fill="SALMON" layoutX="524.0" layoutY="114.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      
+                  <Label alignment="CENTER" layoutX="137.0" layoutY="158.0" prefHeight="35.0" prefWidth="77.0" text="MENS">
+                     <font>
+                        <Font name="Bauhaus 93" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="377.0" layoutY="158.0" prefHeight="35.0" prefWidth="77.0" text="ERGER">
+                     <font>
+                        <Font name="Bauhaus 93" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="137.0" layoutY="398.0" prefHeight="35.0" prefWidth="77.0" text="JE">
+                     <font>
+                        <Font name="Bauhaus 93" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="377.0" layoutY="398.0" prefHeight="35.0" prefWidth="77.0" text="NIET">
+                     <font>
+                        <Font name="Bauhaus 93" size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="40.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <Image url="@Images/arrow-35.png" />
+                  </ImageView>
+                  <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="185.0" layoutY="498.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                     <Image url="@Images/arrow-35.png" />
+                  </ImageView>
+                  <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="499.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@Images/arrow-35.png" />
+                  </ImageView>
+                  <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="355.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+                     <Image url="@Images/arrow-35.png" />
+                  </ImageView>
+                  <ImageView fx:id="imgDice" fitHeight="60.0" fitWidth="60.0" layoutX="265.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@Images/DiceNONE.png" />
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <ListView layoutX="630.0" layoutY="353.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextField layoutX="630.0" layoutY="553.0" prefHeight="25.0" prefWidth="200.0" />
+      <TableView layoutX="630.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="116.0" text="Player" />
+          <TableColumn prefWidth="83.0" text="Score" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnThrowDice" layoutX="630.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Throw Dice" />
+      <Button layoutX="630.0" layoutY="270.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="########" />
+      <Button fx:id="btnLeaveGame" layoutX="630.0" layoutY="310.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Leave Game" />
    </children>
 </AnchorPane>
