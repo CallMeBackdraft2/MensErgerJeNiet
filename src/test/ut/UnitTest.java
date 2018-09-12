@@ -1,4 +1,4 @@
-package unittests;
+package ut;
 
 import classes.Dice;
 import org.hamcrest.CoreMatchers;
@@ -9,7 +9,7 @@ import static org.junit.Assert.assertThat;
 
 public class UnitTest {
     @Test
-    public void testDicePercentages(){
+    public void DicePercentageTest(){
         Dice dice = new Dice();
         int iterations = 1000000;
         int oneCount = 0;
