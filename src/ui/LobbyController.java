@@ -21,19 +21,8 @@ public class LobbyController {
     void initialize(){
         btnLeaveLobby.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                Parent root;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-                    Stage stage = new Stage();
-                    stage.setTitle("Mens Erger Je Niet");
-                    stage.setScene(new Scene(root));
-                    stage.show();
-                    // Hide this current window (if this is what you want)
-                    ((Node)(event.getSource())).getScene().getWindow().hide();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
+                JavaFXSceneFactory.generateStage(getClass().getResource("MainMenu.fxml"),false, "Hoofdmenu").show();
+                ((Node)(event.getSource())).getScene().getWindow().hide();
             }
         });
     }

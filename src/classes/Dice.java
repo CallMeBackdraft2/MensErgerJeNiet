@@ -27,7 +27,7 @@ public class Dice {
     private diceNumber convertToDiceNumber(double rolledValue){
         diceNumber result = null;
         //The below IF containers are used to be able to control the chances of getting a certain diceroll
-        //every the difference between the value of if statement and the following statement is the percentage chance of getting that roll
+        //the difference between the value of if statement and the following statement is the percentage chance of getting that roll
         if(rolledValue < 0.16){
             result = diceNumber.ONE;
         } else if (rolledValue < 0.32) {

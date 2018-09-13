@@ -31,55 +31,22 @@ public class MainMenuController {
     void initialize(){
         btnQuickPlay.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                Parent root;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("4-Player.fxml"));
-                    Stage stage = new Stage();
-                    stage.setTitle("4 Player Game");
-                    stage.setScene(new Scene(root));
-                    stage.show();
-                    // Hide this current window (if this is what you want)
-                    ((Node)(event.getSource())).getScene().getWindow().hide();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
+                JavaFXSceneFactory.generateStage(getClass().getResource("4-Player.fxml"),false,"Speelbord",629).show();
+                ((Node)(event.getSource())).getScene().getWindow().hide();
             }
         });
 
         btnCreateLobby.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                Parent root;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("LobbyView.fxml"));
-                    Stage stage = new Stage();
-                    stage.setTitle("Lobby - ABC######");
-                    stage.setScene(new Scene(root));
-                    stage.show();
-                    // Hide this current window (if this is what you want)
-                    ((Node)(event.getSource())).getScene().getWindow().hide();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
+                JavaFXSceneFactory.generateStage(getClass().getResource("LobbyView.fxml"), false, "Spellobby").show();
+                ((Node)(event.getSource())).getScene().getWindow().hide();
             }
         });
 
         btnFindLobby.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                Parent root;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("LobbyBrowser.fxml"));
-                    Stage stage = new Stage();
-                    stage.setTitle("Mens Erger Je Niet - Lobby Browser");
-                    stage.setScene(new Scene(root));
-                    stage.show();
-                    // Hide this current window (if this is what you want)
-                    ((Node)(event.getSource())).getScene().getWindow().hide();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
+                JavaFXSceneFactory.generateStage(getClass().getResource("LobbyBrowser.fxml"),false, "Lobby Browser").show();
+                ((Node)(event.getSource())).getScene().getWindow().hide();
             }
         });
 

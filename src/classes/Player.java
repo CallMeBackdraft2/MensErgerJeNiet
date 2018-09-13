@@ -8,10 +8,11 @@ public class Player {
     private Pawn[] pawnArray;
     private int PlayerScore;
 
-    public Player(){
-        pawnArray = new Pawn[4];
+    public Player(playerColor color){
+        this.pawnArray = new Pawn[4];
+        this.playercolor = color;
         for(int i = 0; i < 4; i++){
-            pawnArray[i] = new Pawn(i);
+            this.pawnArray[i] = new Pawn(i);
             setPawnLoc(i,0);
         }
     }

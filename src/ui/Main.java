@@ -10,10 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-        primaryStage.setTitle("Mens Erger Je Niet");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+        JavaFXSceneFactory.generateStage(getClass().getResource("MainMenu.fxml"), false, "Hoofdmenu").show();
     }
 
 

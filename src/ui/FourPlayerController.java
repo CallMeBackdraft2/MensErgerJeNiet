@@ -25,14 +25,10 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.util.Pair;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class FourPlayerController {
@@ -40,7 +36,6 @@ public class FourPlayerController {
 
     private GameBoard gb = new GameBoard(gameType.FOURPLAYER);
     private boolean isThrown;
-    private Circle selectedPawn = null;
     private HashMap<String,String> identifyingList = new HashMap<String,String>() {{
         put("GR","Green");
         put("BL","Blue");
@@ -53,31 +48,22 @@ public class FourPlayerController {
         put("K","WalkingTile");
     }};
 
-    Player player;
 
     @FXML
     ImageView imgDice;
     @FXML
-    Button btnThrowDice;
-    @FXML
     Button btnLeaveGame;
-
     @FXML
-    Circle REP01;
-    Circle REP02;
-    Circle REP03;
-    Circle REP04;
+    Button btnThrowDice;
+
+
 
     @FXML
     void initialize(){
-        //todo fix all this cleanly
-        player = new Player();
-        for(int i = 0; i < 4; i++){
-            player.setPawnLoc(i,i);
-        }
+        addAllEventHandlers();
+    }
 
-
-
+    private void addAllEventHandlers() {
         imgDice.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -94,19 +80,8 @@ public class FourPlayerController {
 
         btnLeaveGame.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                Parent root;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-                    Stage stage = new Stage();
-                    stage.setTitle("Mens Erger Je Niet");
-                    stage.setScene(new Scene(root));
-                    stage.show();
-                    // Hide this current window (if this is what you want)
-                    ((Node)(event.getSource())).getScene().getWindow().hide();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
+                JavaFXSceneFactory.generateStage(getClass().getResource("MainMenu.fxml"),false, "Hoofdmenu").show();
+                ((Node)(event.getSource())).getScene().getWindow().hide();
             }
         });
     }
@@ -153,19 +128,36 @@ public class FourPlayerController {
     @FXML
     public void handleMouseClick(MouseEvent mouseEvent) {
         //todo fix all this cleanly
+
         Circle clickedCircle = (Circle)mouseEvent.getSource();
-        String circleIdentifier = clickedCircle.getId();
-        if(identifyingList.get(circleIdentifier.substring(2,3)).equals("Pawn")){
+        String circleFullID = clickedCircle.getId();
+        String circleTypeID = identifyingList.get(circleFullID.substring(2,3));
+        String circlePlayerID = identifyingList.get(circleFullID.substring(0,2)).toUpperCase();
+        int circleNumericID = Integer.parseInt(circleFullID.substring(3,5));
+
+
+        System.out.println(circleTypeID);
+        System.out.println(circlePlayerID.toUpperCase());
+        System.out.println(circleNumericID);
+        if (circleTypeID == "Pawn"){
+            System.out.println(gb.getPlayerByColor(playerColor.valueOf(circlePlayerID)));
+        }
+
+
+
+
+        /*System.out.println("Type: " + circleTypeID + " Player: " + circlePlayerID + " Number: " + circleNumericID);
+        if(identifyingList.get(circleFullID.substring(2,3)).equals("Pawn")){
             selectedPawn = clickedCircle;
-            if(player.getPawnLoc(Integer.parseInt(selectedPawn.getId().substring(3,5))) == 0){
-                player.movePawnIntoPlay(Integer.parseInt(selectedPawn.getId().substring(3,5)));
+            if(player.getPawnState(Integer.parseInt(circleFullID.substring(3,5)) - 1) == pawnState.STARTPOSITION){
+                player.movePawnIntoPlay(Integer.parseInt(selectedPawn.getId().substring(3,5)) - 1);
             }
-        } else if(selectedPawn != null && (identifyingList.get(circleIdentifier.substring(0,2)).equals("WalkingTile") || identifyingList.get(circleIdentifier.substring(0,2)).equals(identifyingList.get(selectedPawn.getId().substring(0,2))))){
-            if(player.getPawnState(Integer.parseInt(selectedPawn.getId().substring(3,5))) == pawnState.STARTPOSITION || (player.getPawnLoc(Integer.parseInt(selectedPawn.getId().substring(3,5))) < Integer.parseInt(circleIdentifier.substring(3,5)))){
-                player.setPawnLoc(Integer.parseInt(selectedPawn.getId().substring(3,5)),Integer.parseInt(circleIdentifier.substring(3,5)));
+        } else if(selectedPawn != null && (identifyingList.get(circleFullID.substring(0,2)).equals("WalkingTile") || identifyingList.get(circleFullID.substring(0,2)).equals(identifyingList.get(selectedPawn.getId().substring(0,2))))){
+            if(player.getPawnState(Integer.parseInt(selectedPawn.getId().substring(3,5)) - 1) == pawnState.STARTPOSITION || (player.getPawnLoc(Integer.parseInt(selectedPawn.getId().substring(3,5)) - 1) < Integer.parseInt(circleFullID.substring(3,5)))){
+                player.setPawnLoc(Integer.parseInt(selectedPawn.getId().substring(3,5)) - 1,Integer.parseInt(circleFullID.substring(3,5)));
                 selectedPawn.setLayoutX(clickedCircle.getLayoutX());
                 selectedPawn.setLayoutY(clickedCircle.getLayoutY());
             }
-        }
+        }*/
     }
 }
