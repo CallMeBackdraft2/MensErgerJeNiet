@@ -13,7 +13,7 @@
       <Button fx:id="btnQuickPlay" layoutX="298.0" layoutY="268.0" mnemonicParsing="false" prefHeight="30" prefWidth="90" text="Quick Play" />
       <ImageView fitHeight="206.0" fitWidth="428.0" layoutX="100.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Images/mens-erger-je-niet.png" />
+            <Image url="@../Images/mens-erger-je-niet.png" />
          </image>
       </ImageView>
    </children>

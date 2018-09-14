@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        JavaFXSceneFactory.generateStage(getClass().getResource("MainMenu.fxml"), false, "Hoofdmenu").show();
+        JavaFXSceneFactory.generateStage(getClass().getResource("guifiles/MainMenu.fxml"), false, "Hoofdmenu").show();
     }
 
 

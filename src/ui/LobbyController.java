@@ -21,7 +21,7 @@ public class LobbyController {
     void initialize(){
         btnLeaveLobby.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(getClass().getResource("MainMenu.fxml"),false, "Hoofdmenu").show();
+                JavaFXSceneFactory.generateStage(getClass().getResource("guifiles/MainMenu.fxml"),false, "Hoofdmenu").show();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
             }
         });

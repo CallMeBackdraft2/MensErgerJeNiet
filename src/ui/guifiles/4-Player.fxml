@@ -15,7 +15,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.FourPlayerController">
    <children>
        <ImageView fitHeight="635.0" fitWidth="699.0" layoutX="313.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
-           <Image url="@Images/parchment-texture.jpg" />
+           <Image url="@../Images/parchment-texture.jpg" />
        </ImageView>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: E5322B;">
          <children>
@@ -159,19 +159,19 @@
                      </font>
                   </Label>
                   <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="40.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <Image url="@Images/arrow-35.png" />
+                     <Image url="@../Images/arrow-35.png" />
                   </ImageView>
                   <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="185.0" layoutY="498.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-                     <Image url="@Images/arrow-35.png" />
+                     <Image url="@../Images/arrow-35.png" />
                   </ImageView>
                   <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="499.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@Images/arrow-35.png" />
+                     <Image url="@../Images/arrow-35.png" />
                   </ImageView>
                   <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="355.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-                     <Image url="@Images/arrow-35.png" />
+                     <Image url="@../Images/arrow-35.png" />
                   </ImageView>
                   <ImageView fx:id="imgDice" fitHeight="60.0" fitWidth="60.0" layoutX="265.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@Images/DiceNONE.png" />
+                     <Image url="@../Images/DiceNONE.png" />
                   </ImageView>
 
                </children>

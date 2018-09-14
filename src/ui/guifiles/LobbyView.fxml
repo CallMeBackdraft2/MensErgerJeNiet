@@ -20,7 +20,7 @@
       <Button fx:id="btnLeaveLobby" layoutX="339.0" layoutY="361.0" mnemonicParsing="false" text="Leave Lobby" />
       <Label layoutX="270.0" layoutY="98.0" text="Player List:" />
        <ImageView fitHeight="240.0" fitWidth="240.0" layoutX="14.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
-           <Image url="@Images/4playerboard.JPG" />
+           <Image url="@../Images/4playerboard.JPG" />
        </ImageView>
       <ChoiceBox layoutX="14.0" layoutY="73.0" prefHeight="25.0" prefWidth="240.0" />
       <Label layoutX="14.0" layoutY="56.0" text="Game Mode:" />

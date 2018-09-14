@@ -31,21 +31,21 @@ public class MainMenuController {
     void initialize(){
         btnQuickPlay.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(getClass().getResource("4-Player.fxml"),false,"Speelbord",629).show();
+                JavaFXSceneFactory.generateStage(getClass().getResource("guifiles/4-Player.fxml"),false,"Speelbord",629).show();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
             }
         });
 
         btnCreateLobby.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(getClass().getResource("LobbyView.fxml"), false, "Spellobby").show();
+                JavaFXSceneFactory.generateStage(getClass().getResource("guifiles/LobbyView.fxml"), false, "Spellobby").show();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
             }
         });
 
         btnFindLobby.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(getClass().getResource("LobbyBrowser.fxml"),false, "Lobby Browser").show();
+                JavaFXSceneFactory.generateStage(getClass().getResource("guifiles/LobbyBrowser.fxml"),false, "Lobby Browser").show();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
             }
         });

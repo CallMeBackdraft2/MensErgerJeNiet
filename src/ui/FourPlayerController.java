@@ -32,6 +32,7 @@ import java.util.HashMap;
 
 
 public class FourPlayerController {
+    //todo check what of all this can be put into gamelogic and what has to stay tied to the UI
 
 
     private GameBoard gb = new GameBoard(gameType.FOURPLAYER);
@@ -80,7 +81,7 @@ public class FourPlayerController {
 
         btnLeaveGame.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(getClass().getResource("MainMenu.fxml"),false, "Hoofdmenu").show();
+                JavaFXSceneFactory.generateStage(getClass().getResource("guifiles/MainMenu.fxml"),false, "Hoofdmenu").show();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
             }
         });
