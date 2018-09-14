@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8.0.121" fx:controller="ui.LobbyController" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ChoiceBox layoutX="270.0" layoutY="31.0" prefWidth="150.0" />
       <ListView layoutX="271.0" layoutY="115.0" prefHeight="240.0" prefWidth="150.0" />

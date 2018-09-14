@@ -3,13 +3,14 @@ package classes;
 import enums.pawnState;
 
 public class Pawn {
-    private int pawnID;
+    private int id;
     private int pawnLoc;
     private pawnState pawnstate;
 
-    public Pawn(int pawnID){
+    public Pawn(int id){
         //every newly instantiated pawn always starts in one of the four start positions of the player
         this.pawnstate = pawnState.STARTPOSITION;
+        this.id = id;
     }
 
     public void setPawnLoc(int pawnLoc){

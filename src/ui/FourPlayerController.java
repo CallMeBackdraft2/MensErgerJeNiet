@@ -1,41 +1,30 @@
 package ui;
 
-import classes.GameBoard;
-import classes.Player;
-import enums.gameType;
-import enums.pawnState;
-import enums.playerColor;
+import classes.Lobby;
+import classes.Tile;
 import javafx.animation.*;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class FourPlayerController {
     //todo check what of all this can be put into gamelogic and what has to stay tied to the UI
-
-
-    private GameBoard gb = new GameBoard(gameType.FOURPLAYER);
+    private Lobby lobby;
     private boolean isThrown;
     private HashMap<String,String> identifyingList = new HashMap<String,String>() {{
         put("GR","Green");
@@ -56,12 +45,28 @@ public class FourPlayerController {
     Button btnLeaveGame;
     @FXML
     Button btnThrowDice;
-
-
+    @FXML
+    AnchorPane boardPane;
 
     @FXML
     void initialize(){
         addAllEventHandlers();
+        populatePlayingField();
+    }
+
+    private void populatePlayingField() {
+        for(int i = 0; i < boardPane.getChildren().size(); i++){
+            if(boardPane.getChildren().get(i) instanceof Circle && boardPane.getChildren().get(i).getId() != null){
+                String fullID = boardPane.getChildren().get(i).getId();
+                Tile tile = null;
+                if (!identifyingList.get(fullID.substring(0,2)).equals("WalkingTile")){
+                    tile = new Tile(Integer.parseInt(fullID.substring(3,5)),identifyingList.get(fullID.substring(2,3)),identifyingList.get(fullID.substring(0,2)).toUpperCase());
+                } else {
+                    tile = new Tile(Integer.parseInt(fullID.substring(3,5)),identifyingList.get(fullID.substring(2,3)));
+                }
+                lobby.getGameBoard().getPlayingField().addToTileList(tile);
+            }
+        }
     }
 
     private void addAllEventHandlers() {
@@ -81,7 +86,7 @@ public class FourPlayerController {
 
         btnLeaveGame.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(getClass().getResource("guifiles/MainMenu.fxml"),false, "Hoofdmenu").show();
+                JavaFXSceneFactory.generateStage(new MainMenuController(),getClass().getResource("guifiles/MainMenu.fxml"),false, "Hoofdmenu").show();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
             }
         });
@@ -90,7 +95,7 @@ public class FourPlayerController {
     private void throwDice(){
         if (!isThrown){
             Image diceNone = new Image(getClass().getResourceAsStream("Images/DiceNONE.png"));
-            String url = "Images/Dice" + gb.rollDice().name() + ".png";
+            String url = "Images/Dice" + lobby.getGameBoard().rollDice().name() + ".png";
             imgDice.setImage(new Image(getClass().getResourceAsStream(url)));
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.ZERO, new KeyValue(imgDice.imageProperty(), diceNone)),
@@ -105,6 +110,10 @@ public class FourPlayerController {
             );
             timeline.play();
         }
+    }
+
+    public void setLobby(Lobby lobby) {
+        this.lobby = lobby;
     }
 
     private void playSound(String path){
@@ -128,37 +137,8 @@ public class FourPlayerController {
 
     @FXML
     public void handleMouseClick(MouseEvent mouseEvent) {
-        //todo fix all this cleanly
-
-        Circle clickedCircle = (Circle)mouseEvent.getSource();
-        String circleFullID = clickedCircle.getId();
-        String circleTypeID = identifyingList.get(circleFullID.substring(2,3));
-        String circlePlayerID = identifyingList.get(circleFullID.substring(0,2)).toUpperCase();
-        int circleNumericID = Integer.parseInt(circleFullID.substring(3,5));
-
-
-        System.out.println(circleTypeID);
-        System.out.println(circlePlayerID.toUpperCase());
-        System.out.println(circleNumericID);
-        if (circleTypeID == "Pawn"){
-            System.out.println(gb.getPlayerByColor(playerColor.valueOf(circlePlayerID)));
-        }
-
-
-
-
-        /*System.out.println("Type: " + circleTypeID + " Player: " + circlePlayerID + " Number: " + circleNumericID);
-        if(identifyingList.get(circleFullID.substring(2,3)).equals("Pawn")){
-            selectedPawn = clickedCircle;
-            if(player.getPawnState(Integer.parseInt(circleFullID.substring(3,5)) - 1) == pawnState.STARTPOSITION){
-                player.movePawnIntoPlay(Integer.parseInt(selectedPawn.getId().substring(3,5)) - 1);
-            }
-        } else if(selectedPawn != null && (identifyingList.get(circleFullID.substring(0,2)).equals("WalkingTile") || identifyingList.get(circleFullID.substring(0,2)).equals(identifyingList.get(selectedPawn.getId().substring(0,2))))){
-            if(player.getPawnState(Integer.parseInt(selectedPawn.getId().substring(3,5)) - 1) == pawnState.STARTPOSITION || (player.getPawnLoc(Integer.parseInt(selectedPawn.getId().substring(3,5)) - 1) < Integer.parseInt(circleFullID.substring(3,5)))){
-                player.setPawnLoc(Integer.parseInt(selectedPawn.getId().substring(3,5)) - 1,Integer.parseInt(circleFullID.substring(3,5)));
-                selectedPawn.setLayoutX(clickedCircle.getLayoutX());
-                selectedPawn.setLayoutY(clickedCircle.getLayoutY());
-            }
-        }*/
+        //todo find way to handle movement posibilities and legality
+        /*selectedPawn.setLayoutX(clickedCircle.getLayoutX());
+        selectedPawn.setLayoutY(clickedCircle.getLayoutY());*/
     }
 }

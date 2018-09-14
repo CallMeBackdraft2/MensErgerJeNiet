@@ -14,23 +14,31 @@ public class JavaFXSceneFactory {
 
     }
 
-    static Stage generateStage(URL fxmlPath, boolean resizable, String stageTitle){
-        return getStage(fxmlPath, resizable, stageTitle);
+    static Stage generateStage(Object controller,URL fxmlPath, boolean resizable, String stageTitle){
+        return getStage(controller,fxmlPath, resizable,stageTitle);
     }
 
 
-    static Stage generateStage(URL fxmlPath, boolean resizable, String stageTitle, int customHeight){
-        Stage result = getStage(fxmlPath,resizable, stageTitle);
-        result.setHeight(customHeight);
+    static Stage generateStage(Object controller,URL fxmlPath, boolean resizable, String stageTitle, int customHeight, int customWidth){
+        Stage result = getStage(controller,fxmlPath,resizable,stageTitle);
+        if (customHeight != 0){
+            result.setHeight(customHeight);
+        }
+        if (customWidth != 0){
+            result.setWidth(customWidth);
+        }
         return result;
     }
 
-    private static Stage getStage(URL fxmlPath, boolean resizable, String stageTitle){
-        Parent root;
+
+
+    private static Stage getStage(Object controller,URL fxmlPath, boolean resizable, String stageTitle){
         try {
-            root = FXMLLoader.load(fxmlPath);
+            FXMLLoader loader = new FXMLLoader(fxmlPath);
+            loader.setController(controller);
             Stage stage = new Stage();
             stage.setTitle("Mens Erger Je Niet - " + stageTitle);
+            Parent root = loader.load();
             stage.setScene(new Scene(root));
             stage.setResizable(resizable);
             return stage;

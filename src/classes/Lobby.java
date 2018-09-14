@@ -1,4 +1,35 @@
 package classes;
 
+
+import enums.gameType;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Lobby {
+    private GameBoard gameBoard;
+    private List<Player> players;
+
+    public Lobby(Player host){
+        gameBoard = new GameBoard(gameType.FOURPLAYER);
+        players = new ArrayList<>();
+        players.add(host);
+    }
+
+    public void playerJoin(Player player){
+        players.add(player);
+    }
+
+    public void playerLeave(Player player) {
+        players.remove(player);
+    }
+
+    //Public getters
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
 }

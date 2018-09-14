@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="527.0" fx:controller="ui.MainMenuController" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="527.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="btnCreateLobby" layoutX="155.0" layoutY="268.0" mnemonicParsing="false" prefHeight="30" prefWidth="90" text="Create Lobby" />
       <Button fx:id="btnJoinLobby" layoutX="155.0" layoutY="316.0" mnemonicParsing="false" prefHeight="30" prefWidth="90" text="Join Lobby" />
