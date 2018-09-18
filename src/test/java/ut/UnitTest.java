@@ -1,8 +1,11 @@
 package ut;
 
 import classes.Dice;
+import classes.Lobby;
+import classes.Player;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertThat;
@@ -48,4 +51,13 @@ public class UnitTest {
         assertThat((fiveCount * 100) / iterations, CoreMatchers.allOf(Matchers.greaterThan(14), Matchers.lessThan(17)));
         assertThat((sixCount * 100) / iterations, CoreMatchers.allOf(Matchers.greaterThan(18), Matchers.lessThan(21)));
     }
+
+    @Test
+    public void lobbyTest(){
+        Player player = new Player("Dennis");
+        Lobby lobby = new Lobby(player);
+
+        Assert.assertEquals(player, lobby.getPlayers().get(0));
+    }
+    
 }
