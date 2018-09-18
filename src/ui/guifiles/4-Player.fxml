@@ -1,193 +1,294 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.Font?>
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="600.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fitHeight="635.0" fitWidth="699.0" layoutX="313.0" layoutY="-17.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <Image url="@../Images/parchment-texture.jpg"/>
+        </ImageView>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                    prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: E5322B;">
+            <children>
+                <AnchorPane fx:id="boardPane" layoutX="5.0" layoutY="5.0" prefHeight="590.0" prefWidth="590.0"
+                            style="-fx-background-color: FEF5B2;">
+                    <children>
+                        <!--All Tiles belonging to the Green Quadrant-->
+                        <Circle fx:id="WLK01" fill="GREEN" layoutX="45.0" layoutY="245.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK02" fill="WHITE" layoutX="95.0" layoutY="245.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK03" fill="WHITE" layoutX="145.0" layoutY="245.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK04" fill="WHITE" layoutX="195.0" layoutY="245.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK05" fill="WHITE" layoutX="245.0" layoutY="245.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK06" fill="WHITE" layoutX="245.0" layoutY="195.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK07" fill="WHITE" layoutX="245.0" layoutY="145.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK08" fill="WHITE" layoutX="245.0" layoutY="95.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK09" fill="WHITE" layoutX="245.0" layoutY="45.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK10" fill="WHITE" layoutX="295.0" layoutY="45.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <!--All Tiles belonging to the Red Quadrant-->
+                        <Circle fx:id="WLK11" fill="RED" layoutX="345.0" layoutY="45.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK12" fill="WHITE" layoutX="345.0" layoutY="95.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK13" fill="WHITE" layoutX="345.0" layoutY="145.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK14" fill="WHITE" layoutX="345.0" layoutY="195.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK15" fill="WHITE" layoutX="345.0" layoutY="245.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK16" fill="WHITE" layoutX="395.0" layoutY="245.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK17" fill="WHITE" layoutX="445.0" layoutY="245.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK18" fill="WHITE" layoutX="495.0" layoutY="245.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK19" fill="WHITE" layoutX="545.0" layoutY="245.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK20" fill="WHITE" layoutX="545.0" layoutY="295.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <!--All Tiles belonging to the Blue Quadrant-->
+                        <Circle fx:id="WLK21" fill="DODGERBLUE" layoutX="545.0" layoutY="345.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK22" fill="WHITE" layoutX="495.0" layoutY="345.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK23" fill="WHITE" layoutX="445.0" layoutY="345.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK24" fill="WHITE" layoutX="395.0" layoutY="345.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK25" fill="WHITE" layoutX="345.0" layoutY="345.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK26" fill="WHITE" layoutX="345.0" layoutY="395.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK27" fill="WHITE" layoutX="345.0" layoutY="445.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK28" fill="WHITE" layoutX="345.0" layoutY="495.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK29" fill="WHITE" layoutX="345.0" layoutY="545.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK30" fill="WHITE" layoutX="295.0" layoutY="545.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <!--All Tiles belonging to the Yellow Quadrant-->
+                        <Circle fx:id="WLK31" fill="YELLOW" layoutX="245.0" layoutY="545.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK32" fill="WHITE" layoutX="245.0" layoutY="495.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK33" fill="WHITE" layoutX="245.0" layoutY="445.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK34" fill="WHITE" layoutX="245.0" layoutY="395.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK35" fill="WHITE" layoutX="245.0" layoutY="345.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK36" fill="WHITE" layoutX="195.0" layoutY="345.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK37" fill="WHITE" layoutX="145.0" layoutY="345.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK38" fill="WHITE" layoutX="95.0" layoutY="345.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK39" fill="WHITE" layoutX="45.0" layoutY="345.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="WLK40" fill="WHITE" layoutX="45.0" layoutY="295.0"
+                                onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE"/>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-       <ImageView fitHeight="635.0" fitWidth="699.0" layoutX="313.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
-           <Image url="@../Images/parchment-texture.jpg" />
-       </ImageView>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: E5322B;">
-         <children>
-            <AnchorPane fx:id="boardPane" layoutX="5.0" layoutY="5.0" prefHeight="590.0" prefWidth="590.0" style="-fx-background-color: FEF5B2;">
-               <children>
-                  <!--All Tiles belonging to the Green Quadrant-->
-                   <Circle fx:id="WLK01" fill="GREEN" layoutX="45.0" layoutY="245.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK02" fill="WHITE" layoutX="95.0" layoutY="245.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK03" fill="WHITE" layoutX="145.0" layoutY="245.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK04" fill="WHITE" layoutX="195.0" layoutY="245.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK05" fill="WHITE" layoutX="245.0" layoutY="245.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK06" fill="WHITE" layoutX="245.0" layoutY="195.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK07" fill="WHITE" layoutX="245.0" layoutY="145.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK08" fill="WHITE" layoutX="245.0" layoutY="95.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK09" fill="WHITE" layoutX="245.0" layoutY="45.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK10" fill="WHITE" layoutX="295.0" layoutY="45.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <!--All Tiles belonging to the Red Quadrant-->
-                   <Circle fx:id="WLK11" fill="RED" layoutX="345.0" layoutY="45.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK12" fill="WHITE" layoutX="345.0" layoutY="95.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK13" fill="WHITE" layoutX="345.0" layoutY="145.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK14" fill="WHITE" layoutX="345.0" layoutY="195.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK15" fill="WHITE" layoutX="345.0" layoutY="245.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK16" fill="WHITE" layoutX="395.0" layoutY="245.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK17" fill="WHITE" layoutX="445.0" layoutY="245.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK18" fill="WHITE" layoutX="495.0" layoutY="245.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK19" fill="WHITE" layoutX="545.0" layoutY="245.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK20" fill="WHITE" layoutX="545.0" layoutY="295.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <!--All Tiles belonging to the Blue Quadrant-->
-                   <Circle fx:id="WLK21" fill="DODGERBLUE" layoutX="545.0" layoutY="345.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK22" fill="WHITE" layoutX="495.0" layoutY="345.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK23" fill="WHITE" layoutX="445.0" layoutY="345.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK24" fill="WHITE" layoutX="395.0" layoutY="345.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK25" fill="WHITE" layoutX="345.0" layoutY="345.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK26" fill="WHITE" layoutX="345.0" layoutY="395.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK27" fill="WHITE" layoutX="345.0" layoutY="445.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK28" fill="WHITE" layoutX="345.0" layoutY="495.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK29" fill="WHITE" layoutX="345.0" layoutY="545.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK30" fill="WHITE" layoutX="295.0" layoutY="545.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <!--All Tiles belonging to the Yellow Quadrant-->
-                   <Circle fx:id="WLK31" fill="YELLOW" layoutX="245.0" layoutY="545.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK32" fill="WHITE" layoutX="245.0" layoutY="495.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK33" fill="WHITE" layoutX="245.0" layoutY="445.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK34" fill="WHITE" layoutX="245.0" layoutY="395.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK35" fill="WHITE" layoutX="245.0" layoutY="345.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK36" fill="WHITE" layoutX="195.0" layoutY="345.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK37" fill="WHITE" layoutX="145.0" layoutY="345.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK38" fill="WHITE" layoutX="95.0" layoutY="345.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK39" fill="WHITE" layoutX="45.0" layoutY="345.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                   <Circle fx:id="WLK40" fill="WHITE" layoutX="45.0" layoutY="295.0" onMouseClicked="#handleMouseClick" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
 
-                   
-                   <!--Tiles for the Green Homebase-->
-                  <Circle fx:id="GRH01" fill="GREEN" layoutX="95.0" layoutY="295.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="GRH02" fill="GREEN" layoutX="147.0" layoutY="294.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="GRH03" fill="GREEN" layoutX="195.0" layoutY="294.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="GRH04" fill="GREEN" layoutX="245.0" layoutY="295.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                   <!--Tiles for the Green starting base-->
-                  <Circle fill="GREEN" layoutX="90.0" layoutY="90.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="GRS01" fill="LIGHTGREEN" layoutX="66.0" layoutY="69.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="GRS02" fill="LIGHTGREEN" layoutX="116.0" layoutY="69.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="GRS03" fill="LIGHTGREEN" layoutX="66.0" layoutY="114.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="GRS04" fill="LIGHTGREEN" layoutX="116.0" layoutY="114.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <!--Pawns for Green player -->
-                  <Circle fx:id="GRP01" fill="lime" layoutX="66.0" layoutY="69.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="GRP02" fill="lime" layoutX="116.0" layoutY="69.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="GRP03" fill="lime" layoutX="66.0" layoutY="114.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="GRP04" fill="lime" layoutX="116.0" layoutY="114.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  
-                   <!--Tiles for the Blue Homebase-->
-                  <Circle fx:id="BLH01" fill="DODGERBLUE" layoutX="495.0" layoutY="294.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="BLH02" fill="DODGERBLUE" layoutX="445.0" layoutY="295.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="BLH03" fill="DODGERBLUE" layoutX="395.0" layoutY="294.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="BLH04" fill="DODGERBLUE" layoutX="345.0" layoutY="295.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                   <!--Tiles for the Blue starting base-->
-                  <Circle fill="DODGERBLUE" layoutX="500.0" layoutY="500.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="BLS01" fill="LIGHTBLUE" layoutX="476.0" layoutY="478.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="BLS02" fill="LIGHTBLUE" layoutX="526.0" layoutY="478.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="BLS03" fill="LIGHTBLUE" layoutX="476.0" layoutY="523.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="BLS04" fill="LIGHTBLUE" layoutX="526.0" layoutY="523.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <!--Pawns for Blue player -->
-                  <Circle fx:id="BLP01" fill="cyan" layoutX="526.0" layoutY="478.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="BLP02" fill="cyan" layoutX="526.0" layoutY="523.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="BLP03" fill="cyan" layoutX="476.0" layoutY="523.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="BLP04" fill="cyan" layoutX="476.0" layoutY="478.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                        <!--Tiles for the Green Homebase-->
+                        <Circle fx:id="GRH01" fill="GREEN" layoutX="95.0" layoutY="295.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="GRH02" fill="GREEN" layoutX="147.0" layoutY="294.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="GRH03" fill="GREEN" layoutX="195.0" layoutY="294.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="GRH04" fill="GREEN" layoutX="245.0" layoutY="295.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <!--Tiles for the Green starting base-->
+                        <Circle fill="GREEN" layoutX="90.0" layoutY="90.0" radius="65.0" stroke="BLACK"
+                                strokeType="INSIDE"/>
+                        <Circle fx:id="GRS01" fill="LIGHTGREEN" layoutX="66.0" layoutY="69.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="GRS02" fill="LIGHTGREEN" layoutX="116.0" layoutY="69.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="GRS03" fill="LIGHTGREEN" layoutX="66.0" layoutY="114.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="GRS04" fill="LIGHTGREEN" layoutX="116.0" layoutY="114.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <!--Pawns for Green player -->
+                        <Circle fx:id="GRP01" fill="lime" layoutX="66.0" layoutY="69.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="GRP02" fill="lime" layoutX="116.0" layoutY="69.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="GRP03" fill="lime" layoutX="66.0" layoutY="114.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="GRP04" fill="lime" layoutX="116.0" layoutY="114.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
 
-                  <!--Tiles for the Yellow Homebase-->
-                  <Circle fx:id="YEH01" fill="YELLOW" layoutX="295.0" layoutY="495.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="YEH02" fill="YELLOW" layoutX="295.0" layoutY="445.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="YEH03" fill="YELLOW" layoutX="295.0" layoutY="395.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="YEH04" fill="YELLOW" layoutX="295.0" layoutY="345.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                   <!--Tiles for the Yellow starting base-->
-                  <Circle fill="YELLOW" layoutX="90.0" layoutY="500.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="YES01" fill="LIGHTYELLOw" layoutX="65.0" layoutY="478.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="YES02" fill="LIGHTYELLOw" layoutX="115.0" layoutY="478.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="YES03" fill="LIGHTYELLOw" layoutX="65.0" layoutY="523.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="YES04" fill="LIGHTYELLOw" layoutX="115.0" layoutY="523.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <!--Pawns for Yellow Player -->
-                  <Circle fx:id="YEP01" fill="lemonchiffon" layoutX="65.0" layoutY="478.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="YEP02" fill="lemonchiffon" layoutX="115.0" layoutY="478.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="YEP03" fill="lemonchiffon" layoutX="65.0" layoutY="523.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="YEP04" fill="lemonchiffon" layoutX="115.0" layoutY="523.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                        <!--Tiles for the Blue Homebase-->
+                        <Circle fx:id="BLH01" fill="DODGERBLUE" layoutX="495.0" layoutY="294.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="BLH02" fill="DODGERBLUE" layoutX="445.0" layoutY="295.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="BLH03" fill="DODGERBLUE" layoutX="395.0" layoutY="294.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="BLH04" fill="DODGERBLUE" layoutX="345.0" layoutY="295.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <!--Tiles for the Blue starting base-->
+                        <Circle fill="DODGERBLUE" layoutX="500.0" layoutY="500.0" radius="65.0" stroke="BLACK"
+                                strokeType="INSIDE"/>
+                        <Circle fx:id="BLS01" fill="LIGHTBLUE" layoutX="476.0" layoutY="478.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="BLS02" fill="LIGHTBLUE" layoutX="526.0" layoutY="478.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="BLS03" fill="LIGHTBLUE" layoutX="476.0" layoutY="523.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="BLS04" fill="LIGHTBLUE" layoutX="526.0" layoutY="523.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <!--Pawns for Blue player -->
+                        <Circle fx:id="BLP01" fill="cyan" layoutX="526.0" layoutY="478.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="BLP02" fill="cyan" layoutX="526.0" layoutY="523.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="BLP03" fill="cyan" layoutX="476.0" layoutY="523.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="BLP04" fill="cyan" layoutX="476.0" layoutY="478.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
 
-      
-                  
-                   <!--Tiles for the Red Homebase-->
-                  <Circle fx:id="REH01" fill="RED" layoutX="295.0" layoutY="95.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="REH02" fill="RED" layoutX="295.0" layoutY="145.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="REH03" fill="RED" layoutX="295.0" layoutY="195.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="REH04" fill="RED" layoutX="295.0" layoutY="245.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                   <!--Tiles for the Red starting base-->
-                  <Circle fill="RED" layoutX="500.0" layoutY="90.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="RES01" fill="SALMON" layoutX="474.0" layoutY="69.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="RES02" fill="SALMON" layoutX="524.0" layoutY="69.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="RES03" fill="SALMON" layoutX="474.0" layoutY="114.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="RES04" fill="SALMON" layoutX="524.0" layoutY="114.0" onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-                   <!--Pawns for red player-->
-                  <Circle fx:id="REP01" fill="pink" layoutX="474.0" layoutY="69.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="REP02" fill="pink" layoutX="524.0" layoutY="69.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="REP03" fill="pink" layoutX="474.0" layoutY="114.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Circle fx:id="REP04" fill="pink" layoutX="524.0" layoutY="114.0" onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                        <!--Tiles for the Yellow Homebase-->
+                        <Circle fx:id="YEH01" fill="YELLOW" layoutX="295.0" layoutY="495.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="YEH02" fill="YELLOW" layoutX="295.0" layoutY="445.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="YEH03" fill="YELLOW" layoutX="295.0" layoutY="395.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="YEH04" fill="YELLOW" layoutX="295.0" layoutY="345.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <!--Tiles for the Yellow starting base-->
+                        <Circle fill="YELLOW" layoutX="90.0" layoutY="500.0" radius="65.0" stroke="BLACK"
+                                strokeType="INSIDE"/>
+                        <Circle fx:id="YES01" fill="LIGHTYELLOw" layoutX="65.0" layoutY="478.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="YES02" fill="LIGHTYELLOw" layoutX="115.0" layoutY="478.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="YES03" fill="LIGHTYELLOw" layoutX="65.0" layoutY="523.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="YES04" fill="LIGHTYELLOw" layoutX="115.0" layoutY="523.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <!--Pawns for Yellow Player -->
+                        <Circle fx:id="YEP01" fill="lemonchiffon" layoutX="65.0" layoutY="478.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="YEP02" fill="lemonchiffon" layoutX="115.0" layoutY="478.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="YEP03" fill="lemonchiffon" layoutX="65.0" layoutY="523.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="YEP04" fill="lemonchiffon" layoutX="115.0" layoutY="523.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
 
-      
-                  <Label alignment="CENTER" layoutX="137.0" layoutY="158.0" prefHeight="35.0" prefWidth="77.0" text="MENS">
-                     <font>
-                        <Font name="Bauhaus 93" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutX="377.0" layoutY="158.0" prefHeight="35.0" prefWidth="77.0" text="ERGER">
-                     <font>
-                        <Font name="Bauhaus 93" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutX="137.0" layoutY="398.0" prefHeight="35.0" prefWidth="77.0" text="JE">
-                     <font>
-                        <Font name="Bauhaus 93" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutX="377.0" layoutY="398.0" prefHeight="35.0" prefWidth="77.0" text="NIET">
-                     <font>
-                        <Font name="Bauhaus 93" size="24.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="40.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                     <Image url="@../Images/arrow-35.png" />
-                  </ImageView>
-                  <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="185.0" layoutY="498.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-                     <Image url="@../Images/arrow-35.png" />
-                  </ImageView>
-                  <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="499.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../Images/arrow-35.png" />
-                  </ImageView>
-                  <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="355.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-                     <Image url="@../Images/arrow-35.png" />
-                  </ImageView>
-                  <ImageView fx:id="imgDice" fitHeight="60.0" fitWidth="60.0" layoutX="265.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../Images/DiceNONE.png" />
-                  </ImageView>
 
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <ListView layoutX="630.0" layoutY="353.0" prefHeight="200.0" prefWidth="200.0" />
-      <TextField layoutX="630.0" layoutY="553.0" prefHeight="25.0" prefWidth="200.0" />
-      <TableView layoutX="630.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
-        <columns>
-          <TableColumn prefWidth="116.0" text="Player" />
-          <TableColumn prefWidth="83.0" text="Score" />
-        </columns>
-      </TableView>
-      <Button fx:id="btnThrowDice" layoutX="630.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Throw Dice" />
-      <Button layoutX="630.0" layoutY="270.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="########" />
-      <Button fx:id="btnLeaveGame" layoutX="630.0" layoutY="310.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Leave Game" />
-   </children>
+                        <!--Tiles for the Red Homebase-->
+                        <Circle fx:id="REH01" fill="RED" layoutX="295.0" layoutY="95.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="REH02" fill="RED" layoutX="295.0" layoutY="145.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="REH03" fill="RED" layoutX="295.0" layoutY="195.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="REH04" fill="RED" layoutX="295.0" layoutY="245.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <!--Tiles for the Red starting base-->
+                        <Circle fill="RED" layoutX="500.0" layoutY="90.0" radius="65.0" stroke="BLACK"
+                                strokeType="INSIDE"/>
+                        <Circle fx:id="RES01" fill="SALMON" layoutX="474.0" layoutY="69.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="RES02" fill="SALMON" layoutX="524.0" layoutY="69.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="RES03" fill="SALMON" layoutX="474.0" layoutY="114.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="RES04" fill="SALMON" layoutX="524.0" layoutY="114.0"
+                                onMouseClicked="#handleMouseClick" radius="15.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <!--Pawns for red player-->
+                        <Circle fx:id="REP01" fill="pink" layoutX="474.0" layoutY="69.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="REP02" fill="pink" layoutX="524.0" layoutY="69.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="REP03" fill="pink" layoutX="474.0" layoutY="114.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
+                        <Circle fx:id="REP04" fill="pink" layoutX="524.0" layoutY="114.0"
+                                onMouseClicked="#handleMouseClick" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
+
+
+                        <Label alignment="CENTER" layoutX="137.0" layoutY="158.0" prefHeight="35.0" prefWidth="77.0"
+                               text="MENS">
+                            <font>
+                                <Font name="Bauhaus 93" size="24.0"/>
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="377.0" layoutY="158.0" prefHeight="35.0" prefWidth="77.0"
+                               text="ERGER">
+                            <font>
+                                <Font name="Bauhaus 93" size="24.0"/>
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="137.0" layoutY="398.0" prefHeight="35.0" prefWidth="77.0"
+                               text="JE">
+                            <font>
+                                <Font name="Bauhaus 93" size="24.0"/>
+                            </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="377.0" layoutY="398.0" prefHeight="35.0" prefWidth="77.0"
+                               text="NIET">
+                            <font>
+                                <Font name="Bauhaus 93" size="24.0"/>
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="40.0" layoutY="185.0" pickOnBounds="true"
+                                   preserveRatio="true" rotate="180.0">
+                            <Image url="@../Images/arrow-35.png"/>
+                        </ImageView>
+                        <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="185.0" layoutY="498.0" pickOnBounds="true"
+                                   preserveRatio="true" rotate="90.0">
+                            <Image url="@../Images/arrow-35.png"/>
+                        </ImageView>
+                        <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="499.0" layoutY="355.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <Image url="@../Images/arrow-35.png"/>
+                        </ImageView>
+                        <ImageView fitHeight="51.0" fitWidth="130.0" layoutX="355.0" layoutY="40.0" pickOnBounds="true"
+                                   preserveRatio="true" rotate="270.0">
+                            <Image url="@../Images/arrow-35.png"/>
+                        </ImageView>
+                        <ImageView fx:id="imgDice" fitHeight="60.0" fitWidth="60.0" layoutX="265.0" layoutY="265.0"
+                                   pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../Images/DiceNONE.png"/>
+                        </ImageView>
+
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+        <ListView layoutX="630.0" layoutY="353.0" prefHeight="200.0" prefWidth="200.0"/>
+        <TextField layoutX="630.0" layoutY="553.0" prefHeight="25.0" prefWidth="200.0"/>
+        <TableView layoutX="630.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
+            <columns>
+                <TableColumn prefWidth="116.0" text="Player"/>
+                <TableColumn prefWidth="83.0" text="Score"/>
+            </columns>
+        </TableView>
+        <Button fx:id="btnThrowDice" layoutX="630.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="200.0" text="Throw Dice"/>
+        <Button layoutX="630.0" layoutY="270.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0"
+                text="########"/>
+        <Button fx:id="btnLeaveGame" layoutX="630.0" layoutY="310.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="200.0" text="Leave Game"/>
+    </children>
 </AnchorPane>

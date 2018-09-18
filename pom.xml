@@ -20,6 +20,9 @@
                     <compilerArguments>
                         <bootclasspath>${sun.boot.class.path}${path.separator}${java.home}/lib/jfxrt.jar</bootclasspath>
                     </compilerArguments>
+                    <includes>
+                        <include>${basedir}/src/**/UnitTest*.java</include>
+                    </includes>
                 </configuration>
             </plugin>
 

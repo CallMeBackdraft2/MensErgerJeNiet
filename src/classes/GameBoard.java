@@ -7,14 +7,15 @@ public class GameBoard {
     private gameType gametype;
     private Dice dice;
     private PlayingField playingField;
+    private int playerTurnIndex;
 
-    public GameBoard(gameType gametype){
+    public GameBoard(gameType gametype) {
         this.gametype = gametype;
         this.dice = new Dice();
         playingField = new PlayingField();
     }
 
-    public diceNumber rollDice(){
+    public diceNumber rollDice() {
         return dice.rollDice();
     }
 
@@ -28,5 +29,17 @@ public class GameBoard {
 
     public gameType getGametype() {
         return gametype;
+    }
+
+    public int getPlayerTurnIndex() {
+        return playerTurnIndex;
+    }
+
+    public void switchPlayerTurn() {
+        if (playerTurnIndex >= gametype.getValue()) {
+            playerTurnIndex = 0;
+        } else {
+            playerTurnIndex++;
+        }
     }
 }

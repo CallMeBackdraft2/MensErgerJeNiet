@@ -17,11 +17,11 @@ public class LobbyController {
     Button btnLeaveLobby;
 
     @FXML
-    void initialize(){
+    void initialize() {
         btnLeaveLobby.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(new MainMenuController(),getClass().getResource("guifiles/MainMenu.fxml"),false, "Hoofdmenu").show();
-                ((Node)(event.getSource())).getScene().getWindow().hide();
+                JavaFXSceneFactory.generateStage(new MainMenuController(), getClass().getResource("guifiles/MainMenu.fxml"), false, "Hoofdmenu").show();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });
     }

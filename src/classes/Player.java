@@ -4,26 +4,28 @@ import enums.pawnState;
 import enums.playerColor;
 
 public class Player {
+    private int id;
     private String name;
     private playerColor playercolor;
     private Pawn[] pawnArray;
     private int playerScore;
+    private boolean guest;
 
-    public Player(String name){
+    public Player(String name) {
         this.pawnArray = new Pawn[4];
         this.name = name;
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             this.pawnArray[i] = new Pawn(i);
-            setPawnLoc(i,0);
+            setPawnLoc(i, 0);
         }
     }
 
-    public void movePawnIntoPlay(int pawnID){
+    public void movePawnIntoPlay(int pawnID) {
         pawnArray[pawnID].setPawnLoc(1);
         pawnArray[pawnID].movePawnIntoPlay();
     }
 
-    public void setPawnLoc(int pawnID, int pawnLoc){
+    public void setPawnLoc(int pawnID, int pawnLoc) {
         pawnArray[pawnID].setPawnLoc(pawnLoc);
     }
 
@@ -49,11 +51,11 @@ public class Player {
         return this.playerScore;
     }
 
-    public int getPawnLoc(int pawnID){
+    public int getPawnLoc(int pawnID) {
         return this.pawnArray[pawnID].getPawnLoc();
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 }

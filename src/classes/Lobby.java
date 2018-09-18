@@ -10,13 +10,13 @@ public class Lobby {
     private GameBoard gameBoard;
     private List<Player> players;
 
-    public Lobby(Player host){
+    public Lobby(Player host) {
         gameBoard = new GameBoard(gameType.FOURPLAYER);
         players = new ArrayList<>();
         players.add(host);
     }
 
-    public void playerJoin(Player player){
+    public void playerJoin(Player player) {
         players.add(player);
     }
 
@@ -32,4 +32,10 @@ public class Lobby {
     public List<Player> getPlayers() {
         return players;
     }
+
+    public Player getPlayerByIndex(int index) {
+        return players.get(index);
+    }
+
+
 }

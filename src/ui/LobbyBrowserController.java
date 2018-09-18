@@ -11,11 +11,11 @@ public class LobbyBrowserController {
     Button btnGoToMain;
 
     @FXML
-    void initialize(){
+    void initialize() {
         btnGoToMain.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(new MainMenuController(),getClass().getResource("guifiles/MainMenu.fxml"),false,"Hoofdmenu").show();
-                ((Node)(event.getSource())).getScene().getWindow().hide();
+                JavaFXSceneFactory.generateStage(new MainMenuController(), getClass().getResource("guifiles/MainMenu.fxml"), false, "Hoofdmenu").show();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });
     }

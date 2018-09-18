@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Region layoutX="386.0" layoutY="13.0" prefHeight="306.0" prefWidth="200.0" style="-fx-background-color: lightgrey;" />
-      <Label alignment="CENTER" layoutX="386.0" layoutY="14.0" prefHeight="17.0" prefWidth="200.0" text="Filter Options">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <CheckBox layoutX="402.0" layoutY="45.0" mnemonicParsing="false" text="Show games with password" />
-      <ChoiceBox layoutX="411.0" layoutY="135.0" prefWidth="150.0" />
-      <Label layoutX="439.0" layoutY="118.0" text="Select game type:" />
-      <ListView layoutX="13.0" layoutY="13.0" prefHeight="373.0" prefWidth="357.0" />
-      <Button layoutX="390.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="192.0" text="Join Selected Lobby" />
-      <CheckBox layoutX="411.0" layoutY="83.0" mnemonicParsing="false" text="Show games in progress" />
-      <Button fx:id="btnGoToMain" layoutX="391.0" layoutY="327.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="192.0" text="Back to main menu" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
+            <Image url="@../Images/parchment-texture.jpg"/>
+        </ImageView>
+        <Region layoutX="386.0" layoutY="13.0" prefHeight="306.0" prefWidth="200.0"
+                style="-fx-background-color: lightgrey;"/>
+        <Label alignment="CENTER" layoutX="386.0" layoutY="14.0" prefHeight="17.0" prefWidth="200.0"
+               text="Filter Options">
+            <font>
+                <Font name="System Bold" size="12.0"/>
+            </font>
+        </Label>
+        <CheckBox layoutX="402.0" layoutY="45.0" mnemonicParsing="false" text="Show games with password"/>
+        <ChoiceBox layoutX="411.0" layoutY="135.0" prefWidth="150.0"/>
+        <Label layoutX="439.0" layoutY="118.0" text="Select game type:"/>
+        <ListView layoutX="13.0" layoutY="13.0" prefHeight="373.0" prefWidth="357.0"/>
+        <Button layoutX="390.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="192.0"
+                text="Join Selected Lobby"/>
+        <CheckBox layoutX="411.0" layoutY="83.0" mnemonicParsing="false" text="Show games in progress"/>
+        <Button fx:id="btnGoToMain" layoutX="391.0" layoutY="327.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="192.0" text="Back to main menu"/>
+    </children>
 </AnchorPane>

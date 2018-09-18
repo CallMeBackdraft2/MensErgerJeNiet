@@ -2,12 +2,11 @@ package ui;
 
 import classes.Lobby;
 import classes.Player;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-
 
 
 public class MainMenuController {
@@ -22,15 +21,15 @@ public class MainMenuController {
     Button btnFindLobby;
 
     @FXML
-    void initialize(){
+    void initialize() {
         btnQuickPlay.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 FourPlayerController controller = new FourPlayerController();
                 //todo de-hardcode this and get player date from something like log-on or registration
                 controller.setLobby(new Lobby(new Player("Dennis")));
 
-                JavaFXSceneFactory.generateStage(controller,getClass().getResource("guifiles/4-Player.fxml"),false,"Speelbord",629,0).show();
-                ((Node)(event.getSource())).getScene().getWindow().hide();
+                JavaFXSceneFactory.generateStage(controller, getClass().getResource("guifiles/4-Player.fxml"), false, "Speelbord", 629, 0).show();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });
 
@@ -40,15 +39,15 @@ public class MainMenuController {
                 //todo de-hardcode this and get player date from something like log-on or registration
                 controller.setLobby(new Lobby(new Player("Dennis")));
 
-                JavaFXSceneFactory.generateStage(controller,getClass().getResource("guifiles/LobbyView.fxml"), false, "Spellobby").show();
-                ((Node)(event.getSource())).getScene().getWindow().hide();
+                JavaFXSceneFactory.generateStage(controller, getClass().getResource("guifiles/LobbyView.fxml"), false, "Spellobby", 429, 431).show();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });
 
         btnFindLobby.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(new LobbyBrowserController(),getClass().getResource("guifiles/LobbyBrowser.fxml"),false, "Lobby Browser").show();
-                ((Node)(event.getSource())).getScene().getWindow().hide();
+                JavaFXSceneFactory.generateStage(new LobbyBrowserController(), getClass().getResource("guifiles/LobbyBrowser.fxml"), false, "Lobby Browser", 429, 600).show();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });
 

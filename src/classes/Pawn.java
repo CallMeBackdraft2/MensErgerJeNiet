@@ -7,13 +7,13 @@ public class Pawn {
     private int pawnLoc;
     private pawnState pawnstate;
 
-    public Pawn(int id){
+    public Pawn(int id) {
         //every newly instantiated pawn always starts in one of the four start positions of the player
         this.pawnstate = pawnState.STARTPOSITION;
         this.id = id;
     }
 
-    public void setPawnLoc(int pawnLoc){
+    public void setPawnLoc(int pawnLoc) {
         this.pawnLoc = pawnLoc;
     }
 
@@ -21,7 +21,7 @@ public class Pawn {
         return this.pawnLoc;
     }
 
-    public pawnState getPawnstate(){
+    public pawnState getPawnstate() {
         return this.pawnstate;
     }
 

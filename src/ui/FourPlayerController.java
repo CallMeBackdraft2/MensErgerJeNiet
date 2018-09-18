@@ -1,6 +1,8 @@
 package ui;
 
 import classes.Lobby;
+import classes.Pawn;
+import classes.Player;
 import classes.Tile;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
@@ -60,9 +62,9 @@ public class FourPlayerController {
                 String fullID = boardPane.getChildren().get(i).getId();
                 Tile tile = null;
                 if (!identifyingList.get(fullID.substring(0,2)).equals("WalkingTile")){
-                    tile = new Tile(Integer.parseInt(fullID.substring(3,5)),identifyingList.get(fullID.substring(2,3)),identifyingList.get(fullID.substring(0,2)).toUpperCase());
+                    tile = new Tile(Integer.parseInt(fullID.substring(3,5)),identifyingList.get(fullID.substring(2,3)),(int)boardPane.getChildren().get(i).getLayoutX(),(int)boardPane.getChildren().get(i).getLayoutY(), identifyingList.get(fullID.substring(0,2)).toUpperCase());
                 } else {
-                    tile = new Tile(Integer.parseInt(fullID.substring(3,5)),identifyingList.get(fullID.substring(2,3)));
+                    tile = new Tile(Integer.parseInt(fullID.substring(3,5)),identifyingList.get(fullID.substring(2,3)),(int)boardPane.getChildren().get(i).getLayoutX(),(int)boardPane.getChildren().get(i).getLayoutY());
                 }
                 lobby.getGameBoard().getPlayingField().addToTileList(tile);
             }
@@ -102,7 +104,7 @@ public class FourPlayerController {
                     new KeyFrame(Duration.ZERO, new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-                            rotateImageView(imgDice,720,2.5,1);
+                            rotateImageView(imgDice,1440,2.5,1);
                             playSound("src/ui/Media/DiceRollSound.mp3");
                         }
                     }),
@@ -135,10 +137,23 @@ public class FourPlayerController {
         rotation.play();
     }
 
+    Circle selectedPawn = null;
+
     @FXML
     public void handleMouseClick(MouseEvent mouseEvent) {
         //todo find way to handle movement posibilities and legality
-        /*selectedPawn.setLayoutX(clickedCircle.getLayoutX());
-        selectedPawn.setLayoutY(clickedCircle.getLayoutY());*/
+        Circle circle = (Circle)mouseEvent.getSource();
+        Tile tile = lobby.getGameBoard().getPlayingField().findTileinList(Integer.parseInt(circle.getId().substring(3,5)),identifyingList.get(circle.getId().substring(2,3)));
+
+
+        if (tile.getType().equals("Pawn")){
+            selectedPawn = circle;
+        } else if (selectedPawn != null){
+            selectedPawn.setLayoutX(circle.getLayoutX());
+            selectedPawn.setLayoutY(circle.getLayoutY());
+        } else {
+
+        }
+
     }
 }
