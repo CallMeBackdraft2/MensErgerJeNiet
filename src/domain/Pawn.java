@@ -1,6 +1,4 @@
-package classes;
-
-import enums.pawnState;
+package domain;
 
 public class Pawn {
     private int id;

@@ -1,4 +1,4 @@
-package enums;
+package domain;
 
 public enum playerColor {
     RED(0),

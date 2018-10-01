@@ -1,9 +1,7 @@
 package ui;
 
-import classes.Lobby;
-import classes.Pawn;
-import classes.Player;
-import classes.Tile;
+import domain.Lobby;
+import domain.Tile;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,9 +17,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class FourPlayerController {

@@ -1,7 +1,4 @@
-package classes;
-
-import enums.diceNumber;
-import enums.gameType;
+package domain;
 
 public class GameBoard {
     private gameType gametype;

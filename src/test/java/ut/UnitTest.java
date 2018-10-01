@@ -1,8 +1,8 @@
 package ut;
 
-import classes.Dice;
-import classes.Lobby;
-import classes.Player;
+import domain.Dice;
+import domain.Lobby;
+import domain.Player;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
