@@ -16,29 +16,26 @@ public class LocalGame implements Game {
     }
 
     @Override
+    public void createLobbyView() {
+        
+    }
+
+    @Override
+    public void updateLobbyView() {
+
+    }
+
+    @Override
+    public void deleteLobbyView() {
+
+    }
+
+    @Override
     public void joinLobby(int lobbyId) {
 
     }
 
-    @Override
-    public void createLobby() {
 
-    }
-
-    @Override
-    public void setLobbyName(String lobbyName) {
-
-    }
-
-    @Override
-    public void setLobbyType(LobbyType lobbyType) {
-
-    }
-
-    @Override
-    public void setGameMode(GameMode gameMode) {
-
-    }
 
     @Override
     public void readyUp() {
@@ -52,6 +49,11 @@ public class LocalGame implements Game {
 
     @Override
     public void leaveLobby() {
+
+    }
+
+    @Override
+    public void startGame() {
 
     }
 }
