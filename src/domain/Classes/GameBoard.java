@@ -1,4 +1,7 @@
-package domain;
+package domain.Classes;
+
+import domain.Enums.diceNumber;
+import domain.Enums.gameType;
 
 public class GameBoard {
     private gameType gametype;

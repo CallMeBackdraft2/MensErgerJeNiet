@@ -1,4 +1,7 @@
-package domain;
+package domain.Classes;
+
+import domain.Enums.pawnState;
+import domain.Enums.playerColor;
 
 public class Player {
     private int id;

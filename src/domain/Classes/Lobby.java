@@ -1,5 +1,7 @@
-package domain;
+package domain.Classes;
 
+
+import domain.Enums.gameType;
 
 import java.util.ArrayList;
 import java.util.List;

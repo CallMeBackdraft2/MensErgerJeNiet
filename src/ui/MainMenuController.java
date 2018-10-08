@@ -1,7 +1,7 @@
 package ui;
 
-import domain.Lobby;
-import domain.Player;
+import domain.Classes.Lobby;
+import domain.Classes.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -39,7 +39,7 @@ public class MainMenuController {
                 //todo de-hardcode this and get player date from something like log-on or registration
                 controller.setLobby(new Lobby(new Player("Dennis")));
 
-                JavaFXSceneFactory.generateStage(controller, getClass().getResource("guifiles/LobbyView.fxml"), false, "Spellobby", 429, 431).show();
+                JavaFXSceneFactory.generateStage(controller, getClass().getResource("guifiles/LobbySettings.fxml"), false, "Spellobby", 429, 431).show();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });

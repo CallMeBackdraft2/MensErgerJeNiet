@@ -1,4 +1,6 @@
-package domain;
+package domain.Classes;
+
+import domain.Enums.diceNumber;
 
 import java.util.Date;
 import java.util.Random;

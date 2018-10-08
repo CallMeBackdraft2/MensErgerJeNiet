@@ -1,7 +1,7 @@
 package ui;
 
-import domain.Lobby;
-import domain.Tile;
+import domain.Classes.Lobby;
+import domain.Classes.Tile;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

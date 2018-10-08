@@ -1,7 +1,7 @@
 package ui;
 
-import domain.Lobby;
-import domain.Player;
+import domain.Classes.Lobby;
+import domain.Classes.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

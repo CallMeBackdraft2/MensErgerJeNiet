@@ -1,4 +1,4 @@
-package domain;
+package domain.Enums;
 
 public enum diceNumber {
     ONE(1),

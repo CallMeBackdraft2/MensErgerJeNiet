@@ -1,4 +1,4 @@
-package domain;
+package domain.Classes;
 
 
 import javafx.util.Pair;

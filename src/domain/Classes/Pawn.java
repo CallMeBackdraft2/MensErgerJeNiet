@@ -1,4 +1,6 @@
-package domain;
+package domain.Classes;
+
+import domain.Enums.pawnState;
 
 public class Pawn {
     private int id;
