@@ -17,8 +17,8 @@ buildNumber.properties
 .settings/
 
 # Intellij
-.idea/
-*.iml
+.idea/workspace.xml
+
 *.iws
 
 # Mac
