@@ -11,7 +11,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertThat;
 
 
-public class UnitTest {
+public class    UnitTest {
     @Test
     public void dicePercentageTest() {
         Dice dice = new Dice();

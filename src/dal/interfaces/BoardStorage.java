@@ -8,9 +8,10 @@ import domain.Enums.GameMode;
 
 public interface BoardStorage {
 
-    void setGameMode(GameMode gameMode);
+    void init(GameMode gameMode);
     Tile[] getTiles();
     Pawn[] getPlayerPawns(int PlayerId);
-    void setTilePawn(int id, Pawn pawn);
+    void movePawn(int pawnId, int tileId);
+    Pawn getPawn(int id);
     Tile getTile(int id);
 }
