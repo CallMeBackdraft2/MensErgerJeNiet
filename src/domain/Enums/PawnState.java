@@ -1,6 +1,6 @@
 package domain.Enums;
 
-public enum pawnState {
+public enum PawnState {
     STARTPOSITION,
     INPLAY,
     HOMECOURT;

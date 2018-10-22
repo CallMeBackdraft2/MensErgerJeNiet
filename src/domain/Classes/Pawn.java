@@ -1,16 +1,16 @@
 package domain.Classes;
 
-import domain.Enums.pawnState;
+import domain.Enums.PawnState;
 
 public class Pawn {
     private int id;
     private int playerId;
     private int pawnTileId;
-    private pawnState pawnstate;
+    private PawnState pawnstate;
 
     public Pawn(int playerId,  int id) {
         //every newly instantiated pawn always starts in one of the four start positions of the player
-        this.pawnstate = pawnState.STARTPOSITION;
+        this.pawnstate = PawnState.STARTPOSITION;
         this.playerId = playerId;
         this.id = id;
     }
@@ -23,12 +23,12 @@ public class Pawn {
         return this.pawnTileId;
     }
 
-    public pawnState getPawnState() {
+    public PawnState getPawnState() {
         return this.pawnstate;
     }
 
     public void movePawnIntoPlay() {
-        this.pawnstate = pawnState.INPLAY;
+        this.pawnstate = PawnState.INPLAY;
     }
 
     public int getPlayerId() {

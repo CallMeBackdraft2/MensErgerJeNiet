@@ -19,6 +19,8 @@ public class PlayingField {
 
     public PlayingField() {
         tiles = new ArrayList<>();
+        pawns = new ArrayList<>();
+
     }
 
     public void addToTileList(Tile tile) {

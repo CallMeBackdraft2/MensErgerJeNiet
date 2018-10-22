@@ -1,12 +1,12 @@
 package domain.Classes;
 
-import domain.Enums.pawnState;
-import domain.Enums.playerColor;
+import domain.Enums.PawnState;
+import domain.Enums.PlayerColor;
 
 public class Player {
     private int id;
     private String name;
-    private playerColor playercolor;
+    private PlayerColor playercolor;
     private Pawn[] pawnArray;
     private int playerScore;
     private boolean guest;
@@ -15,7 +15,7 @@ public class Player {
         this.pawnArray = new Pawn[4];
         this.name = name;
         for (int i = 0; i < 4; i++) {
-            this.pawnArray[i] = new Pawn(i);
+            this.pawnArray[i] = new Pawn(id, i);
             setPawnLoc(i, 0);
         }
     }
@@ -34,16 +34,16 @@ public class Player {
         this.playerScore = playerScore;
     }
 
-    public void setPlayercolor(playerColor playercolor) {
+    public void setPlayercolor(PlayerColor playercolor) {
         this.playercolor = playercolor;
     }
 
     //public getters
-    public playerColor getPlayercolor() {
+    public PlayerColor getPlayercolor() {
         return this.playercolor;
     }
 
-    public pawnState getPawnState(int pawnID) {
+    public PawnState getPawnState(int pawnID) {
         return this.pawnArray[pawnID].getPawnState();
     }
 

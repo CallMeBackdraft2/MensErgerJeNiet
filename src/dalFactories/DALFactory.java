@@ -1,4 +1,4 @@
-package DALFactories;
+package dalFactories;
 
 import dal.interfaces.BoardStorage;
 import dal.localImplementation.LocalBoardStorage;

@@ -1,6 +1,6 @@
 package domain.Enums;
 
-public enum playerColor {
+public enum PlayerColor {
     RED(0),
     GREEN(1),
     BLUE(2),
@@ -8,7 +8,7 @@ public enum playerColor {
 
     private int value;
 
-    playerColor(int value) {
+    PlayerColor(int value) {
         this.value = value;
     }
 
