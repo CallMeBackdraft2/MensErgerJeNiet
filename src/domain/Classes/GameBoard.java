@@ -1,15 +1,15 @@
 package domain.Classes;
 
+import domain.Enums.GameMode;
 import domain.Enums.diceNumber;
-import domain.Enums.gameType;
 
 public class GameBoard {
-    private gameType gametype;
+    private GameMode gametype;
     private Dice dice;
     private PlayingField playingField;
     private int playerTurnIndex;
 
-    public GameBoard(gameType gametype) {
+    public GameBoard(GameMode gametype) {
         this.gametype = gametype;
         this.dice = new Dice();
         playingField = new PlayingField();
@@ -27,7 +27,7 @@ public class GameBoard {
         return playingField;
     }
 
-    public gameType getGametype() {
+    public GameMode getGametype() {
         return gametype;
     }
 
@@ -36,7 +36,7 @@ public class GameBoard {
     }
 
     public void switchPlayerTurn() {
-        if (playerTurnIndex >= gametype.getValue()) {
+        if (playerTurnIndex >= gametype.getPlayerCount()) {
             playerTurnIndex = 0;
         } else {
             playerTurnIndex++;

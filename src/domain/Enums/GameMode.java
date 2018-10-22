@@ -1,6 +1,17 @@
 package domain.Enums;
 
 public enum GameMode {
-    FOURPLAYERBOARD,
-    SIXPLAYERBOARD;
+
+    FOURPLAYERBOARD(4),
+    SIXPLAYERBOARD(6);
+
+    private final int playerCount;
+
+    GameMode(int playerCount) {
+        this.playerCount = playerCount;
+    }
+
+    public int getPlayerCount() {
+        return playerCount;
+    }
 }

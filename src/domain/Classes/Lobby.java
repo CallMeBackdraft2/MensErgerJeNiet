@@ -1,7 +1,7 @@
 package domain.Classes;
 
 
-import domain.Enums.gameType;
+import domain.Enums.GameMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public class Lobby {
     private List<Player> players;
 
     public Lobby(Player host) {
-        gameBoard = new GameBoard(gameType.FOURPLAYER);
+        gameBoard = new GameBoard(GameMode.FOURPLAYERBOARD);
         players = new ArrayList<>();
         players.add(host);
     }
