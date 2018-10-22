@@ -9,7 +9,8 @@ public class Tile {
     private String color;
     private int xLoc;
     private int yLoc;
-    private boolean hasPawn;
+
+
 
     public Tile(int id, String type, int xLoc, int yLoc, String color) {
         this.id = id;
@@ -29,14 +30,6 @@ public class Tile {
 
     public void setColor(String color) {
         this.color = color;
-    }
-
-    public boolean hasPawn() {
-        return hasPawn;
-    }
-
-    public void setPawn(boolean hasPawn) {
-        this.hasPawn = hasPawn;
     }
 
     public int getId() {

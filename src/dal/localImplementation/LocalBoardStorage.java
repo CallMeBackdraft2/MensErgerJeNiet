@@ -6,33 +6,56 @@ import domain.Classes.Pawn;
 import domain.Classes.Tile;
 import domain.Enums.GameMode;
 
+import java.util.List;
+import java.util.Optional;
+
 public class LocalBoardStorage implements BoardStorage {
 
-    GameBoard gameBoard;
+    private GameBoard gameBoard;
 
     @Override
-    public void setGameMode(GameMode gameMode) {
+    public void init(GameMode gameMode) {
 
-        gameBoard=  new GameBoard(gameMode);
+        gameBoard = new GameBoard(gameMode);
     }
 
     @Override
     public Tile[] getTiles() {
-        return new Tile[0];
+        List<Tile> tiles = gameBoard.getPlayingField().getTiles();
+        return (Tile[]) tiles.toArray();
     }
 
     @Override
     public Pawn[] getPlayerPawns(int PlayerId) {
-        return new Pawn[0];
+        return (Pawn[]) gameBoard.getPlayingField().getPawns()
+                .stream().filter(p -> p.getPlayerId() == PlayerId).toArray();
     }
 
     @Override
-    public void setTilePawn(int id, Pawn pawn) {
+    public void movePawn(int pawnId, int tileId) {
 
+        Pawn pawn = getPawn(pawnId);
+        pawn.setPawnTileId(tileId);
+    }
+
+    @Override
+    public Pawn getPawn(int id) {
+
+        Optional<Pawn> optional = gameBoard.getPlayingField().getPawns()
+                .stream().filter(p -> p.getId() == id).findFirst();
+        if (!optional.isPresent()) {
+            throw new IllegalArgumentException("No pawn found with the id = " + id);
+        }
+        return optional.get();
     }
 
     @Override
     public Tile getTile(int id) {
-        return null;
+        Optional<Tile> optional = gameBoard.getPlayingField().getTiles()
+                .stream().filter(t -> t.getId() == id).findFirst();
+        if (!optional.isPresent()) {
+            throw new IllegalArgumentException("No tile found with the id = " + id);
+        }
+        return optional.get();
     }
 }

@@ -21,12 +21,12 @@ public class Player {
     }
 
     public void movePawnIntoPlay(int pawnID) {
-        pawnArray[pawnID].setPawnLoc(1);
+        pawnArray[pawnID].setPawnTileId(1);
         pawnArray[pawnID].movePawnIntoPlay();
     }
 
     public void setPawnLoc(int pawnID, int pawnLoc) {
-        pawnArray[pawnID].setPawnLoc(pawnLoc);
+        pawnArray[pawnID].setPawnTileId(pawnLoc);
     }
 
     //public setters
@@ -44,7 +44,7 @@ public class Player {
     }
 
     public pawnState getPawnState(int pawnID) {
-        return this.pawnArray[pawnID].getPawnstate();
+        return this.pawnArray[pawnID].getPawnState();
     }
 
     public int getPlayerScore() {
@@ -52,7 +52,7 @@ public class Player {
     }
 
     public int getPawnLoc(int pawnID) {
-        return this.pawnArray[pawnID].getPawnLoc();
+        return this.pawnArray[pawnID].getPawnTileId();
     }
 
     public String getName() {

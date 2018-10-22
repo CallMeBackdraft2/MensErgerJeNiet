@@ -5,18 +5,12 @@ import domain.Enums.diceNumber;
 
 public class GameBoard {
     private GameMode gametype;
-    private Dice dice;
     private PlayingField playingField;
-    private int playerTurnIndex;
+
 
     public GameBoard(GameMode gametype) {
         this.gametype = gametype;
-        this.dice = new Dice();
         playingField = new PlayingField();
-    }
-
-    public diceNumber rollDice() {
-        return dice.rollDice();
     }
 
     public void setPlayingField(PlayingField playingField) {
@@ -31,15 +25,5 @@ public class GameBoard {
         return gametype;
     }
 
-    public int getPlayerTurnIndex() {
-        return playerTurnIndex;
-    }
 
-    public void switchPlayerTurn() {
-        if (playerTurnIndex >= gametype.getPlayerCount()) {
-            playerTurnIndex = 0;
-        } else {
-            playerTurnIndex++;
-        }
-    }
 }

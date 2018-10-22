@@ -91,9 +91,9 @@ public class FourPlayerController {
     }
 
     private void throwDice(){
-        if (!isThrown){
+        /*if (!isThrown){
             Image diceNone = new Image(getClass().getResourceAsStream("Images/DiceNONE.png"));
-            String url = "Images/Dice" + lobby.getGameBoard().rollDice().name() + ".png";
+           String url = "Images/Dice" + lobby.getGameBoard().rollDice().name() + ".png";
             imgDice.setImage(new Image(getClass().getResourceAsStream(url)));
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.ZERO, new KeyValue(imgDice.imageProperty(), diceNone)),
@@ -107,7 +107,7 @@ public class FourPlayerController {
                     new KeyFrame(Duration.seconds(2), new KeyValue(imgDice.imageProperty(), new Image(getClass().getResourceAsStream(url))))
             );
             timeline.play();
-        }
+        }*/
     }
 
     public void setLobby(Lobby lobby) {

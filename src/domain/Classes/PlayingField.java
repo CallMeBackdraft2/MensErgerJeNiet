@@ -6,7 +6,16 @@ import java.util.List;
 
 public class PlayingField {
     private List<Tile> tiles;
+    private List<Pawn> pawns;
 
+
+    public List<Pawn> getPawns(){
+        return pawns;
+    }
+
+    public void addPawn(Pawn pawn){
+
+    }
 
     public PlayingField() {
         tiles = new ArrayList<>();
