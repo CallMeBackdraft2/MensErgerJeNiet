@@ -10,12 +10,12 @@ import domain.Enums.LobbyType;
 import domain.Enums.PawnState;
 import logic.interfaces.Game;
 
-public class LocalSingleplayerGame implements Game {
+public class LocalFourPlayerGame implements Game {
     Dice dice;
     boolean diceRolled;
     BoardStorage boardStorage;
 
-    public LocalSingleplayerGame(){
+    public LocalFourPlayerGame(){
         boardStorage = DALFactory.getLocalBoardStorage();
     }
 
@@ -35,6 +35,18 @@ public class LocalSingleplayerGame implements Game {
             // if the selected pawn still hasn't been played
             if (selectedPawn.getPawnState() == PawnState.STARTPOSITION && dice.getLastRolled() == 6) {
                 selectedPawn.movePawnIntoPlay();
+
+                // TODO What happens if another pawn is occupying the starting tiles
+                // Depending on the player the pawn gets placed in the correct starting position
+                if (selectedPawn.getPlayerId() == 1) {
+                    boardStorage.movePawn(pawnId, 1);
+                } else if (selectedPawn.getPlayerId() == 2) {
+                    boardStorage.movePawn(pawnId, 11);
+                } else if (selectedPawn.getPlayerId() == 3) {
+                    boardStorage.movePawn(pawnId, 21);
+                } else if (selectedPawn.getPlayerId() == 4) {
+                    boardStorage.movePawn(pawnId, 31);
+                }
                 return;
             }
             else if (selectedPawn.getPawnState() == PawnState.STARTPOSITION && dice.getLastRolled() != 6) {
@@ -42,21 +54,27 @@ public class LocalSingleplayerGame implements Game {
                 throw new IllegalArgumentException("YOu just can't");
             }
 
-            // Check if the pawn is in play
-            if (selectedPawn.getPawnState() == PawnState.INPLAY) {
-                // Current steps taken + rolled dice value
-                int newStepsTaken = selectedPawn.getStepsTaken() + dice.getLastRolled();
+            // TODO When a Pawn is already in play
 
-                if (newStepsTaken > 44){
-                    int temp = newStepsTaken - 44;
-                    temp = 44 - temp;
-                    selectedPawn.setStepsTaken(temp);
-                }
-            }
+            // TODO When a Pawn is in HomeBase
         }
         else {
-            //TODO throw errorMessage when the dice hasnt been rolled yet
+            //TODO throw errorMessage when the dice hasn't been rolled yet
             throw new IllegalArgumentException("YOu just can't");
+        }
+    }
+
+    private boolean smashPawn(int smashingPawnId, int tileId) {
+
+        Pawn smashedPawn = boardStorage.getTile(tileId).getPawn();
+        Pawn smashingPawn = boardStorage.getPawn(smashingPawnId);
+
+        if (smashedPawn.getPlayerId() != smashingPawn.getPlayerId()) {
+            boardStorage.getTile(tileId).removePawn();
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
