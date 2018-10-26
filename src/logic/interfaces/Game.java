@@ -1,8 +1,14 @@
 package logic.interfaces;
 
+import domain.Classes.Tile;
+
+import java.util.List;
+
 public interface Game {
     int rollDice();
     void movePawn(int pawnId);
+    List<Tile> getTiles();
+
 
     //Lobbystuff
     void createLobbyView();

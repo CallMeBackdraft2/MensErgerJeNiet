@@ -9,6 +9,7 @@ import domain.Enums.GameMode;
 import java.util.List;
 import java.util.Optional;
 
+
 public class LocalBoardStorage implements BoardStorage {
 
     private GameBoard gameBoard;
@@ -17,12 +18,13 @@ public class LocalBoardStorage implements BoardStorage {
     public void init(GameMode gameMode) {
 
         gameBoard = new GameBoard(gameMode);
+        BoardReader.Load("Boards/"+ gameMode.name() + ".map",gameBoard.getPlayingField());
     }
 
     @Override
-    public Tile[] getTiles() {
+    public List<Tile> getTiles() {
         List<Tile> tiles = gameBoard.getPlayingField().getTiles();
-        return (Tile[]) tiles.toArray();
+        return tiles;
     }
 
     @Override

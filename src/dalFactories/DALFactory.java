@@ -8,5 +8,6 @@ public  class DALFactory {
     public static BoardStorage getLocalBoardStorage() {
 
         return new LocalBoardStorage();
+
     }
 }

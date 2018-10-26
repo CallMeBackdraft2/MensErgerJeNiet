@@ -2,13 +2,12 @@ package logic.localImplementation;
 
 import dal.interfaces.BoardStorage;
 import dalFactories.DALFactory;
-import domain.Classes.Dice;
-import domain.Classes.GameBoard;
-import domain.Classes.Pawn;
+import domain.Classes.*;
 import domain.Enums.GameMode;
-import domain.Enums.LobbyType;
 import domain.Enums.PawnState;
 import logic.interfaces.Game;
+
+import java.util.List;
 
 public class LocalFourPlayerGame implements Game {
     Dice dice;
@@ -17,6 +16,7 @@ public class LocalFourPlayerGame implements Game {
 
     public LocalFourPlayerGame(){
         boardStorage = DALFactory.getLocalBoardStorage();
+        boardStorage.init(GameMode.FOURPLAYERBOARD);
     }
 
     @Override
@@ -62,6 +62,11 @@ public class LocalFourPlayerGame implements Game {
             //TODO throw errorMessage when the dice hasn't been rolled yet
             throw new IllegalArgumentException("YOu just can't");
         }
+    }
+
+    @Override
+    public List<Tile> getTiles() {
+        return boardStorage.getTiles();
     }
 
     private boolean smashPawn(int smashingPawnId, int tileId) {
