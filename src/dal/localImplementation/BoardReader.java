@@ -1,5 +1,6 @@
 package dal.localImplementation;
 
+import domain.Classes.Pawn;
 import domain.Classes.PlayingField;
 import domain.Classes.Tile;
 
@@ -15,18 +16,26 @@ public class BoardReader {
             while ((line = br.readLine()) != null) {
                 String[] para = line.split("\\s+");
                 String idString = para[0];
+
+
                 int id = Integer.parseInt(idString.substring(3, 5));
                 String typeString = idString.substring(0, 3);
                 String color = para[1];
                 int x = Integer.parseInt(para[2]);
                 int y = Integer.parseInt(para[3]);
-                Tile tile = new Tile(id, typeString, x, y, color);
+                Tile tile = new Tile(idString,color,x,y);
                 playingField.addToTileList(tile);
+
+                if(tile.getFullId().charAt(2) == 'P'){
+
+                    playingField.addPawn(new Pawn(tile.getFullId()));
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
 
 }

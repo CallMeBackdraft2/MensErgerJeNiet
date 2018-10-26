@@ -15,18 +15,18 @@ public class Player {
         this.pawnArray = new Pawn[4];
         this.name = name;
         for (int i = 0; i < 4; i++) {
-            this.pawnArray[i] = new Pawn(id, i);
+            //this.pawnArray[i] = new Pawn(id, i);
             setPawnLoc(i, 0);
         }
     }
 
     public void movePawnIntoPlay(int pawnID) {
-        pawnArray[pawnID].setPawnTileId(1);
-        pawnArray[pawnID].movePawnIntoPlay();
+       // pawnArray[pawnID].setPawnTileId(1);
+       // pawnArray[pawnID].movePawnIntoPlay();
     }
 
     public void setPawnLoc(int pawnID, int pawnLoc) {
-        pawnArray[pawnID].setPawnTileId(pawnLoc);
+       // pawnArray[pawnID].setPawnTileId(pawnLoc);
     }
 
     //public setters
@@ -51,9 +51,9 @@ public class Player {
         return this.playerScore;
     }
 
-    public int getPawnLoc(int pawnID) {
+   /* public int getPawnLoc(int pawnID) {
         return this.pawnArray[pawnID].getPawnTileId();
-    }
+    }*/
 
     public String getName() {
         return this.name;

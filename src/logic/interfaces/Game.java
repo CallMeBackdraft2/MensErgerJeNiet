@@ -1,16 +1,20 @@
 package logic.interfaces;
 
+import domain.Classes.Pawn;
 import domain.Classes.Tile;
 
 import java.util.List;
 
 public interface Game {
     int rollDice();
-    void movePawn(int pawnId);
+    void movePawn(String pawnId);
     List<Tile> getTiles();
+    List<Tile> getPossibleMoves(Pawn pawn);
+    boolean isYourTurn();
+    Pawn getPawn(String homeTileID);
 
 
-    //Lobbystuff
+    //Lobbystuff voor multiplayer iteratie
     void createLobbyView();
     void updateLobbyView();
     void deleteLobbyView();

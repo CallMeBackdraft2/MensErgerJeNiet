@@ -3,9 +3,10 @@ package domain.Classes;
 
 import javafx.util.Pair;
 
+
 public class Tile {
     // fields
-    private int id;
+    private String id;
     private String type;
     private String color;
     private int xLoc;
@@ -13,34 +14,34 @@ public class Tile {
     private Pawn pawn;
 
     // Constructors
-    public Tile(int id, String type, int xLoc, int yLoc, String color) {
-        this.id = id;
-        this.type = type;
+    public Tile(String fullId, String color, int xLoc, int yLoc) {
+        this.id = fullId;
+        this.type = fullId.substring(2, 3);
         this.xLoc = xLoc;
         this.yLoc = yLoc;
         this.color = color;
-    }
 
-    public Tile(int id, String type, int xLoc, int yLoc) {
-        this.id = id;
-        this.type = type;
-        this.xLoc = xLoc;
-        this.yLoc = yLoc;
     }
 
     // Properties
-    public void AddPawn(Pawn pawn) { this.pawn = pawn; }
-    public Pawn getPawn() {return this.pawn; }
-
-    public void setColor(String color) {
-        this.color = color;
+    public void AddPawn(Pawn pawn) {
+        this.pawn = pawn;
     }
+
+    public Pawn getPawn() {
+        return this.pawn;
+    }
+
     public String getColor() {
         return this.color;
     }
 
-    public int getId() {
+    public String getFullId() {
         return id;
+    }
+
+    public int getNummerId() {
+        return Integer.parseInt(id.substring(3, 5));
     }
 
     public String getType() {
@@ -57,6 +58,7 @@ public class Tile {
     public void removePawn() {
         pawn = null;
     }
+
 
     @Override
     public String toString() {

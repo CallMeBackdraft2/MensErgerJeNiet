@@ -1,8 +1,12 @@
 package ui;
 
 import domain.Classes.Lobby;
+import domain.Classes.Pawn;
 import domain.Classes.Tile;
-import javafx.animation.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,18 +19,32 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import logic.localImplementation.LocalFourPlayerGame;
 
 import java.io.File;
+import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
 
 public class FourPlayerController {
+    @FXML
+    ImageView imgDice;
+    @FXML
+    Button btnLeaveGame;
+    @FXML
+    Button btnThrowDice;
+    @FXML
+    AnchorPane boardPane;
+    LocalFourPlayerGame game;
+    Circle selectedPawn = null;
+
+    private Dictionary<Tile, Circle> tileCircles = new Hashtable<>();
+    private Dictionary<Pawn, Circle> pawnCircles = new Hashtable<>();
+
     //todo check what of all this can be put into gamelogic and what has to stay tied to the UI
     private Lobby lobby;
     private boolean isThrown;
@@ -42,26 +60,13 @@ public class FourPlayerController {
         put("K", "WalkingTile");
     }};
 
-
-    @FXML
-    ImageView imgDice;
-    @FXML
-    Button btnLeaveGame;
-    @FXML
-    Button btnThrowDice;
-    @FXML
-    AnchorPane boardPane;
-
-    LocalFourPlayerGame game;
-
     @FXML
     void initialize() {
-        //addAllEventHandlers();
+        addAllEventHandlers();
         game = new LocalFourPlayerGame();
         populatePlayingField();
 
     }
-
 
     private int getRadius(String type) {
 
@@ -75,28 +80,61 @@ public class FourPlayerController {
         }
     }
 
-    private Color getColor(String colorName) {
 
-       switch (colorName){
-
-           case "WHITE" : return Color.WHITE;
-           case "GREEN" : return Color.GREEN;
-           case "RED" : return Color.RED;
-           case "YELLOW" : return Color.YELLOW;
-           case "DODGERBLUE" : return Color.DODGERBLUE;
-           case "cyan" : return Color.CYAN;
-           case "lime" : return Color.LIME;
-           case "LIGHTGREEN" : return Color.LIGHTGREEN;
-           case "LIGHTBLUE" : return Color.LIGHTBLUE;
-           case "lemmonchiffon" :return Color.LEMONCHIFFON;
-           case "SALMON" : return Color.SALMON;
-           case "pink" : return Color.PINK;
-
-       }
-        return Color.GRAY;
+    private Circle getPawnCircle(Pawn pawn) {
+        return pawnCircles.get(pawn);
     }
 
+    private Circle getTileCircle(Tile tile) {
+        return tileCircles.get(tile);
+    }
 
+    private Pawn chosenPawn;
+    private void tilePressed(Tile tile) {
+
+        if (game.isYourTurn() && chosenPawn == null) {
+            Circle pawn = getPawnCircle(game.getPawn(tile.getFullId()));
+            List<Tile> tiles =  game.getPossibleMoves((game.getPawn(tile.getFullId())));
+            for (Tile possibleMove : tiles) {
+                getTileCircle(possibleMove).setStrokeWidth(2);
+                getTileCircle(possibleMove).setStroke(Color.BLACK);
+            }
+        }
+
+    }
+
+    private Color getColor(String colorName) {
+
+        switch (colorName) {
+
+            case "WHITE":
+                return Color.WHITE;
+            case "GREEN":
+                return Color.GREEN;
+            case "RED":
+                return Color.RED;
+            case "YELLOW":
+                return Color.YELLOW;
+            case "DODGERBLUE":
+                return Color.DODGERBLUE;
+            case "cyan":
+                return Color.CYAN;
+            case "lime":
+                return Color.LIME;
+            case "LIGHTGREEN":
+                return Color.LIGHTGREEN;
+            case "LIGHTBLUE":
+                return Color.LIGHTBLUE;
+            case "lemmonchiffon":
+                return Color.LEMONCHIFFON;
+            case "SALMON":
+                return Color.SALMON;
+            case "pink":
+                return Color.PINK;
+
+        }
+        return Color.GRAY;
+    }
 
     private void populatePlayingField() {
 
@@ -114,21 +152,25 @@ public class FourPlayerController {
             circle.setFill(getColor(tile.getColor()));
             circle.setStroke(Color.BLACK);
             circle.setStrokeWidth(1);
-              boardPane.getChildren().add(circle);
+
+
+            tileCircles.put(tile,circle);
+            boardPane.getChildren().add(circle);
+
+            if(tile.getFullId().charAt(2) == 'P'){
+
+                Pawn pawn = game.getPawn(tile.getFullId());
+                Circle pawnCircle = new Circle(10,Color.GRAY);
+                pawnCircle.setCenterX(tile.getLocation().getKey());
+
+                pawnCircle.setCenterY(tile.getLocation().getValue());
+                pawnCircles.put(pawn,pawnCircle);
+                boardPane.getChildren().add(pawnCircle);
+                pawnCircle.onMouseClickedProperty().set(event -> tilePressed(tile));
+
+            }
 
         }
-        /*   for(int i = 0; i < boardPane.getChildren().size(); i++){
-            if(boardPane.getChildren().get(i) instanceof Circle && boardPane.getChildren().get(i).getId() != null){
-                String fullID = boardPane.getChildren().get(i).getId();
-                Tile tile = null;
-                if (!identifyingList.get(fullID.substring(0,2)).equals("WalkingTile")){
-                    tile = new Tile(Integer.parseInt(fullID.substring(3,5)),identifyingList.get(fullID.substring(2,3)),(int)boardPane.getChildren().get(i).getLayoutX(),(int)boardPane.getChildren().get(i).getLayoutY(), identifyingList.get(fullID.substring(0,2)).toUpperCase());
-                } else {
-                    tile = new Tile(Integer.parseInt(fullID.substring(3,5)),identifyingList.get(fullID.substring(2,3)),(int)boardPane.getChildren().get(i).getLayoutX(),(int)boardPane.getChildren().get(i).getLayoutY());
-                }
-                lobby.getGameBoard().getPlayingField().addToTileList(tile);
-            }
-        }*/
     }
 
     private void addAllEventHandlers() {
@@ -148,42 +190,43 @@ public class FourPlayerController {
 
         btnLeaveGame.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(new MainMenuController(),getClass().getResource("guifiles/MainMenu.fxml"),false, "Hoofdmenu").show();
-                ((Node)(event.getSource())).getScene().getWindow().hide();
+                JavaFXSceneFactory.generateStage(new MainMenuController(), getClass().getResource("guifiles/MainMenu.fxml"), false, "Hoofdmenu").show();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });
     }
 
-    private void throwDice(){
-        /*if (!isThrown){
-            Image diceNone = new Image(getClass().getResourceAsStream("Images/DiceNONE.png"));
-           String url = "Images/Dice" + lobby.getGameBoard().rollDice().name() + ".png";
+    private void throwDice() {
+        if (!isThrown) {
+
+            Image diceNone = new Image(getClass().getResourceAsStream("Images/Dice0.png"));
+            int thrown = game.rollDice();
+            String url = "Images/Dice" + thrown + ".png";
             imgDice.setImage(new Image(getClass().getResourceAsStream(url)));
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.ZERO, new KeyValue(imgDice.imageProperty(), diceNone)),
-                    new KeyFrame(Duration.ZERO, new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            rotateImageView(imgDice,1440,2.5,1);
-                            playSound("src/ui/Media/DiceRollSound.mp3");
-                        }
+                    new KeyFrame(Duration.ZERO, event -> {
+
+                        rotateImageView(imgDice, 1440, 2.5, 1);
+                        playSound("src/ui/Media/DiceRollSound.mp3");
+
                     }),
                     new KeyFrame(Duration.seconds(2), new KeyValue(imgDice.imageProperty(), new Image(getClass().getResourceAsStream(url))))
             );
             timeline.play();
-        }*/
+        }
     }
 
     public void setLobby(Lobby lobby) {
         this.lobby = lobby;
     }
 
-    private void playSound(String path){
+    private void playSound(String path) {
         MediaPlayer soundplayer = new MediaPlayer(new Media(new File(new File(path).getAbsolutePath()).toURI().toString()));
         soundplayer.play();
     }
 
-    private void rotateImageView(ImageView img, int degrees, double duration, int cycleAmount){
+    private void rotateImageView(ImageView img, int degrees, double duration, int cycleAmount) {
         RotateTransition rotation = new RotateTransition(Duration.seconds(duration), img);
         rotation.setCycleCount(cycleAmount);
         rotation.setByAngle(degrees);
@@ -197,18 +240,16 @@ public class FourPlayerController {
         rotation.play();
     }
 
-    Circle selectedPawn = null;
-
     @FXML
     public void handleMouseClick(MouseEvent mouseEvent) {
         //todo find way to handle movement posibilities and legality
-        Circle circle = (Circle)mouseEvent.getSource();
-        Tile tile = lobby.getGameBoard().getPlayingField().findTileinList(Integer.parseInt(circle.getId().substring(3,5)),identifyingList.get(circle.getId().substring(2,3)));
+        Circle circle = (Circle) mouseEvent.getSource();
+        Tile tile = lobby.getGameBoard().getPlayingField().findTileinList(Integer.parseInt(circle.getId().substring(3, 5)), identifyingList.get(circle.getId().substring(2, 3)));
 
 
-        if (tile.getType().equals("Pawn")){
+        if (tile.getType().equals("Pawn")) {
             selectedPawn = circle;
-        } else if (selectedPawn != null){
+        } else if (selectedPawn != null) {
             selectedPawn.setLayoutX(circle.getLayoutX());
             selectedPawn.setLayoutY(circle.getLayoutY());
         } else {

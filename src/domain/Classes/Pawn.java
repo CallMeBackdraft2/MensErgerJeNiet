@@ -1,31 +1,30 @@
 package domain.Classes;
 
 import domain.Enums.PawnState;
+import domain.Enums.PlayerColor;
 
 public class Pawn {
     // Fields
-    private int id;
-    private int playerId;
-    private int pawnTileId;
+    private String fullId;
+    private String pawnTileId;
     private int stepsTaken;
+    private PlayerColor playerColor;
 
     private PawnState pawnstate;
 
-    // Constructor
-    public Pawn(int playerId,  int id) {
-        //every newly instantiated pawn always starts in one of the four start positions of the player
-        this.pawnstate = PawnState.STARTPOSITION;
-        this.playerId = playerId;
-        this.id = id;
-        this.stepsTaken = 0;
+    public Pawn(String fullId) {
+        this.fullId = fullId;
+        playerColor = PlayerColor.fromId(fullId);
     }
 
+    // Constructor
+
     // Properties
-    public void setPawnTileId(int pawnTileId) {
+    public void setPawnTileId(String pawnTileId) {
         this.pawnTileId = pawnTileId;
     }
 
-    public int getPawnTileId() {
+    public String getPawnTileId() {
         return this.pawnTileId;
     }
 
@@ -37,16 +36,22 @@ public class Pawn {
         this.pawnstate = PawnState.INPLAY;
     }
 
-    public int getPlayerId() {
-        return playerId;
-    }
 
-    public int getId() {
-        return id;
-    }
 
     public int getStepsTaken() { return stepsTaken; }
 
     public void setStepsTaken(int stepsTaken) { this.stepsTaken = stepsTaken; }
 
+    public String getFullId() {
+        return fullId;
+    }
+
+    public int getPlayerId(){
+        return playerColor.getValue();
+
+    }
+
+    public PlayerColor getPlayerColor() {
+        return playerColor;
+    }
 }

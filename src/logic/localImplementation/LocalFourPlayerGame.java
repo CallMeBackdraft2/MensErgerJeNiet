@@ -10,6 +10,7 @@ import logic.interfaces.Game;
 import java.util.List;
 
 public class LocalFourPlayerGame implements Game {
+
     Dice dice;
     boolean diceRolled;
     BoardStorage boardStorage;
@@ -27,7 +28,7 @@ public class LocalFourPlayerGame implements Game {
     }
 
     @Override
-    public void movePawn(int pawnId) {
+    public void movePawn(String pawnId) {
         if (diceRolled){
             // get the pawn that is given
             Pawn selectedPawn = boardStorage.getPawn(pawnId);
@@ -39,13 +40,13 @@ public class LocalFourPlayerGame implements Game {
                 // TODO What happens if another pawn is occupying the starting tiles
                 // Depending on the player the pawn gets placed in the correct starting position
                 if (selectedPawn.getPlayerId() == 1) {
-                    boardStorage.movePawn(pawnId, 1);
+                    boardStorage.movePawn(pawnId, "WL01");
                 } else if (selectedPawn.getPlayerId() == 2) {
-                    boardStorage.movePawn(pawnId, 11);
+                    boardStorage.movePawn(pawnId, "WL11");
                 } else if (selectedPawn.getPlayerId() == 3) {
-                    boardStorage.movePawn(pawnId, 21);
+                    boardStorage.movePawn(pawnId, "WL21");
                 } else if (selectedPawn.getPlayerId() == 4) {
-                    boardStorage.movePawn(pawnId, 31);
+                    boardStorage.movePawn(pawnId, "WL31");
                 }
                 return;
             }
@@ -69,7 +70,22 @@ public class LocalFourPlayerGame implements Game {
         return boardStorage.getTiles();
     }
 
-    private boolean smashPawn(int smashingPawnId, int tileId) {
+    @Override
+    public List<Tile> getPossibleMoves(Pawn pawn) {
+        return boardStorage.getTiles();
+    }
+
+    @Override
+    public boolean isYourTurn() {
+        return true;
+    }
+
+    @Override
+    public Pawn getPawn(String homeTileID) {
+        return boardStorage.getPawn(homeTileID);
+    }
+
+    private boolean smashPawn(String smashingPawnId, String tileId) {
 
         Pawn smashedPawn = boardStorage.getTile(tileId).getPawn();
         Pawn smashingPawn = boardStorage.getPawn(smashingPawnId);

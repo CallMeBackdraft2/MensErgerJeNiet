@@ -15,6 +15,7 @@ public class PlayingField {
 
     public void addPawn(Pawn pawn){
 
+        pawns.add(pawn);
     }
 
     public PlayingField() {
@@ -33,7 +34,7 @@ public class PlayingField {
 
     public Tile findTileinList(int id, String type) {
         for (Tile tile : tiles) {
-            if (tile.getId() == id && tile.getType().equals(type)) {
+            if (tile.getNummerId() == id && tile.getType().equals(type)) {
                 return tile;
             }
         }

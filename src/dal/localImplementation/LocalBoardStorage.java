@@ -30,21 +30,21 @@ public class LocalBoardStorage implements BoardStorage {
     @Override
     public Pawn[] getPlayerPawns(int PlayerId) {
         return (Pawn[]) gameBoard.getPlayingField().getPawns()
-                .stream().filter(p -> p.getPlayerId() == PlayerId).toArray();
+                .stream().filter(p -> p.getPlayerColor().getValue() == PlayerId).toArray();
     }
 
     @Override
-    public void movePawn(int pawnId, int tileId) {
+    public void movePawn(String pawnId, String tileId) {
 
         Pawn pawn = getPawn(pawnId);
         pawn.setPawnTileId(tileId);
     }
 
     @Override
-    public Pawn getPawn(int id) {
+    public Pawn getPawn(String id) {
 
         Optional<Pawn> optional = gameBoard.getPlayingField().getPawns()
-                .stream().filter(p -> p.getId() == id).findFirst();
+                .stream().filter(p -> p.getFullId().equals(id)).findFirst();
         if (!optional.isPresent()) {
             throw new IllegalArgumentException("No pawn found with the id = " + id);
         }
@@ -52,9 +52,9 @@ public class LocalBoardStorage implements BoardStorage {
     }
 
     @Override
-    public Tile getTile(int id) {
+    public Tile getTile(String id) {
         Optional<Tile> optional = gameBoard.getPlayingField().getTiles()
-                .stream().filter(t -> t.getId() == id).findFirst();
+                .stream().filter(t -> t.getFullId().equals(id)).findFirst();
         if (!optional.isPresent()) {
             throw new IllegalArgumentException("No tile found with the id = " + id);
         }
