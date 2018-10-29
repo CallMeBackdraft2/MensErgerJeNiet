@@ -13,10 +13,15 @@ public class Dice {
     // Constructor
     public Dice() {
         r =  new Random();
+        LastRolled = -1;
     }
 
     // Methods
     public int rollDice() {
+        if(LastRolled == -1){
+           LastRolled = 6;
+            return 6;
+        }
         int number = r.nextInt(6) + 1;
         this.LastRolled = number;
         return  number;

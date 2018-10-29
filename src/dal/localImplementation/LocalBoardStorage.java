@@ -34,6 +34,11 @@ public class LocalBoardStorage implements BoardStorage {
     }
 
     @Override
+    public List<Pawn> getPawns() {
+        return gameBoard.getPlayingField().getPawns();
+    }
+
+    @Override
     public void movePawn(String pawnId, String tileId) {
 
         Pawn pawn = getPawn(pawnId);

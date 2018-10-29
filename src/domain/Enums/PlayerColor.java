@@ -1,5 +1,7 @@
 package domain.Enums;
 
+import javafx.scene.paint.Color;
+
 public enum PlayerColor {
     RED(0),
     GREEN(1),
@@ -29,6 +31,40 @@ public enum PlayerColor {
         System.out.println("ERROR");
         return PlayerColor.RED;
 
+    }
+
+    public Color toColor() {
+
+        switch (value) {
+
+            case 0:
+                return Color.RED;
+            case 1:
+                return Color.GREEN;
+            case 2:
+                return Color.BLUE;
+            case 3:
+                return Color.YELLOW;
+
+        }
+        return Color.GREY;
+    }
+
+    public Color toColorAccent() {
+
+        switch (value) {
+
+            case 0:
+                return Color.DARKRED;
+            case 1:
+                return Color.DARKGREEN;
+            case 2:
+                return Color.DARKBLUE;
+            case 3:
+                return Color.rgb(209, 177, 0);
+
+        }
+        return Color.BLACK;
     }
 
     public int getValue() {

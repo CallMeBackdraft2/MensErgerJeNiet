@@ -9,10 +9,10 @@ public interface Game {
     int rollDice();
     void movePawn(String pawnId);
     List<Tile> getTiles();
-    List<Tile> getPossibleMoves(Pawn pawn);
+    Tile getPossibleMove(Pawn pawn);
     boolean isYourTurn();
     Pawn getPawn(String homeTileID);
-
+    List<Pawn> getPawns();
 
     //Lobbystuff voor multiplayer iteratie
     void createLobbyView();

@@ -2,12 +2,17 @@ package logic.localImplementation;
 
 import dal.interfaces.BoardStorage;
 import dalFactories.DALFactory;
-import domain.Classes.*;
+import domain.Classes.Dice;
+import domain.Classes.Pawn;
+import domain.Classes.Tile;
 import domain.Enums.GameMode;
 import domain.Enums.PawnState;
+import domain.Enums.PlayerColor;
 import logic.interfaces.Game;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LocalFourPlayerGame implements Game {
 
@@ -15,21 +20,23 @@ public class LocalFourPlayerGame implements Game {
     boolean diceRolled;
     BoardStorage boardStorage;
 
-    public LocalFourPlayerGame(){
+    public LocalFourPlayerGame() {
         boardStorage = DALFactory.getLocalBoardStorage();
         boardStorage.init(GameMode.FOURPLAYERBOARD);
+        dice = new Dice();
     }
 
     @Override
     public int rollDice() {
-        dice = new Dice();
+
         diceRolled = true;
         return dice.rollDice();
     }
 
+
     @Override
     public void movePawn(String pawnId) {
-        if (diceRolled){
+      /*  if (diceRolled) {
             // get the pawn that is given
             Pawn selectedPawn = boardStorage.getPawn(pawnId);
 
@@ -49,8 +56,7 @@ public class LocalFourPlayerGame implements Game {
                     boardStorage.movePawn(pawnId, "WL31");
                 }
                 return;
-            }
-            else if (selectedPawn.getPawnState() == PawnState.STARTPOSITION && dice.getLastRolled() != 6) {
+            } else if (selectedPawn.getPawnState() == PawnState.STARTPOSITION && dice.getLastRolled() != 6) {
                 //TODO Throw errorMessage saying 6 was not rolled by the dice
                 throw new IllegalArgumentException("YOu just can't");
             }
@@ -58,12 +64,31 @@ public class LocalFourPlayerGame implements Game {
             // TODO When a Pawn is already in play
 
             // TODO When a Pawn is in HomeBase
-        }
-        else {
+        } else {
             //TODO throw errorMessage when the dice hasn't been rolled yet
             throw new IllegalArgumentException("YOu just can't");
         }
+        */
+
+
+      if(diceRolled) {
+        Pawn pawn = getPawn(pawnId);
+        Tile tile = getPossibleMove(pawn);
+        if(tile!=null) {
+
+            Pawn smashedPawn =  tile.getPawn();
+            if(smashedPawn!=null){
+
+                smashedPawn.setPawnTileId(smashedPawn.getFullId());
+
+            }
+
+
+            pawn.setPawnTileId(tile.getFullId());
+            tile.setPawn(pawn);
+        }
     }
+}
 
     @Override
     public List<Tile> getTiles() {
@@ -71,8 +96,47 @@ public class LocalFourPlayerGame implements Game {
     }
 
     @Override
-    public List<Tile> getPossibleMoves(Pawn pawn) {
-        return boardStorage.getTiles();
+    public List<Pawn> getPawns() {
+        return boardStorage.getPawns();
+    }
+
+    @Override
+    public Tile getPossibleMove(Pawn pawn) {
+
+
+        Tile curTile = boardStorage.getTile(pawn.getPawnTileId());
+        if (curTile.getType().charAt(2) == 'P') {
+
+            if(dice.getLastRolled()==6) {
+
+                System.out.println(pawn.getPlayerColor().toString());
+                Stream<Tile> stream = boardStorage.getTiles().stream()
+                        .filter(t -> t.getColor().equals(pawn.getPlayerColor().toString()) && t.getType().equals("WLK"));
+
+
+                return stream.findFirst().get();
+            }
+            return null;
+        }
+
+        List<Tile> walkables = getTiles().stream()
+                .filter(t -> t.getType().equals("WLK")).collect(Collectors.toList());
+        int i = walkables.indexOf(curTile);
+        i += dice.getLastRolled();
+        if (i >= 40) {
+            i -= 40;
+        }
+        System.out.println(i);
+        System.out.println(walkables.get(i));
+
+        Tile result = walkables.get(i);
+        if(result.getPawn()!=null){
+            if(result.getPawn().getPlayerColor() == pawn.getPlayerColor()){
+                return null;
+            }
+        }
+
+        return walkables.get(i);
     }
 
     @Override
@@ -81,8 +145,8 @@ public class LocalFourPlayerGame implements Game {
     }
 
     @Override
-    public Pawn getPawn(String homeTileID) {
-        return boardStorage.getPawn(homeTileID);
+    public Pawn getPawn(String id) {
+        return boardStorage.getPawn(id);
     }
 
     private boolean smashPawn(String smashingPawnId, String tileId) {
@@ -93,15 +157,14 @@ public class LocalFourPlayerGame implements Game {
         if (smashedPawn.getPlayerId() != smashingPawn.getPlayerId()) {
             boardStorage.getTile(tileId).removePawn();
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     @Override
     public void createLobbyView() {
-        
+
     }
 
     @Override
@@ -118,7 +181,6 @@ public class LocalFourPlayerGame implements Game {
     public void joinLobby(int lobbyId) {
 
     }
-
 
 
     @Override

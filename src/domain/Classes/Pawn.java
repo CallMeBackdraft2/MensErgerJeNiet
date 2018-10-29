@@ -15,6 +15,7 @@ public class Pawn {
     public Pawn(String fullId) {
         this.fullId = fullId;
         playerColor = PlayerColor.fromId(fullId);
+        pawnTileId = fullId;
     }
 
     // Constructor

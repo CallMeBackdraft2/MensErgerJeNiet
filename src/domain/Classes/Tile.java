@@ -16,7 +16,7 @@ public class Tile {
     // Constructors
     public Tile(String fullId, String color, int xLoc, int yLoc) {
         this.id = fullId;
-        this.type = fullId.substring(2, 3);
+        this.type = fullId.substring(0, 3);
         this.xLoc = xLoc;
         this.yLoc = yLoc;
         this.color = color;
@@ -24,7 +24,7 @@ public class Tile {
     }
 
     // Properties
-    public void AddPawn(Pawn pawn) {
+    public void setPawn(Pawn pawn) {
         this.pawn = pawn;
     }
 

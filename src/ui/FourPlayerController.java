@@ -3,6 +3,7 @@ package ui;
 import domain.Classes.Lobby;
 import domain.Classes.Pawn;
 import domain.Classes.Tile;
+import domain.Enums.PlayerColor;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
@@ -59,6 +60,7 @@ public class FourPlayerController {
         put("S", "StartTile");
         put("K", "WalkingTile");
     }};
+    private Pawn chosenPawn;
 
     @FXML
     void initialize() {
@@ -80,7 +82,6 @@ public class FourPlayerController {
         }
     }
 
-
     private Circle getPawnCircle(Pawn pawn) {
         return pawnCircles.get(pawn);
     }
@@ -89,17 +90,61 @@ public class FourPlayerController {
         return tileCircles.get(tile);
     }
 
-    private Pawn chosenPawn;
+    private void pawnPressed(Pawn pawn) {
+
+        chosenPawn = pawn;
+        clearSelection();
+        if (game.isYourTurn()) {
+            chosenPawn = pawn;
+            Circle pawnCircle = getPawnCircle(pawn);
+            Tile possibleMove = game.getPossibleMove(pawn);
+
+           if( possibleMove==null){
+
+               return;
+           }
+            getTileCircle(possibleMove).setStrokeWidth(10);
+
+            getTileCircle(possibleMove).setStroke(pawn.getPlayerColor().toColorAccent());
+
+
+        }
+
+    }
+
+    private void clearSelection(){
+
+        for (Tile t : game.getTiles()) {
+
+            getTileCircle(t).setStrokeWidth(1);
+            getTileCircle(t).setStroke(Color.BLACK);
+        }
+    }
+
+    private void updateBoard(){
+
+        for (Pawn pawn : game.getPawns()) {
+
+            Circle pawnCirle = getPawnCircle(pawn);
+            Tile tile = game.getTiles().stream().filter(t -> t.getFullId().equals(pawn.getPawnTileId())).findFirst().get();
+            pawnCirle.setCenterX(tile.getLocation().getKey());
+            pawnCirle.setCenterY(tile.getLocation().getValue());
+        }
+        
+
+    }
+    
     private void tilePressed(Tile tile) {
 
-        if (game.isYourTurn() && chosenPawn == null) {
-            Circle pawn = getPawnCircle(game.getPawn(tile.getFullId()));
-            List<Tile> tiles =  game.getPossibleMoves((game.getPawn(tile.getFullId())));
-            for (Tile possibleMove : tiles) {
-                getTileCircle(possibleMove).setStrokeWidth(2);
-                getTileCircle(possibleMove).setStroke(Color.BLACK);
-            }
+        if (game.isYourTurn() && chosenPawn != null && tile== game.getPossibleMove(chosenPawn) ) {
+
+            Circle pawn = getPawnCircle(chosenPawn);
+            game.movePawn(chosenPawn.getFullId());
+
+            updateBoard();
         }
+
+        clearSelection();
 
     }
 
@@ -131,6 +176,8 @@ public class FourPlayerController {
                 return Color.SALMON;
             case "pink":
                 return Color.PINK;
+            case "BLUE":
+                return Color.BLUE;
 
         }
         return Color.GRAY;
@@ -152,21 +199,21 @@ public class FourPlayerController {
             circle.setFill(getColor(tile.getColor()));
             circle.setStroke(Color.BLACK);
             circle.setStrokeWidth(1);
+            circle.onMouseClickedProperty().set(event -> tilePressed(tile));
 
-
-            tileCircles.put(tile,circle);
+            tileCircles.put(tile, circle);
             boardPane.getChildren().add(circle);
 
-            if(tile.getFullId().charAt(2) == 'P'){
+            if (tile.getFullId().charAt(2) == 'P') {
 
                 Pawn pawn = game.getPawn(tile.getFullId());
-                Circle pawnCircle = new Circle(10,Color.GRAY);
+                Circle pawnCircle = new Circle(12, pawn.getPlayerColor().toColorAccent());
                 pawnCircle.setCenterX(tile.getLocation().getKey());
 
                 pawnCircle.setCenterY(tile.getLocation().getValue());
-                pawnCircles.put(pawn,pawnCircle);
+                pawnCircles.put(pawn, pawnCircle);
                 boardPane.getChildren().add(pawnCircle);
-                pawnCircle.onMouseClickedProperty().set(event -> tilePressed(tile));
+                pawnCircle.onMouseClickedProperty().set(event -> pawnPressed(pawn));
 
             }
 
@@ -215,6 +262,7 @@ public class FourPlayerController {
             );
             timeline.play();
         }
+        clearSelection();
     }
 
     public void setLobby(Lobby lobby) {
