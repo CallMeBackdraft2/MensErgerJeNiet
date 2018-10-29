@@ -74,18 +74,22 @@ public class LocalFourPlayerGame implements Game {
       if(diceRolled) {
         Pawn pawn = getPawn(pawnId);
         Tile tile = getPossibleMove(pawn);
+
         if(tile!=null) {
+
+            boardStorage.getTile( pawn.getPawnTileId()).removePawn();
 
             Pawn smashedPawn =  tile.getPawn();
             if(smashedPawn!=null){
 
                 smashedPawn.setPawnTileId(smashedPawn.getFullId());
-
+                int c=5;
             }
 
 
             pawn.setPawnTileId(tile.getFullId());
             tile.setPawn(pawn);
+
         }
     }
 }
