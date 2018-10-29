@@ -27,8 +27,9 @@ public class LocalBoardStorageTest{
 
     @Test
     public void movePawn(){
-        local.getPawn(0).movePawnIntoPlay();
+        local.getPawn("WLK01").movePawnIntoPlay();
 
-        Assert.assertTrue(local.getPawn(0).getPawnState() == PawnState.INPLAY);
+        Assert.assertTrue(local.getPawn("WLK01").getPawnState() == PawnState.INPLAY);
     }
+
 }
