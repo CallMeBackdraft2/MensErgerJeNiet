@@ -1,20 +1,24 @@
 package ui;
 
-import domain.Classes.Lobby;
 import domain.Classes.Pawn;
 import domain.Classes.Tile;
-import domain.Enums.PlayerColor;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -26,7 +30,6 @@ import logic.localImplementation.LocalFourPlayerGame;
 
 import java.io.File;
 import java.util.Dictionary;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -40,26 +43,23 @@ public class FourPlayerController {
     Button btnThrowDice;
     @FXML
     AnchorPane boardPane;
+    @FXML
+    TextField messageField;
+
+    @FXML
+    ListView chatListView;
+    @FXML
+    ListView playersListView;
+
     LocalFourPlayerGame game;
     Circle selectedPawn = null;
 
     private Dictionary<Tile, Circle> tileCircles = new Hashtable<>();
     private Dictionary<Pawn, Circle> pawnCircles = new Hashtable<>();
 
-    //todo check what of all this can be put into gamelogic and what has to stay tied to the UI
-    private Lobby lobby;
+
     private boolean isThrown;
-    private HashMap<String, String> identifyingList = new HashMap<String, String>() {{
-        put("GR", "Green");
-        put("BL", "Blue");
-        put("YE", "Yellow");
-        put("RE", "Red");
-        put("WL", "WalkingTile");
-        put("P", "Pawn");
-        put("H", "HomeTile");
-        put("S", "StartTile");
-        put("K", "WalkingTile");
-    }};
+
     private Pawn chosenPawn;
 
     @FXML
@@ -67,7 +67,7 @@ public class FourPlayerController {
         addAllEventHandlers();
         game = new LocalFourPlayerGame();
         populatePlayingField();
-
+        playersListView.setItems(FXCollections.observableArrayList(game.getPlayers()));
     }
 
     private int getRadius(String type) {
@@ -99,10 +99,10 @@ public class FourPlayerController {
             Circle pawnCircle = getPawnCircle(pawn);
             Tile possibleMove = game.getPossibleMove(pawn);
 
-           if( possibleMove==null){
+            if (possibleMove == null) {
 
-               return;
-           }
+                return;
+            }
             getTileCircle(possibleMove).setStrokeWidth(10);
 
             getTileCircle(possibleMove).setStroke(pawn.getPlayerColor().toColorAccent());
@@ -113,7 +113,7 @@ public class FourPlayerController {
 
     }
 
-    private void clearSelection(){
+    private void clearSelection() {
 
         for (Tile t : game.getTiles()) {
 
@@ -122,7 +122,7 @@ public class FourPlayerController {
         }
     }
 
-    private void updateBoard(){
+    private void updateBoard() {
 
         for (Pawn pawn : game.getPawns()) {
 
@@ -131,13 +131,13 @@ public class FourPlayerController {
             pawnCirle.setCenterX(tile.getLocation().getKey());
             pawnCirle.setCenterY(tile.getLocation().getValue());
         }
-        
+
 
     }
-    
+
     private void tilePressed(Tile tile) {
 
-        if (game.isYourTurn() && chosenPawn != null && tile== game.getPossibleMove(chosenPawn) ) {
+        if (game.isYourTurn() && chosenPawn != null && tile == game.getPossibleMove(chosenPawn)) {
 
             Circle pawn = getPawnCircle(chosenPawn);
             game.movePawn(chosenPawn.getFullId());
@@ -222,19 +222,12 @@ public class FourPlayerController {
     }
 
     private void addAllEventHandlers() {
-        imgDice.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                throwDice();
-                event.consume();
-            }
+        imgDice.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            throwDice();
+            event.consume();
         });
 
-        btnThrowDice.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                throwDice();
-            }
-        });
+        btnThrowDice.setOnAction(event -> throwDice());
 
         btnLeaveGame.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -242,11 +235,25 @@ public class FourPlayerController {
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });
+
+
+        messageField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER) {
+
+                    game.sendMessage(messageField.getText());
+                    messageField.clear();
+                    ObservableList<String> s = FXCollections.observableArrayList(game.getMessages());
+                    chatListView.setItems(s);
+                }
+            }
+        });
+
     }
 
     private void throwDice() {
         if (!isThrown) {
-
             Image diceNone = new Image(getClass().getResourceAsStream("Images/Dice0.png"));
             int thrown = game.rollDice();
             String url = "Images/Dice" + thrown + ".png";
@@ -266,9 +273,6 @@ public class FourPlayerController {
         clearSelection();
     }
 
-    public void setLobby(Lobby lobby) {
-        this.lobby = lobby;
-    }
 
     private void playSound(String path) {
         MediaPlayer soundplayer = new MediaPlayer(new Media(new File(new File(path).getAbsolutePath()).toURI().toString()));
@@ -289,21 +293,5 @@ public class FourPlayerController {
         rotation.play();
     }
 
-    @FXML
-    public void handleMouseClick(MouseEvent mouseEvent) {
-        //todo find way to handle movement posibilities and legality
-        Circle circle = (Circle) mouseEvent.getSource();
-        Tile tile = lobby.getGameBoard().getPlayingField().findTileinList(Integer.parseInt(circle.getId().substring(3, 5)), identifyingList.get(circle.getId().substring(2, 3)));
 
-
-        if (tile.getType().equals("Pawn")) {
-            selectedPawn = circle;
-        } else if (selectedPawn != null) {
-            selectedPawn.setLayoutX(circle.getLayoutX());
-            selectedPawn.setLayoutY(circle.getLayoutY());
-        } else {
-
-        }
-
-    }
 }

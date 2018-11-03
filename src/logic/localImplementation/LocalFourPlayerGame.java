@@ -2,14 +2,12 @@ package logic.localImplementation;
 
 import dal.interfaces.BoardStorage;
 import dalFactories.DALFactory;
-import domain.Classes.Dice;
-import domain.Classes.Pawn;
-import domain.Classes.Tile;
+import domain.Classes.*;
 import domain.Enums.GameMode;
-import domain.Enums.PawnState;
-import domain.Enums.PlayerColor;
 import logic.interfaces.Game;
 
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,11 +16,17 @@ public class LocalFourPlayerGame implements Game {
 
     Dice dice;
     boolean diceRolled;
+    Lobby lobby;
     BoardStorage boardStorage;
 
     public LocalFourPlayerGame() {
         boardStorage = DALFactory.getLocalBoardStorage();
         boardStorage.init(GameMode.FOURPLAYERBOARD);
+        lobby = new Lobby(new Player(0, "TestHuman"));
+        lobby.playerJoin(new Player(1, "TestAI1"));
+        lobby.playerJoin(new Player(2, "TestAI2"));
+        lobby.playerJoin(new Player(3, "TestAI3"));
+
         dice = new Dice();
     }
 
@@ -102,6 +106,30 @@ public class LocalFourPlayerGame implements Game {
     @Override
     public List<Pawn> getPawns() {
         return boardStorage.getPawns();
+    }
+
+    @Override
+    public List<Player> getPlayers() {
+       return lobby.getPlayers();
+    }
+
+    @Override
+    public void sendMessage(String message) {
+
+        lobby.addMessage(lobby.getPlayerByIndex(0), message);
+    }
+
+    @Override
+    public List<String> getMessages() {
+
+        List<String> messages = new ArrayList<>();
+        for (LobbyMessage message : lobby.getMessages()) {
+            messages.add(message.getPlayer().getName() + ": " + message.getMessage()
+                    + " [" + message.getLocalDateTime().toLocalTime().format(DateTimeFormatter.ISO_LOCAL_TIME)
+                    + "]");
+
+        }
+        return messages;
     }
 
     @Override

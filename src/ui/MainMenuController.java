@@ -26,7 +26,6 @@ public class MainMenuController {
             public void handle(ActionEvent event) {
                 FourPlayerController controller = new FourPlayerController();
                 //todo de-hardcode this and get player date from something like log-on or registration
-                controller.setLobby(new Lobby(new Player("Dennis")));
 
                 JavaFXSceneFactory.generateStage(controller, getClass().getResource("guifiles/4-Player.fxml"), false, "Speelbord", 629, 0).show();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
@@ -37,7 +36,7 @@ public class MainMenuController {
             public void handle(ActionEvent event) {
                 LobbyController controller = new LobbyController();
                 //todo de-hardcode this and get player date from something like log-on or registration
-                controller.setLobby(new Lobby(new Player("Dennis")));
+                controller.setLobby(new Lobby(new Player(0, "Dennis")));
 
                 JavaFXSceneFactory.generateStage(controller, getClass().getResource("guifiles/LobbySettings.fxml"), false, "Spellobby", 429, 431).show();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
