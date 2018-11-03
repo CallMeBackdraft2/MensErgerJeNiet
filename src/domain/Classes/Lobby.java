@@ -1,19 +1,31 @@
 package domain.Classes;
 
 
-import domain.Enums.GameMode;
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Lobby {
-    private GameBoard gameBoard;
+
     private List<Player> players;
+    private List<LobbyMessage> messages;
 
     public Lobby(Player host) {
-        gameBoard = new GameBoard(GameMode.FOURPLAYERBOARD);
         players = new ArrayList<>();
+        messages = new ArrayList<>();
         players.add(host);
+    }
+
+    public List<LobbyMessage> getMessages(){
+
+       return messages;
+
+    }
+
+    public void addMessage(Player player, String message){
+
+        messages.add(new LobbyMessage(player,message, LocalDateTime.now()));
     }
 
     public void playerJoin(Player player) {
@@ -24,10 +36,6 @@ public class Lobby {
         players.remove(player);
     }
 
-    //Public getters
-    public GameBoard getGameBoard() {
-        return gameBoard;
-    }
 
     public List<Player> getPlayers() {
         return players;

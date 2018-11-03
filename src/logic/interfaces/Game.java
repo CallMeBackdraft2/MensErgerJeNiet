@@ -1,6 +1,7 @@
 package logic.interfaces;
 
 import domain.Classes.Pawn;
+import domain.Classes.Player;
 import domain.Classes.Tile;
 
 import java.util.List;
@@ -14,6 +15,12 @@ public interface Game {
     Pawn getPawn(String homeTileID);
     List<Pawn> getPawns();
 
+
+    List<Player> getPlayers();
+
+
+    void sendMessage(String message);
+    List<String> getMessages();
     //Lobbystuff voor multiplayer iteratie
     void createLobbyView();
     void updateLobbyView();
