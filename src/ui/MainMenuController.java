@@ -21,7 +21,20 @@ public class MainMenuController {
     Button btnFindLobby;
 
     @FXML
+    Button btnJoinLobby;
+
+    @FXML
     void initialize() {
+        btnJoinLobby.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                SixPlayerController controller = new SixPlayerController();
+                //todo de-hardcode this and get player date from something like log-on or registration
+
+                JavaFXSceneFactory.generateStage(controller, getClass().getResource("guifiles/6-Player.fxml"), false, "Speelbord", 629, 0).show();
+                ((Node) (event.getSource())).getScene().getWindow().hide();
+            }
+        });
+
         btnQuickPlay.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 FourPlayerController controller = new FourPlayerController();
@@ -38,7 +51,7 @@ public class MainMenuController {
                 //todo de-hardcode this and get player date from something like log-on or registration
                 controller.setLobby(new Lobby(new Player(0, "Dennis")));
 
-                JavaFXSceneFactory.generateStage(controller, getClass().getResource("guifiles/LobbySettings.fxml"), false, "Spellobby", 429, 431).show();
+                JavaFXSceneFactory.generateStage(controller, getClass().getResource("guifiles/LobbyView.fxml"), false, "Spellobby", 429, 431).show();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });
