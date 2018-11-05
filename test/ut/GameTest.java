@@ -3,11 +3,12 @@ package ut;
 import domain.Enums.GameMode;
 import domain.Enums.PawnState;
 import logic.interfaces.Game;
+import logicFactories.LogicFactory;
 import org.junit.*;
 
 public abstract class GameTest {
 
-    Game game;
+    Game game = LogicFactory.getLocalFourPlayerGameTest();
 
     public abstract Game createInstance();
 
@@ -41,14 +42,41 @@ public abstract class GameTest {
 
     @Test
     public void movePawn(){
-        game.getPawn("WLK01").movePawnIntoPlay();
-
-        Assert.assertTrue(game.getPawn("WLK01").getPawnState() == PawnState.INPLAY);
+        while(true){
+            if(game.rollDice() == 6){
+                break;
+            }
+        }
+        game.movePawn("GRP01");
     }
 
     @Test
-    public void hitPawn(){
+    public void hitPawnTest() {
+        game.readyUp();
+        
+        while (true) {
+            if (game.rollDice() == 6) {
+                break;
+            }
+        }
+        game.movePawn("GRP01");
 
+        while (true) {
+            if (game.rollDice() == 2) {
+                break;
+            }
+        }
+        game.movePawn("GRP01");
+
+        for (int i = 0; i < 3; i++) {
+            while (true) {
+                if (game.rollDice() == 6) {
+                    break;
+                }
+            }
+            game.movePawn("YEP01");
+        }
+
+        Assert.assertTrue(game.getPawn("GRP01").getPawnState() == PawnState.STARTPOSITION);
     }
-
 }
