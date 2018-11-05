@@ -72,7 +72,7 @@
                         <ImageView fx:id="imgDice" fitHeight="60.0" fitWidth="60.0" layoutX="265.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                             <Image url="@../Images/Dice0.png" />
                      <effect>
-                        <ColorAdjust contrast="0.02" hue="0.33" saturation="1.0" />
+                        <ColorAdjust brightness="0.22" contrast="0.02" saturation="1.0" />
                      </effect>
                         </ImageView>
 

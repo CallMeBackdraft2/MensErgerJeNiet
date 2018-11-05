@@ -14,6 +14,13 @@ public enum PlayerColor {
         this.value = value;
     }
 
+    public double getHue(){
+
+      double d =  PlayerColor.values()[value].toColor().getHue();
+      return d;
+
+    }
+
     public static PlayerColor fromId(String id) {
 
         switch (id.substring(0, 2)) {

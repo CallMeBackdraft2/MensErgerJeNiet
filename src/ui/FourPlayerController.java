@@ -2,6 +2,7 @@ package ui;
 
 import domain.Classes.Pawn;
 import domain.Classes.Tile;
+import domain.Enums.PlayerColor;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
@@ -12,9 +13,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -27,7 +30,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import logic.interfaces.Game;
-import logic.localImplementation.LocalFourPlayerGame;
 import logicFactories.LogicFactory;
 
 import java.io.File;
@@ -257,7 +259,19 @@ public class FourPlayerController {
     private void throwDice() {
         if (!isThrown) {
             Image diceNone = new Image(getClass().getResourceAsStream("Images/Dice0.png"));
-            int thrown = game.rollDice();
+            int thrown = -1;
+            try {
+                thrown = game.rollDice();
+
+            } catch (Exception e) {
+
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setTitle("Error");
+                a.setContentText(e.getMessage());
+                a.show();
+            }
+            double d = PlayerColor.values()[game.getCurrentPlayerId()].getHue();
+            imgDice.setEffect(new ColorAdjust(d/360, 1, 0, 0));
             String url = "Images/Dice" + thrown + ".png";
             imgDice.setImage(new Image(getClass().getResourceAsStream(url)));
             Timeline timeline = new Timeline(

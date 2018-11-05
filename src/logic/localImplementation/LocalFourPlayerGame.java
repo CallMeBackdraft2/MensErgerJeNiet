@@ -40,11 +40,36 @@ public class LocalFourPlayerGame implements Game {
         if (diceRolled){
             throw new IllegalArgumentException("move your pawn");
         }
+        dice.rollDice();
+        boolean canMove =false;
+        Pawn[] pawns = boardStorage.getPlayerPawns(currentTurn);
+        for (Pawn pawn : pawns) {
+            if(getPossibleMove(pawn)!=null)
+            {
+                canMove = true;
 
-        diceRolled = true;
-        return dice.rollDice();
+            }
+        }
+        if(!canMove){
+
+            diceRolled=false;
+            switchTurn();
+
+        } else {
+
+            diceRolled = true;
+        }
+        return dice.getLastRolled();
     }
 
+    private void switchTurn(){
+        if (currentTurn == 3){
+            currentTurn = 0;
+        }
+        else {
+            currentTurn++;
+        }
+    }
 
     @Override
     public void movePawn(String pawnId) {
@@ -76,13 +101,8 @@ public class LocalFourPlayerGame implements Game {
                 return;
             }
             else {
-                if (currentTurn == 3){
-                    currentTurn = 0;
-                }
-                else {
-                    currentTurn++;
-                }
-            }
+                switchTurn();
+        }
             //todo throw exception no possible move
         }
         // todo exception not your turn
@@ -100,6 +120,11 @@ public class LocalFourPlayerGame implements Game {
     @Override
     public List<Pawn> getPawns() {
         return boardStorage.getPawns();
+    }
+
+    @Override
+    public int getCurrentPlayerId() {
+        return currentTurn;
     }
 
     @Override
