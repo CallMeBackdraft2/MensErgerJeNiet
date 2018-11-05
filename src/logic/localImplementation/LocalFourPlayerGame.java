@@ -19,14 +19,16 @@ public class LocalFourPlayerGame implements Game {
     Lobby lobby;
     BoardStorage boardStorage;
 
-    public LocalFourPlayerGame() {
+    private boolean debugMode;
+
+    public LocalFourPlayerGame(boolean debugMode) {
         boardStorage = DALFactory.getLocalBoardStorage();
         boardStorage.init(GameMode.FOURPLAYERBOARD);
         lobby = new Lobby(new Player(0, "TestHuman"));
         lobby.playerJoin(new Player(1, "TestAI1"));
         lobby.playerJoin(new Player(2, "TestAI2"));
         lobby.playerJoin(new Player(3, "TestAI3"));
-
+        this.debugMode=debugMode;
         dice = new Dice();
     }
 
