@@ -4,6 +4,7 @@ import dal.interfaces.BoardStorage;
 import dalFactories.DALFactory;
 import domain.Classes.*;
 import domain.Enums.GameMode;
+import domain.Enums.PlayerColor;
 import logic.interfaces.Game;
 
 import java.time.format.DateTimeFormatter;
@@ -14,16 +15,18 @@ import java.util.stream.Stream;
 
 public class LocalFourPlayerGame implements Game {
 
-    Dice dice;
+    public Dice dice;
     boolean diceRolled;
     Lobby lobby;
     BoardStorage boardStorage;
+    int currentTurn = 0;
 
     private boolean debugMode;
 
     public LocalFourPlayerGame(boolean debugMode) {
         boardStorage = DALFactory.getLocalBoardStorage();
         boardStorage.init(GameMode.FOURPLAYERBOARD);
+
         lobby = new Lobby(new Player(0, "TestHuman"));
         lobby.playerJoin(new Player(1, "TestAI1"));
         lobby.playerJoin(new Player(2, "TestAI2"));
@@ -34,6 +37,9 @@ public class LocalFourPlayerGame implements Game {
 
     @Override
     public int rollDice() {
+        if (diceRolled){
+            throw new IllegalArgumentException("move your pawn");
+        }
 
         diceRolled = true;
         return dice.rollDice();
@@ -42,61 +48,47 @@ public class LocalFourPlayerGame implements Game {
 
     @Override
     public void movePawn(String pawnId) {
-      /*  if (diceRolled) {
-            // get the pawn that is given
-            Pawn selectedPawn = boardStorage.getPawn(pawnId);
-
-            // if the selected pawn still hasn't been played
-            if (selectedPawn.getPawnState() == PawnState.STARTPOSITION && dice.getLastRolled() == 6) {
-                selectedPawn.movePawnIntoPlay();
-
-                // TODO What happens if another pawn is occupying the starting tiles
-                // Depending on the player the pawn gets placed in the correct starting position
-                if (selectedPawn.getPlayerId() == 1) {
-                    boardStorage.movePawn(pawnId, "WL01");
-                } else if (selectedPawn.getPlayerId() == 2) {
-                    boardStorage.movePawn(pawnId, "WL11");
-                } else if (selectedPawn.getPlayerId() == 3) {
-                    boardStorage.movePawn(pawnId, "WL21");
-                } else if (selectedPawn.getPlayerId() == 4) {
-                    boardStorage.movePawn(pawnId, "WL31");
-                }
-                return;
-            } else if (selectedPawn.getPawnState() == PawnState.STARTPOSITION && dice.getLastRolled() != 6) {
-                //TODO Throw errorMessage saying 6 was not rolled by the dice
-                throw new IllegalArgumentException("YOu just can't");
-            }
-
-            // TODO When a Pawn is already in play
-
-            // TODO When a Pawn is in HomeBase
-        } else {
-            //TODO throw errorMessage when the dice hasn't been rolled yet
-            throw new IllegalArgumentException("YOu just can't");
-        }
-        */
-
 
       if(diceRolled) {
         Pawn pawn = getPawn(pawnId);
-        Tile tile = getPossibleMove(pawn);
 
-        if(tile!=null) {
+        if (pawn.getPlayerColor().getValue() == currentTurn) {
 
-            boardStorage.getTile( pawn.getPawnTileId()).removePawn();
+            Tile possibleMove = getPossibleMove(pawn);
 
-            Pawn smashedPawn =  tile.getPawn();
-            if(smashedPawn!=null){
+            if (possibleMove != null) {
 
-                smashedPawn.setPawnTileId(smashedPawn.getFullId());
-                int c=5;
+                boardStorage.getTile(pawn.getPawnTileId()).removePawn();
+                Pawn smashedPawn = possibleMove.getPawn();
+
+                if (smashedPawn != null) {
+
+                    // Places the smashed pawn to the starting tile
+                    smashedPawn.setPawnTileId(smashedPawn.getFullId());
+                }
+                pawn.setPawnTileId(possibleMove.getFullId());
+                possibleMove.setPawn(pawn);
             }
 
+            diceRolled = false;
 
-            pawn.setPawnTileId(tile.getFullId());
-            tile.setPawn(pawn);
-
+            if(dice.getLastRolled() == 6){
+                return;
+            }
+            else {
+                if (currentTurn == 3){
+                    currentTurn = 0;
+                }
+                else {
+                    currentTurn++;
+                }
+            }
+            //todo throw exception no possible move
         }
+        // todo exception not your turn
+    }
+    else {
+          throw new IllegalArgumentException("Roll the dice");
     }
 }
 
@@ -117,7 +109,6 @@ public class LocalFourPlayerGame implements Game {
 
     @Override
     public void sendMessage(String message) {
-
         lobby.addMessage(lobby.getPlayerByIndex(0), message);
     }
 
