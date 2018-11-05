@@ -25,13 +25,13 @@ public abstract class GameTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testMovePawn(){
+    public void testIllegalMove(){
         while(true) {
             if(game.rollDice() != 6) {
                 break;
             }
         }
-        game.movePawn("REP01");
+        game.movePawn("YEP01");
     }
 
     @Test
@@ -39,6 +39,15 @@ public abstract class GameTest {
         Assert.assertNotNull(game.getPossibleMove(game.getPawn("REP01")));
     }
 
+    @Test
+    public void testGetPawns(){
+        Assert.assertNotNull(game.getPawns());
+    }
+
+    @Test
+    public void testGetTiles(){
+        Assert.assertNotNull(game.getTiles());
+    }
 
     @Test
     public void movePawn(){
