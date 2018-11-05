@@ -8,13 +8,13 @@ import org.junit.*;
 
 public abstract class GameTest {
 
-    Game game = LogicFactory.getLocalFourPlayerGameTest();
+    Game game;
 
-    public abstract Game createInstance();
+    //public abstract Game createInstance();
 
     @Before
     public void initGame(){
-        game = createInstance();
+        game = LogicFactory.getLocalFourPlayerGameTest();
     }
 
     @Test
@@ -53,20 +53,6 @@ public abstract class GameTest {
     @Test
     public void hitPawnTest() {
         game.readyUp();
-        
-        while (true) {
-            if (game.rollDice() == 6) {
-                break;
-            }
-        }
-        game.movePawn("GRP01");
-
-        while (true) {
-            if (game.rollDice() == 2) {
-                break;
-            }
-        }
-        game.movePawn("GRP01");
 
         for (int i = 0; i < 3; i++) {
             while (true) {
@@ -74,9 +60,24 @@ public abstract class GameTest {
                     break;
                 }
             }
-            game.movePawn("YEP01");
+            game.movePawn("REP01");
         }
 
-        Assert.assertTrue(game.getPawn("GRP01").getPawnState() == PawnState.STARTPOSITION);
+        while (true) {
+            if (game.rollDice() == 6) {
+                break;
+            }
+        }
+        game.movePawn("BLP01");
+
+        while (true) {
+            if (game.rollDice() == 2) {
+                break;
+            }
+        }
+        game.movePawn("BLP01");
+
+
+        Assert.assertTrue(game.getPawn("REP01").getPawnState() == PawnState.STARTPOSITION);
     }
 }
