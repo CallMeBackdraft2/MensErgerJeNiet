@@ -6,7 +6,9 @@ public enum PlayerColor {
     RED(0),
     GREEN(1),
     BLUE(2),
-    YELLOW(3);
+    YELLOW(3),
+    BLACK(4),
+    PURPLE(5);
 
     private int value;
 
@@ -25,6 +27,10 @@ public enum PlayerColor {
                 return PlayerColor.BLUE;
             case "YE":
                 return PlayerColor.YELLOW;
+            case "BC":
+                return PlayerColor.BLACK;
+            case "PU":
+                return PlayerColor.PURPLE;
 
         }
 
@@ -45,6 +51,10 @@ public enum PlayerColor {
                 return Color.BLUE;
             case 3:
                 return Color.YELLOW;
+            case 4:
+                return Color.BLACK;
+            case 5:
+                return Color.PURPLE;
 
         }
         return Color.GREY;
@@ -62,6 +72,10 @@ public enum PlayerColor {
                 return Color.DARKBLUE;
             case 3:
                 return Color.rgb(209, 177, 0);
+            case 4:
+                return Color.GRAY;
+            case 5:
+                return Color.rgb(100,23,98);
 
         }
         return Color.BLACK;
