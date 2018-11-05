@@ -2,12 +2,14 @@ package ut;
 
 import dal.localImplementation.LocalBoardStorage;
 import dalFactories.DALFactory;
+import domain.Classes.Pawn;
 import domain.Enums.GameMode;
 import domain.Enums.PawnState;
 import org.junit.Assert;
 import org.junit.*;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 
 public class BoardStorageTest {
@@ -26,9 +28,17 @@ public class BoardStorageTest {
     }
 
     @Test
-    public void movePawnSixPlayerBoard(){
-        local.init(GameMode.SIXPLAYERBOARD);
+    public void getTilesTest(){
+        Assert.assertNotNull(local.getTiles());
+    }
 
-        Assert.assertTrue(local.getPawn("WLK01").getPawnState() == PawnState.INPLAY);
+    @Test
+    public void getPawnsTest(){
+        Assert.assertNotNull(local.getPawns());
+    }
+
+    @Test
+    public void getTileTest(){
+        Assert.assertThat(local.getPawn("REP01"), instanceOf(Pawn.class));
     }
 }
