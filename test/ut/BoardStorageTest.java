@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertThat;
 
-public class LocalBoardStorageTest{
+public class BoardStorageTest {
     private LocalBoardStorage local;
     @Before
     public void Initialize(){
@@ -26,10 +26,9 @@ public class LocalBoardStorageTest{
     }
 
     @Test
-    public void movePawn(){
-        local.getPawn("WLK01").movePawnIntoPlay();
+    public void movePawnSixPlayerBoard(){
+        local.init(GameMode.SIXPLAYERBOARD);
 
         Assert.assertTrue(local.getPawn("WLK01").getPawnState() == PawnState.INPLAY);
     }
-
 }
