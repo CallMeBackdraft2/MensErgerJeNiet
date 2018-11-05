@@ -26,7 +26,9 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+import logic.interfaces.Game;
 import logic.localImplementation.LocalFourPlayerGame;
+import logicFactories.LogicFactory;
 
 import java.io.File;
 import java.util.Dictionary;
@@ -51,7 +53,7 @@ public class FourPlayerController {
     @FXML
     ListView playersListView;
 
-    LocalFourPlayerGame game;
+    Game game;
     Circle selectedPawn = null;
 
     private Dictionary<Tile, Circle> tileCircles = new Hashtable<>();
@@ -65,7 +67,7 @@ public class FourPlayerController {
     @FXML
     void initialize() {
         addAllEventHandlers();
-        game = new LocalFourPlayerGame();
+        game = LogicFactory.getLocalFourPlayerGame();
         populatePlayingField();
         playersListView.setItems(FXCollections.observableArrayList(game.getPlayers()));
     }
