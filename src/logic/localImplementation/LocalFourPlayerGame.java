@@ -27,7 +27,8 @@ public class LocalFourPlayerGame implements Game {
         boardStorage = DALFactory.getLocalBoardStorage();
         boardStorage.init(GameMode.FOURPLAYERBOARD);
 
-        lobby = new Lobby(new Player(0, "TestHuman"));
+        lobby = Lobby.getOfflineLobby();
+        lobby.playerJoin(new Player(0, "TestHuman"));
         lobby.playerJoin(new Player(1, "TestAI1"));
         lobby.playerJoin(new Player(2, "TestAI2"));
         lobby.playerJoin(new Player(3, "TestAI3"));

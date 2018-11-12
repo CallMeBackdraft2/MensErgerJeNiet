@@ -11,29 +11,21 @@ import java.util.List;
 public class Lobby {
 
     private GameMode gameMode;
-    boolean isOnline;
+    private boolean isOnline;
     private List<Player> players;
     private List<LobbyMessage> messages;
 
 
-    private Lobby(boolean isOnline ) {
+    public Lobby( ) {
         players = new ArrayList<>();
         messages = new ArrayList<>();
-        this.isOnline = isOnline;
     }
 
-    public static Lobby getOfflineLobby() {
-
-
-        return new Lobby(false);
-    }
-
-    public static Lobby getOnlineLobby(Player host) {
-
-        Lobby lobby = new Lobby(true);
-        lobby.players.add(host);
-        return lobby;
-    }
+   public Lobby(Player host) {
+       players = new ArrayList<>();
+       messages = new ArrayList<>();
+        players.add(host);
+   }
 
     public List<LobbyMessage> getMessages() {
 
@@ -70,6 +62,15 @@ public class Lobby {
 
     public Lobby setGameMode(GameMode gameMode) {
         this.gameMode = gameMode;
+        return this;
+    }
+
+    public boolean isOnline() {
+        return isOnline;
+    }
+
+    public Lobby setOnline(boolean online) {
+        isOnline = online;
         return this;
     }
 }
