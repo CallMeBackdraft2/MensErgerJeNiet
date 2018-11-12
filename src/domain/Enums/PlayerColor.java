@@ -80,7 +80,7 @@ public enum PlayerColor {
             case 3:
                 return Color.rgb(209, 177, 0);
             case 4:
-                return Color.GRAY;
+                return Color.rgb(64, 64, 64);
             case 5:
                 return Color.rgb(100,23,98);
 

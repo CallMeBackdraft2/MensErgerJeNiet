@@ -6,7 +6,7 @@ import logic.interfaces.Game;
 import logicFactories.LogicFactory;
 import org.junit.*;
 
-public abstract class GameTest {
+public class GameTest {
 
     Game game;
 
