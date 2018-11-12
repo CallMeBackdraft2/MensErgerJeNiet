@@ -15,7 +15,7 @@
             <Image url="@../Images/parchment-texture.jpg" />
         </ImageView>
         <ChoiceBox fx:id="cbLobbyType" layoutX="270.0" layoutY="31.0" prefWidth="150.0" />
-        <ListView layoutX="271.0" layoutY="115.0" prefHeight="240.0" prefWidth="150.0" />
+        <ListView fx:id="lvPlayerList" layoutX="271.0" layoutY="115.0" prefHeight="240.0" prefWidth="150.0" />
         <TextField fx:id="txtfPassword" disable="true" layoutX="271.0" layoutY="73.0" />
         <Label layoutX="270.0" layoutY="14.0" text="Lobby Type:" />
         <Label layoutX="270.0" layoutY="56.0" text="Password:" />
