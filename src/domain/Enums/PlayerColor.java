@@ -4,9 +4,9 @@ import javafx.scene.paint.Color;
 
 public enum PlayerColor {
     RED(0),
-    GREEN(1),
-    BLUE(2),
-    YELLOW(3),
+    BLUE(1),
+    YELLOW(2),
+    GREEN(3),
     BLACK(4),
     PURPLE(5);
 
@@ -53,11 +53,11 @@ public enum PlayerColor {
             case 0:
                 return Color.RED;
             case 1:
-                return Color.GREEN;
-            case 2:
                 return Color.BLUE;
-            case 3:
+            case 2:
                 return Color.YELLOW;
+            case 3:
+                return Color.GREEN;
             case 4:
                 return Color.BLACK;
             case 5:
@@ -73,12 +73,12 @@ public enum PlayerColor {
 
             case 0:
                 return Color.DARKRED;
-            case 1:
-                return Color.DARKGREEN;
             case 2:
+                return Color.rgb(209, 177, 0);
+            case 1:
                 return Color.DARKBLUE;
             case 3:
-                return Color.rgb(209, 177, 0);
+                return Color.DARKGREEN;
             case 4:
                 return Color.rgb(64, 64, 64);
             case 5:

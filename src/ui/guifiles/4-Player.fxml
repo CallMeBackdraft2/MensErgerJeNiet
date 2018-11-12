@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,6 +20,7 @@
             <children>
                 <AnchorPane fx:id="boardPane" layoutX="5.0" layoutY="5.0" prefHeight="590.0" prefWidth="590.0" style="-fx-background-color: FEF5B2;">
                     <children>
+                  <Circle id="TurnCircle" fx:id="TurnCircle" fill="WHITE" layoutX="295.0" layoutY="295.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
 
                         <!--Tiles for the Green starting base-->
                         <Circle fill="GREEN" layoutX="90.0" layoutY="90.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
@@ -71,9 +71,6 @@
                         </ImageView>
                         <ImageView fx:id="imgDice" fitHeight="60.0" fitWidth="60.0" layoutX="265.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                             <Image url="@../Images/Dice0.png" />
-                     <effect>
-                        <ColorAdjust brightness="0.22" contrast="0.02" saturation="1.0" />
-                     </effect>
                         </ImageView>
 
                     </children>

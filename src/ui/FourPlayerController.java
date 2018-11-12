@@ -51,6 +51,9 @@ public class FourPlayerController {
     TextField messageField;
 
     @FXML
+    Circle TurnCircle;
+
+    @FXML
     ListView chatListView;
     @FXML
     ListView playersListView;
@@ -136,6 +139,7 @@ public class FourPlayerController {
             pawnCirle.setCenterY(tile.getLocation().getValue());
         }
 
+        TurnCircle.setFill(PlayerColor.values()[game.getCurrentPlayerId()].toColor());
 
     }
 
@@ -150,6 +154,7 @@ public class FourPlayerController {
         }
 
         clearSelection();
+       // imgDice.setImage(new Image(getClass().getResourceAsStream("Images/Dice0.png")));
 
     }
 
@@ -270,8 +275,7 @@ public class FourPlayerController {
                 a.setContentText(e.getMessage());
                 a.show();
             }
-            double d = PlayerColor.values()[game.getCurrentPlayerId()].getHue();
-            imgDice.setEffect(new ColorAdjust(d/360, 1, 0, 0));
+            //imgDice.setEffect(new ColorAdjust(((color.getHue()/360) -.5f)*2, 1, 0, 0));
             String url = "Images/Dice" + thrown + ".png";
             imgDice.setImage(new Image(getClass().getResourceAsStream(url)));
             Timeline timeline = new Timeline(
@@ -282,9 +286,12 @@ public class FourPlayerController {
                         playSound("src/ui/Media/DiceRollSound.mp3");
 
                     }),
-                    new KeyFrame(Duration.seconds(2), new KeyValue(imgDice.imageProperty(), new Image(getClass().getResourceAsStream(url))))
-            );
-            timeline.play();
+                    new KeyFrame(Duration.seconds(2), new KeyValue(imgDice.imageProperty(), new Image(getClass().getResourceAsStream(url)))),
+                  new KeyFrame(Duration.seconds(3), new KeyValue(TurnCircle.fillProperty(), (PlayerColor.values()[game.getCurrentPlayerId()].toColor()))),
+            new KeyFrame(Duration.seconds(1),  new KeyValue(TurnCircle.fillProperty(),Color.WHITE)));
+
+                    timeline.play();
+
         }
         clearSelection();
     }

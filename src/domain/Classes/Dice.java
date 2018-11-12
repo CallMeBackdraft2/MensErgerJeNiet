@@ -19,10 +19,7 @@ public class Dice {
 
     // Methods
     public int rollDice() {
-        if(LastRolled == -1){
-           LastRolled = 6;
-            return 6;
-        }
+
         int number=-1;
 
              number = r.nextInt(6) + 1;
