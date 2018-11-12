@@ -149,7 +149,7 @@ public class LocalFourPlayerGame implements Game {
                 return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override
