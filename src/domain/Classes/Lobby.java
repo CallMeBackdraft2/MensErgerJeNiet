@@ -1,6 +1,8 @@
 package domain.Classes;
 
 
+import domain.Enums.GameMode;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,24 +10,40 @@ import java.util.List;
 
 public class Lobby {
 
+    private GameMode gameMode;
+    boolean isOnline;
     private List<Player> players;
     private List<LobbyMessage> messages;
 
-    public Lobby(Player host) {
+
+    private Lobby(boolean isOnline ) {
         players = new ArrayList<>();
         messages = new ArrayList<>();
-        players.add(host);
+        this.isOnline = isOnline;
     }
 
-    public List<LobbyMessage> getMessages(){
+    public static Lobby getOfflineLobby() {
 
-       return messages;
+
+        return new Lobby(false);
+    }
+
+    public static Lobby getOnlineLobby(Player host) {
+
+        Lobby lobby = new Lobby(true);
+        lobby.players.add(host);
+        return lobby;
+    }
+
+    public List<LobbyMessage> getMessages() {
+
+        return messages;
 
     }
 
-    public void addMessage(Player player, String message){
+    public void addMessage(Player player, String message) {
 
-        messages.add(new LobbyMessage(player,message, LocalDateTime.now()));
+        messages.add(new LobbyMessage(player, message, LocalDateTime.now()));
     }
 
     public void playerJoin(Player player) {
@@ -46,4 +64,12 @@ public class Lobby {
     }
 
 
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
+    public Lobby setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
+        return this;
+    }
 }
