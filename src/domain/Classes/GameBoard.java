@@ -3,12 +3,12 @@ package domain.Classes;
 import domain.Enums.GameMode;
 
 public class GameBoard {
-    private GameMode gametype;
+    private GameMode gameMode;
     private PlayingField playingField;
 
 
-    public GameBoard(GameMode gametype) {
-        this.gametype = gametype;
+    public GameBoard(GameMode gameMode) {
+        this.gameMode = gameMode;
         playingField = new PlayingField();
     }
 
@@ -20,8 +20,8 @@ public class GameBoard {
         return playingField;
     }
 
-    public GameMode getGametype() {
-        return gametype;
+    public GameMode getGameMode() {
+        return gameMode;
     }
 
 

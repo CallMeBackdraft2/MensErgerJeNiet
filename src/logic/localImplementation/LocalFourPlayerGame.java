@@ -4,7 +4,6 @@ import dal.interfaces.BoardStorage;
 import dalFactories.DALFactory;
 import domain.Classes.*;
 import domain.Enums.GameMode;
-import domain.Enums.PlayerColor;
 import logic.interfaces.Game;
 
 import java.time.format.DateTimeFormatter;
@@ -16,43 +15,48 @@ import java.util.stream.Stream;
 public class LocalFourPlayerGame implements Game {
 
     public Dice dice;
-    boolean diceRolled;
     Lobby lobby;
     BoardStorage boardStorage;
     int currentTurn = 0;
-
+    private boolean diceRolled;
     private boolean debugMode;
 
     public LocalFourPlayerGame(boolean debugMode) {
         boardStorage = DALFactory.getLocalBoardStorage();
         boardStorage.init(GameMode.FOURPLAYERBOARD);
 
-        lobby = new Lobby(new Player(0, "TestHuman"));
+        lobby = new Lobby();
+        lobby.playerJoin(new Player(0, "TestHuman"));
         lobby.playerJoin(new Player(1, "TestAI1"));
         lobby.playerJoin(new Player(2, "TestAI2"));
         lobby.playerJoin(new Player(3, "TestAI3"));
-        this.debugMode=debugMode;
+        this.debugMode = true;
+
         dice = new Dice();
     }
 
     @Override
+    public boolean isDiceRolled() {
+        return diceRolled;
+    }
+
+    @Override
     public int rollDice() {
-        if (diceRolled && !debugMode){
+        if (diceRolled && !debugMode) {
             throw new IllegalArgumentException("move your pawn");
         }
         dice.rollDice();
-        boolean canMove =false;
+        boolean canMove = false;
         Pawn[] pawns = boardStorage.getPlayerPawns(currentTurn);
         for (Pawn pawn : pawns) {
-            if(getPossibleMove(pawn)!=null)
-            {
+            if (getPossibleMove(pawn) != null) {
                 canMove = true;
 
             }
         }
-        if(!canMove){
+        if (!canMove) {
 
-            diceRolled=false;
+            diceRolled = false;
             switchTurn();
 
         } else {
@@ -62,11 +66,10 @@ public class LocalFourPlayerGame implements Game {
         return dice.getLastRolled();
     }
 
-    private void switchTurn(){
-        if (currentTurn == 3){
+    private void switchTurn() {
+        if (currentTurn == 3) {
             currentTurn = 0;
-        }
-        else {
+        } else {
             currentTurn++;
         }
     }
@@ -74,47 +77,60 @@ public class LocalFourPlayerGame implements Game {
     @Override
     public void movePawn(String pawnId) {
 
-      if(diceRolled || debugMode) {
-        Pawn pawn = getPawn(pawnId);
+        if (diceRolled || debugMode) {
+            Pawn pawn = getPawn(pawnId);
 
-        if (pawn.getPlayerColor().getValue() == currentTurn) {
+            if (pawn.getPlayerColor().getValue() == currentTurn) {
 
-            Tile possibleMove = getPossibleMove(pawn);
+                Tile possibleMove = getPossibleMove(pawn);
 
-            if (possibleMove != null) {
+                if (possibleMove != null) {
 
-                boardStorage.getTile(pawn.getPawnTileId()).removePawn();
-                Pawn smashedPawn = possibleMove.getPawn();
+                    boardStorage.getTile(pawn.getPawnTileId()).removePawn();
+                    Pawn smashedPawn = possibleMove.getPawn();
 
-                if (smashedPawn != null) {
+                    if (smashedPawn != null) {
 
-                    // Places the smashed pawn to the starting tile
-                    smashedPawn.setPawnTileId(smashedPawn.getFullId());
+                        // Places the smashed pawn to the starting tile
+                        smashedPawn.setPawnTileId(smashedPawn.getFullId());
+                    }
+                    if (!pawn.getPawnTileId().equals(pawn.getFullId())) {
+                        pawn.setStepsTaken(pawn.getStepsTaken() + dice.getLastRolled());
+                    }
+                    pawn.setPawnTileId(possibleMove.getFullId());
+
+                    possibleMove.setPawn(pawn);
                 }
-                if(!pawn.getPawnTileId().equals( pawn.getFullId())) {
-                    pawn.setStepsTaken(pawn.getStepsTaken() + dice.getLastRolled());
-                }
-                pawn.setPawnTileId(possibleMove.getFullId());
 
-                possibleMove.setPawn(pawn);
+                diceRolled = false;
+
+                if (dice.getLastRolled() == 6) {
+                    return;
+                } else {
+                    switchTurn();
+                }
             }
 
-            diceRolled = false;
+        } else {
+            throw new IllegalArgumentException("Roll the dice");
+        }
 
-            if(dice.getLastRolled() == 6){
-                return;
+        if (checkWincondition()) {
+            throw new IllegalArgumentException("Player " + getCurrentPlayerId() + " has won");
+        }
+    }
+
+
+    private Boolean checkWincondition() {
+
+        Pawn[] pawns = boardStorage.getPlayerPawns(currentTurn);
+        for (Pawn pawn : pawns) {
+            if (pawn.getPawnTileId().charAt(2) != 'H') {
+                return false;
             }
-            else {
-                switchTurn();
         }
-            //todo throw exception no possible move
-        }
-        // todo exception not your turn
+        return true;
     }
-    else {
-          throw new IllegalArgumentException("Roll the dice");
-    }
-}
 
     @Override
     public List<Tile> getTiles() {
@@ -133,7 +149,7 @@ public class LocalFourPlayerGame implements Game {
 
     @Override
     public List<Player> getPlayers() {
-       return lobby.getPlayers();
+        return lobby.getPlayers();
     }
 
     @Override
@@ -161,7 +177,7 @@ public class LocalFourPlayerGame implements Game {
         Tile curTile = boardStorage.getTile(pawn.getPawnTileId());
         if (curTile.getType().charAt(2) == 'P') {
 
-            if(dice.getLastRolled()==6) {
+            if (dice.getLastRolled() == 6) {
 
                 Stream<Tile> stream = boardStorage.getTiles().stream()
                         .filter(t -> t.getColor().equals(pawn.getPlayerColor().toString()) && t.getType().equals("WLK"));
@@ -174,28 +190,28 @@ public class LocalFourPlayerGame implements Game {
         Tile possibleMove;
         possibleMove = GetWalkingTilePossibleMove(pawn, curTile);
 
-        if(pawn.getPawnTileId().equals((pawn.getFullId().substring(0,2)+"H04"))) {
+        if (pawn.getPawnTileId().equals((pawn.getFullId().substring(0, 2) + "H04"))) {
             return null;
         }
-        if(pawn.getStepsTaken()+dice.getLastRolled() >= boardStorage.getTileAmountOf("WLK")) {
+        if (pawn.getStepsTaken() + dice.getLastRolled() >= boardStorage.getTileAmountOf("WLK")) {
 
-            int amountToWalk = pawn.getStepsTaken() + dice.getLastRolled() - boardStorage.getTileAmountOf("WLK") ;
+            int amountToWalk = pawn.getStepsTaken() + dice.getLastRolled() - boardStorage.getTileAmountOf("WLK");
 
-            int t =1;
+            int t = 1;
             int dir = 1;
             amountToWalk = amountToWalk % 6;
-            while(amountToWalk>0){
-                if(t==4){
-                    dir=-1;
-                } else if(t==1){
+            while (amountToWalk > 0) {
+                if (t == 4) {
+                    dir = -1;
+                } else if (t == 1) {
                     dir = 1;
                 }
-                t+= dir;
+                t += dir;
                 amountToWalk--;
             }
 
 
-            return boardStorage.getTile((pawn.getFullId().substring(0,2)+"H0"+t));
+            return boardStorage.getTile((pawn.getFullId().substring(0, 2) + "H0" + t));
 
         }
 
@@ -216,8 +232,8 @@ public class LocalFourPlayerGame implements Game {
             i -= boardStorage.getTileAmountOf("WLK");
         }
         possibleMove = walkables.get(i);
-        if(possibleMove.getPawn()!=null){
-            if(possibleMove.getPawn().getPlayerColor() == pawn.getPlayerColor()){
+        if (possibleMove.getPawn() != null) {
+            if (possibleMove.getPawn().getPlayerColor() == pawn.getPlayerColor()) {
             }
         }
         return possibleMove;

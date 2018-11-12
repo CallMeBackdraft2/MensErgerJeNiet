@@ -5,14 +5,14 @@ import domain.Enums.PlayerColor;
 public class Player {
     private int id;
     private String name;
-    private PlayerColor playercolor;
+    private PlayerColor playerColor;
     private int playerScore;
     private boolean guest;
 
     public Player(int id, String name) {
         this.id = id;
         this.name = name;
-        this.playercolor  = PlayerColor.values()[id];
+        this.playerColor = PlayerColor.values()[id];
 
     }
 
@@ -21,13 +21,13 @@ public class Player {
         this.playerScore = playerScore;
     }
 
-    public void setPlayercolor(PlayerColor playercolor) {
-        this.playercolor = playercolor;
+    public void setPlayerColor(PlayerColor playerColor) {
+        this.playerColor = playerColor;
     }
 
     //public getters
-    public PlayerColor getPlayercolor() {
-        return this.playercolor;
+    public PlayerColor getPlayerColor() {
+        return this.playerColor;
     }
 
 
@@ -45,6 +45,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return id + " " +  name + " as " + playercolor;
+        return id + " " +  name + " as " + playerColor;
     }
 }

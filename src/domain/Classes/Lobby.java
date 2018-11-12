@@ -19,11 +19,13 @@ public class Lobby {
     public Lobby( ) {
         players = new ArrayList<>();
         messages = new ArrayList<>();
+        gameMode = GameMode.FOURPLAYERBOARD;
     }
 
    public Lobby(Player host) {
        players = new ArrayList<>();
        messages = new ArrayList<>();
+       gameMode = GameMode.FOURPLAYERBOARD;
         players.add(host);
    }
 
@@ -39,6 +41,16 @@ public class Lobby {
     }
 
     public void playerJoin(Player player) {
+        if (gameMode.equals(GameMode.FOURPLAYERBOARD)) {
+            if (players.size() + 1 >= 5){
+                throw new IllegalArgumentException("Maximal of 4 players allowed");
+            }
+        }
+        else {
+            if (players.size() + 1 >= 7){
+                throw new IllegalArgumentException("Maximal of 6 players allowed");
+            }
+        }
         players.add(player);
     }
 
