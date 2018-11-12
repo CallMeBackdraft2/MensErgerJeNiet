@@ -72,9 +72,12 @@ public class FourPlayerController {
     @FXML
     void initialize() {
         addAllEventHandlers();
-        game = LogicFactory.getLocalFourPlayerGame();
         populatePlayingField();
         playersListView.setItems(FXCollections.observableArrayList(game.getPlayers()));
+    }
+
+    public void setGame(Game game){
+        this.game = game;
     }
 
     private int getRadius(String type) {

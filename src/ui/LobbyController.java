@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
+import logicFactories.LogicFactory;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -58,11 +59,13 @@ public class LobbyController {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 if(newValue == (Number)0){
                     btnReady.setText("Start Game");
+                    gameLobby.setOnline(false);
                     btnAddPlayer.setDisable(false);
                     txtfPassword.setDisable(true);
                     txtfLobbyName.setDisable(true);
                 } else {
                     btnReady.setText("Ready");
+                    gameLobby.setOnline(true);
                     btnAddPlayer.setDisable(true);
                     txtfPassword.setDisable(false);
                     txtfLobbyName.setDisable(false);
@@ -85,6 +88,20 @@ public class LobbyController {
             public void handle(ActionEvent event) {
                 JavaFXSceneFactory.generateStage(new MainMenuController(), getClass().getResource("guifiles/MainMenu.fxml"), false, "Hoofdmenu").show();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
+            }
+        });
+
+        btnReady.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (gameLobby.isOnline()){
+                    //todo online implementation
+                } else {
+                    FourPlayerController controller = new FourPlayerController();
+                    controller.setGame(LogicFactory.getLocalFourPlayerGame(gameLobby));
+                    JavaFXSceneFactory.generateStage(controller, getClass().getResource("guifiles/4-Player.fxml"), false, "Speelbord", 629, 0).show();
+                    ((Node) (event.getSource())).getScene().getWindow().hide();
+                }
             }
         });
 
