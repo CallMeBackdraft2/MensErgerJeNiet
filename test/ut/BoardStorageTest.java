@@ -1,6 +1,7 @@
 package ut;
 
 import com.sun.prism.paint.Color;
+import dal.interfaces.BoardStorage;
 import dal.localImplementation.LocalBoardStorage;
 import dalFactories.DALFactory;
 import domain.Classes.Pawn;
@@ -15,13 +16,16 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 
 public class BoardStorageTest {
-    private LocalBoardStorage local;
+    private BoardStorage local;
 
     @Before
     public void Initialize() {
-        DALFactory dal = new DALFactory();
+        //DALFactory dal = new DALFactory();
 
-        local = (LocalBoardStorage) dal.getLocalBoardStorage();
+        //local = (LocalBoardStorage) dal.getLocalBoardStorage();
+
+        local = DALFactory.getLocalBoardStorage();
+        local.init(GameMode.FOURPLAYERBOARD);
     }
 
     @Test
