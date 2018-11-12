@@ -106,7 +106,7 @@ public class LobbyController {
 
                 result.ifPresent(player -> {
                     Player newPlayer = new Player(0,player.getKey());
-                    newPlayer.setPlayercolor(player.getValue());
+                    newPlayer.setPlayerColor(player.getValue());
                     gameLobby.playerJoin(newPlayer);
                     updatePlayerList();
                 });
