@@ -7,6 +7,13 @@ import java.util.List;
 public class PlayingField {
     private List<Tile> tiles;
     private List<Pawn> pawns;
+
+    public PlayingField() {
+        tiles = new ArrayList<>();
+        pawns = new ArrayList<>();
+
+    }
+
     public List<Pawn> getPawns(){
         return pawns;
     }
@@ -14,12 +21,6 @@ public class PlayingField {
     public void addPawn(Pawn pawn){
 
         pawns.add(pawn);
-    }
-
-    public PlayingField() {
-        tiles = new ArrayList<>();
-        pawns = new ArrayList<>();
-
     }
 
     public void addToTileList(Tile tile) {
