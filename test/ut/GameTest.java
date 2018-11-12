@@ -94,4 +94,30 @@ public class GameTest {
 
         Assert.assertTrue(game.getPawn("REP01").getPawnState() == PawnState.STARTPOSITION);
     }
+
+    @Test
+    public void hitOwnPawnTest() {
+        game.readyUp();
+
+        for (int i = 0; i < 3; i++) {
+            while (true) {
+                if (game.rollDice() == 6) {
+                    break;
+                }
+            }
+            game.movePawn("REP01");
+        }
+
+        for (int i = 0; i < 3; i++) {
+            while (true) {
+                if (game.rollDice() == 6) {
+                    break;
+                }
+            }
+            game.movePawn("REP02");
+        }
+
+
+        Assert.assertTrue(game.getPawn("REP01").getPawnState() == PawnState.STARTPOSITION);
+    }
 }
