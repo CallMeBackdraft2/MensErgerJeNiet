@@ -14,9 +14,9 @@
         <ImageView fitHeight="400.0" fitWidth="431.0" pickOnBounds="true">
             <Image url="@../Images/parchment-texture.jpg" />
         </ImageView>
-        <ChoiceBox layoutX="270.0" layoutY="31.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="cbLobbyType" layoutX="270.0" layoutY="31.0" prefWidth="150.0" />
         <ListView layoutX="271.0" layoutY="115.0" prefHeight="240.0" prefWidth="150.0" />
-        <TextField layoutX="271.0" layoutY="73.0" />
+        <TextField fx:id="txtfPassword" disable="true" layoutX="271.0" layoutY="73.0" />
         <Label layoutX="270.0" layoutY="14.0" text="Lobby Type:" />
         <Label layoutX="270.0" layoutY="56.0" text="Password:" />
         <Button fx:id="btnLeaveLobby" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Leave Lobby" />
@@ -28,7 +28,8 @@
         <ChoiceBox layoutX="14.0" layoutY="73.0" prefHeight="25.0" prefWidth="240.0" />
         <Label layoutX="14.0" layoutY="56.0" text="Game Mode:" />
         <Button layoutX="172.0" layoutY="361.0" mnemonicParsing="false" text="Add AI Player" />
-        <TextField layoutX="14.0" layoutY="31.0" prefHeight="25.0" prefWidth="240.0" />
+        <TextField fx:id="txtfLobbyName" disable="true" layoutX="14.0" layoutY="31.0" prefHeight="25.0" prefWidth="240.0" />
         <Label layoutX="14.0" layoutY="14.0" text="Lobby Name:" />
+      <Button fx:id="btnAddPlayer" layoutX="272.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Add Player" />
     </children>
 </AnchorPane>
