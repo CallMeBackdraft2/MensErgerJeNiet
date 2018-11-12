@@ -32,7 +32,6 @@ public class LocalFourPlayerGame implements Game {
         lobby.playerJoin(new Player(2, "TestAI2"));
         lobby.playerJoin(new Player(3, "TestAI3"));
         this.debugMode=debugMode;
-        this.debugMode = true;
         dice = new Dice();
     }
 
@@ -219,7 +218,7 @@ public class LocalFourPlayerGame implements Game {
         possibleMove = walkables.get(i);
         if(possibleMove.getPawn()!=null){
             if(possibleMove.getPawn().getPlayerColor() == pawn.getPlayerColor()){
-                return null;
+               // return null;
             }
         }
         return possibleMove;
