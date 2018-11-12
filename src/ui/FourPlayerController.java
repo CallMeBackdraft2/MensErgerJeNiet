@@ -27,7 +27,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import logic.interfaces.Game;
-import logic.localImplementation.LocalFourPlayerGame;
 import logicFactories.LogicFactory;
 
 import java.io.File;
