@@ -293,8 +293,8 @@ public class FourPlayerController {
 
                     }),
                     new KeyFrame(Duration.seconds(2), new KeyValue(imgDice.imageProperty(), new Image(getClass().getResourceAsStream(url)))),
-                  new KeyFrame(Duration.seconds(3), new KeyValue(TurnCircle.fillProperty(), (PlayerColor.values()[game.getCurrentPlayerId()].toColor()))),
-            new KeyFrame(Duration.seconds(2),  new KeyValue(TurnCircle.fillProperty(),Color.WHITE)));
+                  new KeyFrame(Duration.seconds(3.5), new KeyValue(TurnCircle.fillProperty(), (PlayerColor.values()[game.getCurrentPlayerId()].toColor()))),
+                new KeyFrame(Duration.seconds(2.5),  new KeyValue(TurnCircle.fillProperty(),Color.WHITE)));
 
                     timeline.play();
 
