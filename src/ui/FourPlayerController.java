@@ -145,7 +145,14 @@ public class FourPlayerController {
         }
 
         TurnCircle.setFill(PlayerColor.values()[game.getCurrentPlayerId()].toColor());
-
+        if(game.getIsDone()){
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            btnLeaveGame.fire();
+        }
     }
 
     private void tilePressed(Tile tile) {
@@ -293,8 +300,8 @@ public class FourPlayerController {
 
                     }),
                     new KeyFrame(Duration.seconds(2), new KeyValue(imgDice.imageProperty(), new Image(getClass().getResourceAsStream(url)))),
-                  new KeyFrame(Duration.seconds(3), new KeyValue(TurnCircle.fillProperty(), (PlayerColor.values()[game.getCurrentPlayerId()].toColor()))),
-            new KeyFrame(Duration.seconds(1),  new KeyValue(TurnCircle.fillProperty(),Color.WHITE)));
+                  new KeyFrame(Duration.seconds(3.5), new KeyValue(TurnCircle.fillProperty(), (PlayerColor.values()[game.getCurrentPlayerId()].toColor()))),
+                new KeyFrame(Duration.seconds(2.5),  new KeyValue(TurnCircle.fillProperty(),Color.WHITE)));
 
                     timeline.play();
 

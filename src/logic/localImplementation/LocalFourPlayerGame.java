@@ -4,6 +4,7 @@ import dal.interfaces.BoardStorage;
 import dalFactories.DALFactory;
 import domain.Classes.*;
 import domain.Enums.GameMode;
+import domain.Enums.PlayerColor;
 import logic.interfaces.Game;
 
 import java.time.format.DateTimeFormatter;
@@ -20,6 +21,7 @@ public class LocalFourPlayerGame implements Game {
     int currentTurn = 0;
     private boolean diceRolled;
     private boolean debugMode;
+    private boolean isDone;
 
     public LocalFourPlayerGame(boolean debugMode) {
         boardStorage = DALFactory.getLocalBoardStorage();
@@ -100,6 +102,7 @@ public class LocalFourPlayerGame implements Game {
 
                         // Places the smashed pawn to the starting tile
                         smashedPawn.setPawnTileId(smashedPawn.getFullId());
+                        smashedPawn.setStepsTaken(0);
                     }
                     if (!pawn.getPawnTileId().equals(pawn.getFullId())) {
                         pawn.setStepsTaken(pawn.getStepsTaken() + dice.getLastRolled());
@@ -110,6 +113,11 @@ public class LocalFourPlayerGame implements Game {
                 }
 
                 diceRolled = false;
+
+                if (checkWincondition()) {
+                    isDone=true;
+                    throw new IllegalArgumentException("Player " + PlayerColor.values()[ getCurrentPlayerId()] + " has won");
+                }
 
                 if (dice.getLastRolled() == 6) {
                     return;
@@ -122,18 +130,23 @@ public class LocalFourPlayerGame implements Game {
             throw new IllegalArgumentException("Roll the dice");
         }
 
-        if (checkWincondition()) {
-            throw new IllegalArgumentException("Player " + getCurrentPlayerId() + " has won");
-        }
+
     }
 
 
-    private Boolean checkWincondition() {
+    private boolean checkWincondition() {
 
-        Pawn[] pawns = boardStorage.getPlayerPawns(currentTurn);
-        for (Pawn pawn : pawns) {
-            if (pawn.getPawnTileId().charAt(2) != 'H') {
-                return false;
+
+        for(int i=0;i<4;i++){
+            Pawn[] pawns =  boardStorage.getPlayerPawns(i);
+            boolean won= true;
+            for (Pawn pawn : pawns) {
+                if (pawn.getPawnTileId().charAt(2) != 'H') {
+                    won = false;
+                }
+            }
+            if(won){
+                return true;
             }
         }
         return true;
@@ -218,7 +231,13 @@ public class LocalFourPlayerGame implements Game {
             }
 
 
-            return boardStorage.getTile((pawn.getFullId().substring(0, 2) + "H0" + t));
+            Tile tile =  boardStorage.getTile((pawn.getFullId().substring(0, 2) + "H0" + t));
+            if(tile.getPawn()!=null){
+               if( tile.getPawn().getPlayerColor() == pawn.getPlayerColor()){
+                   return null;
+               }
+            }
+            return tile;
 
         }
 
@@ -308,5 +327,10 @@ public class LocalFourPlayerGame implements Game {
     @Override
     public void startGame() {
 
+    }
+
+    @Override
+    public boolean getIsDone() {
+        return isDone;
     }
 }

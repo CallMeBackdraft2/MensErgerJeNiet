@@ -32,4 +32,6 @@ public interface Game {
     void addAI();
     void leaveLobby();
     void startGame();
+
+    boolean getIsDone();
 }
