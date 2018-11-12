@@ -30,7 +30,8 @@ public class LocalFourPlayerGame implements Game {
         lobby.playerJoin(new Player(1, "TestAI1"));
         lobby.playerJoin(new Player(2, "TestAI2"));
         lobby.playerJoin(new Player(3, "TestAI3"));
-        this.debugMode = debugMode;
+        this.debugMode = true;
+
         dice = new Dice();
     }
 

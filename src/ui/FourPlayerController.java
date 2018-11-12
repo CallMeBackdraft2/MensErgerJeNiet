@@ -110,10 +110,7 @@ public class FourPlayerController {
                 ShowError(new IllegalArgumentException("Not " + pawn.getPlayerColor() +"'s turn"));
                 return;
             }
-            if(!game.isDiceRolled()){
-                ShowError(new IllegalArgumentException("Roll dice first"));
-                return;
-            }
+
             if (possibleMove == null) {
 
                 return;
