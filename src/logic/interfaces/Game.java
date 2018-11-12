@@ -15,7 +15,7 @@ public interface Game {
     Pawn getPawn(String homeTileID);
     List<Pawn> getPawns();
 
-
+    int getCurrentPlayerId();
     List<Player> getPlayers();
 
 

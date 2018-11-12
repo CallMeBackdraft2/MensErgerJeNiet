@@ -1,5 +1,6 @@
 package domain.Classes;
 
+import java.time.LocalDateTime;
 import java.util.Random;
 
 public class Dice {
@@ -22,7 +23,10 @@ public class Dice {
            LastRolled = 6;
             return 6;
         }
-        int number = r.nextInt(6) + 1;
+        int number=-1;
+
+             number = r.nextInt(6) + 1;
+
         this.LastRolled = number;
         return  number;
     }

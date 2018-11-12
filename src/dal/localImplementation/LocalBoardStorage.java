@@ -6,6 +6,7 @@ import domain.Classes.Pawn;
 import domain.Classes.Tile;
 import domain.Enums.GameMode;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,15 +28,22 @@ public class LocalBoardStorage implements BoardStorage {
         return tiles;
     }
 
+
+
     @Override
     public Pawn[] getPlayerPawns(int PlayerId) {
-        return (Pawn[]) gameBoard.getPlayingField().getPawns()
-                .stream().filter(p -> p.getPlayerColor().getValue() == PlayerId).toArray();
+       return Arrays.copyOf( gameBoard.getPlayingField().getPawns()
+                .stream().filter(p -> p.getPlayerColor().getValue() == PlayerId).toArray(),4,Pawn[].class);
     }
 
     @Override
     public List<Pawn> getPawns() {
         return gameBoard.getPlayingField().getPawns();
+    }
+
+    @Override
+    public int getTileAmountOf(String id) {
+        return (int)getTiles().stream().filter(t -> t.getType().equals(id)).count();
     }
 
     @Override
