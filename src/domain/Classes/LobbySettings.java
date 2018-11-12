@@ -7,48 +7,47 @@ import java.util.List;
 
 public class LobbySettings {
 
-    private String Name;
-    private String Password;
-    private List<String> PlayerNames;
-    private String CreatorName;
-
+    private String name;
+    private String password;
+    private List<String> playerNames;
+    private String creatorName;
     private GameMode gameMode;
     private LobbyType lobbyType;
 
     public LobbySettings(String name, String creatorName) {
-        Name = name;
-        this.CreatorName = creatorName;
+        this.name = name;
+        this.creatorName = creatorName;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public LobbySettings setName(String name) {
-        Name = name;
+        this.name = name;
         return this;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public LobbySettings setPassword(String password) {
-        Password = password;
+        this.password = password;
         return this;
     }
 
     public List<String> getPlayerNames() {
-        return PlayerNames;
+        return playerNames;
     }
 
     public LobbySettings setPlayerNames(List<String> playerNames) {
-        PlayerNames = playerNames;
+        this.playerNames = playerNames;
         return this;
     }
 
     public String getCreatorName() {
-        return CreatorName;
+        return creatorName;
     }
 
     public GameMode getGameMode() {
