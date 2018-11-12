@@ -68,7 +68,7 @@ public class GameTest {
     public void hitPawnTest() {
         game.readyUp();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
             while (true) {
                 if (game.rollDice() == 6) {
                     break;
@@ -76,6 +76,12 @@ public class GameTest {
             }
             game.movePawn("REP01");
         }
+        while (true) {
+            if (game.rollDice() == 5) {
+                break;
+            }
+        }
+        game.movePawn("REP01");
 
         while (true) {
             if (game.rollDice() == 6) {
@@ -85,14 +91,14 @@ public class GameTest {
         game.movePawn("BLP01");
 
         while (true) {
-            if (game.rollDice() == 2) {
+            if (game.rollDice() == 1) {
                 break;
             }
         }
         game.movePawn("BLP01");
 
 
-        Assert.assertTrue(game.getPawn("REP01").getPawnState() == PawnState.STARTPOSITION);
+        Assert.assertEquals('P',game.getPawn("REP01").getPawnTileId().charAt(2));
     }
 
     @Test

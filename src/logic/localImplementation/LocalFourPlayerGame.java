@@ -32,9 +32,15 @@ public class LocalFourPlayerGame implements Game {
         lobby.playerJoin(new Player(1, "TestAI1"));
         lobby.playerJoin(new Player(2, "TestAI2"));
         lobby.playerJoin(new Player(3, "TestAI3"));
-        this.debugMode = true;
-
+        this.debugMode = debugMode;
         dice = new Dice();
+    }
+
+    public LocalFourPlayerGame(Lobby lobby){
+        this.lobby = lobby;
+        boardStorage = DALFactory.getLocalBoardStorage();
+        boardStorage.init(lobby.getGameMode());
+        this.dice = new Dice();
     }
 
     @Override
@@ -142,7 +148,7 @@ public class LocalFourPlayerGame implements Game {
                 return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override

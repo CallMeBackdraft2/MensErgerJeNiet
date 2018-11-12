@@ -1,6 +1,7 @@
 package ut;
 
 import com.sun.prism.paint.Color;
+import dal.interfaces.BoardStorage;
 import dal.localImplementation.LocalBoardStorage;
 import dalFactories.DALFactory;
 import domain.Classes.Pawn;
@@ -15,13 +16,16 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 
 public class BoardStorageTest {
-    private LocalBoardStorage local;
+    private BoardStorage local;
 
     @Before
     public void Initialize() {
-        DALFactory dal = new DALFactory();
+        //DALFactory dal = new DALFactory();
 
-        local = (LocalBoardStorage) dal.getLocalBoardStorage();
+        //local = (LocalBoardStorage) dal.getLocalBoardStorage();
+
+        local = DALFactory.getLocalBoardStorage();
+        local.init(GameMode.FOURPLAYERBOARD);
     }
 
     @Test
@@ -42,15 +46,15 @@ public class BoardStorageTest {
 
     @Test
     public void getTileTest(){
-        Assert.assertTrue(local.getTile("GRP01").getColor() == "GREEN");
+        Assert.assertEquals("GREEN", local.getTile("GRP01").getColor());
     }
 
     @Test
     public void getPawnTest() {
         Assert.assertThat(local.getPawn("REP01"), instanceOf(Pawn.class));
-        Assert.assertTrue(local.getPawn("REP01").getPlayerColor() == PlayerColor.RED);
-        Assert.assertTrue(local.getPawn("REP01").getFullId() == "REP01");
-        Assert.assertTrue(local.getPawn("REP01").getStepsTaken() == 0);
-        Assert.assertTrue(local.getPawn("REP01").getPawnTileId() == "REP01");
+        Assert.assertEquals(PlayerColor.RED,local.getPawn("REP01").getPlayerColor());
+        Assert.assertEquals("REP01", local.getPawn("REP01").getFullId());
+        Assert.assertEquals(0, local.getPawn("REP01").getStepsTaken());
+        Assert.assertEquals("REP01", local.getPawn("REP01").getPawnTileId());
     }
 }

@@ -20,16 +20,15 @@
         <Label layoutX="270.0" layoutY="14.0" text="Lobby Type:" />
         <Label layoutX="270.0" layoutY="56.0" text="Password:" />
         <Button fx:id="btnLeaveLobby" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Leave Lobby" />
-        <Button layoutX="371.0" layoutY="361.0" mnemonicParsing="false" text="Ready" />
+        <Button fx:id="btnReady" layoutX="334.0" layoutY="361.0" mnemonicParsing="false" text="Ready" />
         <Label layoutX="270.0" layoutY="98.0" text="Player List:" />
         <ImageView fitHeight="240.0" fitWidth="240.0" layoutX="14.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../Images/4playerboard.JPG" />
         </ImageView>
-        <ChoiceBox layoutX="14.0" layoutY="73.0" prefHeight="25.0" prefWidth="240.0" />
+        <ChoiceBox fx:id="cbGameMode" layoutX="14.0" layoutY="73.0" prefHeight="25.0" prefWidth="240.0" />
         <Label layoutX="14.0" layoutY="56.0" text="Game Mode:" />
-        <Button layoutX="172.0" layoutY="361.0" mnemonicParsing="false" text="Add AI Player" />
         <TextField fx:id="txtfLobbyName" disable="true" layoutX="14.0" layoutY="31.0" prefHeight="25.0" prefWidth="240.0" />
         <Label layoutX="14.0" layoutY="14.0" text="Lobby Name:" />
-      <Button fx:id="btnAddPlayer" layoutX="272.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Add Player" />
+      <Button fx:id="btnAddPlayer" layoutX="176.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Add Player" />
     </children>
 </AnchorPane>
