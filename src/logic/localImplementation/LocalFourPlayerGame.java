@@ -35,6 +35,13 @@ public class LocalFourPlayerGame implements Game {
         dice = new Dice();
     }
 
+    public LocalFourPlayerGame(Lobby lobby){
+        this.lobby = lobby;
+        boardStorage = DALFactory.getLocalBoardStorage();
+        boardStorage.init(lobby.getGameMode());
+        this.dice = new Dice();
+    }
+
     @Override
     public boolean isDiceRolled() {
         return diceRolled;
