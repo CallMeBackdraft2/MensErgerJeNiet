@@ -105,7 +105,15 @@ public class FourPlayerController {
             chosenPawn = pawn;
             Circle pawnCircle = getPawnCircle(pawn);
             Tile possibleMove = game.getPossibleMove(pawn);
+            if(pawn.getPlayerColor().getValue() != game.getCurrentPlayerId()){
 
+                ShowError(new IllegalArgumentException("Not " + pawn.getPlayerColor() +"'s turn"));
+                return;
+            }
+            if(!game.isDiceRolled()){
+                ShowError(new IllegalArgumentException("Roll dice first"));
+                return;
+            }
             if (possibleMove == null) {
 
                 return;
@@ -148,8 +156,12 @@ public class FourPlayerController {
         if (game.isYourTurn() && chosenPawn != null && tile == game.getPossibleMove(chosenPawn)) {
 
             Circle pawn = getPawnCircle(chosenPawn);
+          try{
             game.movePawn(chosenPawn.getFullId());
+          } catch (Exception e) {
 
+              ShowError(e);
+          }
             updateBoard();
         }
 
@@ -270,10 +282,7 @@ public class FourPlayerController {
 
             } catch (Exception e) {
 
-                Alert a = new Alert(Alert.AlertType.ERROR);
-                a.setTitle("Error");
-                a.setContentText(e.getMessage());
-                a.show();
+                ShowError(e);
             }
             //imgDice.setEffect(new ColorAdjust(((color.getHue()/360) -.5f)*2, 1, 0, 0));
             String url = "Images/Dice" + thrown + ".png";
@@ -294,6 +303,13 @@ public class FourPlayerController {
 
         }
         clearSelection();
+    }
+
+    private void ShowError(Exception e) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setHeaderText(e.getMessage());
+
+        a.show();
     }
 
 
