@@ -175,13 +175,25 @@ public class LocalFourPlayerGame implements Game {
         Tile possibleMove;
         possibleMove = GetWalkingTilePossibleMove(pawn, curTile);
 
+        if(pawn.getPawnTileId().equals((pawn.getFullId().substring(0,2)+"H04"))) {
+            return null;
+        }
         if(pawn.getStepsTaken()+dice.getLastRolled() >= boardStorage.getTileAmountOf("WLK")) {
 
-            int i = pawn.getStepsTaken() + +dice.getLastRolled();
-            int amount = (boardStorage.getTileAmountOf("WLK") +4);
-            int newPos = amount - (i-amount);
-            int t =newPos - boardStorage.getTileAmountOf("WLK");
+            int amountToWalk = pawn.getStepsTaken() + dice.getLastRolled() - boardStorage.getTileAmountOf("WLK") ;
 
+            int t =1;
+            int dir = 1;
+            amountToWalk = amountToWalk % 6;
+            while(amountToWalk>0){
+                if(t==4){
+                    dir=-1;
+                } else if(t==1){
+                    dir = 1;
+                }
+                t+= dir;
+                amountToWalk--;
+            }
 
 
             return boardStorage.getTile((pawn.getFullId().substring(0,2)+"H0"+t));
