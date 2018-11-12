@@ -1,11 +1,9 @@
 package logic.localImplementation;
 
-import com.sun.javaws.exceptions.ExitException;
 import dal.interfaces.BoardStorage;
 import dalFactories.DALFactory;
 import domain.Classes.*;
 import domain.Enums.GameMode;
-import domain.Enums.PlayerColor;
 import logic.interfaces.Game;
 
 import java.time.format.DateTimeFormatter;
@@ -116,17 +114,17 @@ public class LocalFourPlayerGame implements Game {
             throw new IllegalArgumentException("Roll the dice");
         }
 
-        if(checkWincondition()){
-            throw  new IllegalArgumentException("Player " + getCurrentPlayerId() + " has won");
+        if (checkWincondition()) {
+            throw new IllegalArgumentException("Player " + getCurrentPlayerId() + " has won");
         }
     }
 
 
-    private Boolean checkWincondition(){
+    private Boolean checkWincondition() {
 
-        Pawn[] pawns =boardStorage.getPlayerPawns(currentTurn);
+        Pawn[] pawns = boardStorage.getPlayerPawns(currentTurn);
         for (Pawn pawn : pawns) {
-            if(pawn.getPawnTileId().charAt(2) != 'H'){
+            if (pawn.getPawnTileId().charAt(2) != 'H') {
                 return false;
             }
         }
