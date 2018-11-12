@@ -36,6 +36,11 @@ public abstract class GameTest {
 
     @Test
     public void possibleMovesTest(){
+        while(true) {
+            if(game.rollDice() != 6) {
+                break;
+            }
+        }
         Assert.assertNotNull(game.getPossibleMove(game.getPawn("REP01")));
     }
 
