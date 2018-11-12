@@ -21,6 +21,7 @@ public class LocalFourPlayerGame implements Game {
     int currentTurn = 0;
     private boolean diceRolled;
     private boolean debugMode;
+    private boolean isDone;
 
     public LocalFourPlayerGame(boolean debugMode) {
         boardStorage = DALFactory.getLocalBoardStorage();
@@ -107,6 +108,7 @@ public class LocalFourPlayerGame implements Game {
                 diceRolled = false;
 
                 if (checkWincondition()) {
+                    isDone=true;
                     throw new IllegalArgumentException("Player " + PlayerColor.values()[ getCurrentPlayerId()] + " has won");
                 }
 
@@ -127,6 +129,7 @@ public class LocalFourPlayerGame implements Game {
 
     private boolean checkWincondition() {
 
+
         for(int i=0;i<4;i++){
             Pawn[] pawns =  boardStorage.getPlayerPawns(i);
             boolean won= true;
@@ -139,7 +142,7 @@ public class LocalFourPlayerGame implements Game {
                 return true;
             }
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -317,5 +320,10 @@ public class LocalFourPlayerGame implements Game {
     @Override
     public void startGame() {
 
+    }
+
+    @Override
+    public boolean getIsDone() {
+        return isDone;
     }
 }

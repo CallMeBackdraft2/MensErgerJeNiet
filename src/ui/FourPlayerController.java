@@ -145,7 +145,14 @@ public class FourPlayerController {
         }
 
         TurnCircle.setFill(PlayerColor.values()[game.getCurrentPlayerId()].toColor());
-
+        if(game.getIsDone()){
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            btnLeaveGame.fire();
+        }
     }
 
     private void tilePressed(Tile tile) {
