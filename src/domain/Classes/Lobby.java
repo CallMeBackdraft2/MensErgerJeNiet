@@ -19,11 +19,13 @@ public class Lobby {
     public Lobby( ) {
         players = new ArrayList<>();
         messages = new ArrayList<>();
+        gameMode = GameMode.FOURPLAYERBOARD;
     }
 
    public Lobby(Player host) {
        players = new ArrayList<>();
        messages = new ArrayList<>();
+       gameMode = GameMode.FOURPLAYERBOARD;
         players.add(host);
    }
 
