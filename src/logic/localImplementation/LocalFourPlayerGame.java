@@ -218,7 +218,6 @@ public class LocalFourPlayerGame implements Game {
         possibleMove = walkables.get(i);
         if(possibleMove.getPawn()!=null){
             if(possibleMove.getPawn().getPlayerColor() == pawn.getPlayerColor()){
-               // return null;
             }
         }
         return possibleMove;
