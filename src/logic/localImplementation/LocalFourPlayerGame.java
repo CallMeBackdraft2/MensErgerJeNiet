@@ -32,12 +32,13 @@ public class LocalFourPlayerGame implements Game {
         lobby.playerJoin(new Player(2, "TestAI2"));
         lobby.playerJoin(new Player(3, "TestAI3"));
         this.debugMode=debugMode;
+        this.debugMode = true;
         dice = new Dice();
     }
 
     @Override
     public int rollDice() {
-        if (diceRolled){
+        if (diceRolled && !debugMode){
             throw new IllegalArgumentException("move your pawn");
         }
         dice.rollDice();
@@ -74,7 +75,7 @@ public class LocalFourPlayerGame implements Game {
     @Override
     public void movePawn(String pawnId) {
 
-      if(diceRolled) {
+      if(diceRolled || debugMode) {
         Pawn pawn = getPawn(pawnId);
 
         if (pawn.getPlayerColor().getValue() == currentTurn) {
@@ -91,7 +92,11 @@ public class LocalFourPlayerGame implements Game {
                     // Places the smashed pawn to the starting tile
                     smashedPawn.setPawnTileId(smashedPawn.getFullId());
                 }
+                if(!pawn.getPawnTileId().equals( pawn.getFullId())) {
+                    pawn.setStepsTaken(pawn.getStepsTaken() + dice.getLastRolled());
+                }
                 pawn.setPawnTileId(possibleMove.getFullId());
+
                 possibleMove.setPawn(pawn);
             }
 
@@ -159,34 +164,53 @@ public class LocalFourPlayerGame implements Game {
 
             if(dice.getLastRolled()==6) {
 
-                System.out.println(pawn.getPlayerColor().toString());
                 Stream<Tile> stream = boardStorage.getTiles().stream()
                         .filter(t -> t.getColor().equals(pawn.getPlayerColor().toString()) && t.getType().equals("WLK"));
-
 
                 return stream.findFirst().get();
             }
             return null;
         }
 
+        Tile possibleMove;
+        possibleMove = GetWalkingTilePossibleMove(pawn, curTile);
+
+        if(pawn.getStepsTaken()+dice.getLastRolled() >= boardStorage.getTileAmountOf("WLK")) {
+
+            int i = pawn.getStepsTaken() + +dice.getLastRolled();
+            int amount = (boardStorage.getTileAmountOf("WLK") +4);
+            int newPos = amount - (i-amount);
+            int t =newPos - boardStorage.getTileAmountOf("WLK");
+
+
+
+            return boardStorage.getTile((pawn.getFullId().substring(0,2)+"H0"+t));
+
+        }
+
+        if (possibleMove == null) return null;
+
+        return possibleMove;
+    }
+
+    private Tile GetWalkingTilePossibleMove(Pawn pawn, Tile curTile) {
+        Tile possibleMove;
         List<Tile> walkables = getTiles().stream()
                 .filter(t -> t.getType().equals("WLK")).collect(Collectors.toList());
         int i = walkables.indexOf(curTile);
         i += dice.getLastRolled();
-        if (i >= 40) {
-            i -= 40;
-        }
-        System.out.println(i);
-        System.out.println(walkables.get(i));
 
-        Tile result = walkables.get(i);
-        if(result.getPawn()!=null){
-            if(result.getPawn().getPlayerColor() == pawn.getPlayerColor()){
+
+        if (i >= boardStorage.getTileAmountOf("WLK")) {
+            i -= boardStorage.getTileAmountOf("WLK");
+        }
+        possibleMove = walkables.get(i);
+        if(possibleMove.getPawn()!=null){
+            if(possibleMove.getPawn().getPlayerColor() == pawn.getPlayerColor()){
                 return null;
             }
         }
-
-        return walkables.get(i);
+        return possibleMove;
     }
 
     @Override

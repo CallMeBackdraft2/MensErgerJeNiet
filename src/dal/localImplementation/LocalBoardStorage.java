@@ -28,6 +28,8 @@ public class LocalBoardStorage implements BoardStorage {
         return tiles;
     }
 
+
+
     @Override
     public Pawn[] getPlayerPawns(int PlayerId) {
        return Arrays.copyOf( gameBoard.getPlayingField().getPawns()
@@ -37,6 +39,11 @@ public class LocalBoardStorage implements BoardStorage {
     @Override
     public List<Pawn> getPawns() {
         return gameBoard.getPlayingField().getPawns();
+    }
+
+    @Override
+    public int getTileAmountOf(String id) {
+        return (int)getTiles().stream().filter(t -> t.getType().equals(id)).count();
     }
 
     @Override

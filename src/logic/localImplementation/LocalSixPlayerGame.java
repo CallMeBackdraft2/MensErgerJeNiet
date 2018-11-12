@@ -108,6 +108,11 @@ public class LocalSixPlayerGame implements Game {
     }
 
     @Override
+    public int getCurrentPlayerId() {
+        return 0;
+    }
+
+    @Override
     public List<Player> getPlayers() {
        return lobby.getPlayers();
     }
