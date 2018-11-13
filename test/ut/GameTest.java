@@ -136,4 +136,89 @@ public class GameTest {
 
         Assert.assertEquals('P', game.getPawn("REP01").getPawnTileId().charAt(2));
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void winTest(){
+
+        //Move red pawn 1 to home base
+        for (int i = 0; i < 7; i++) {
+            while (true) {
+                if (game.rollDice() == 6 && game.getCurrentPlayerId()==0) {
+                    break;
+                }
+            }
+            game.movePawn("REP01" );
+        }
+
+        while (true) {
+            if (game.rollDice() == 4 && game.getCurrentPlayerId()==0) {
+                break;
+            }
+        }
+        game.movePawn("REP01" );
+
+        //Move red pawn 2 to home base
+        for (int i = 0; i < 7; i++) {
+            while (true) {
+                if (game.rollDice() == 6 && game.getCurrentPlayerId()==0) {
+                    break;
+                }
+            }
+            game.movePawn("REP02" );
+        }
+
+        while (true) {
+            if (game.rollDice() == 5 && game.getCurrentPlayerId()==0) {
+                break;
+            }
+        }
+        game.movePawn("REP02" );
+
+        //Move red pawn 3 to home base
+        for (int i = 0; i < 8; i++) {
+            while (true) {
+                if (game.rollDice() == 6 && game.getCurrentPlayerId()==0) {
+                    break;
+                }
+            }
+            game.movePawn("REP03" );
+        }
+        //Move red pawn 4 to home base
+        for (int i = 0; i < 6; i++) {
+            while (true) {
+                if (game.rollDice() == 6 && game.getCurrentPlayerId()==0) {
+                    break;
+                }
+            }
+            game.movePawn("REP04" );
+        }
+
+        while (true) {
+            if (game.rollDice() == 5 && game.getCurrentPlayerId()==0) {
+                break;
+            }
+        }
+        game.movePawn("REP04" );
+
+        while (true) {
+            if (game.rollDice() == 4 && game.getCurrentPlayerId()==0) {
+                break;
+            }
+        }
+        game.movePawn("REP04" );
+
+        while (true) {
+            if (game.rollDice() == 4 && game.getCurrentPlayerId()==0) {
+                break;
+            }
+        }
+        game.movePawn("REP04" );
+
+        Assert.assertEquals("REH01",game.getPawn("REP01").getPawnTileId());
+        Assert.assertEquals("REH02",game.getPawn("REP02").getPawnTileId());
+        Assert.assertEquals("REH03",game.getPawn("REP03").getPawnTileId());
+        Assert.assertEquals("REH04",game.getPawn("REP04").getPawnTileId());
+
+        Assert.assertTrue(game.getIsDone());
+    }
 }
