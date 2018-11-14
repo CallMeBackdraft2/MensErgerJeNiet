@@ -1,5 +1,5 @@
 # Mens Erger Je Niet
 
-codecov Coverage: [![codecov](https://codecov.io/gh/callmebackdraft/MEJN/branch/master/graph/badge.svg)](https://codecov.io/gh/callmebackdraft/MEJN)
+codecov Coverage: [![codecov](https://codecov.io/gh/CallMeBackdraft2/MensErgerJeNiet/branch/develop/graph/badge.svg?token=ShUVreaYTv)](https://codecov.io/gh/CallMeBackdraft2/MensErgerJeNiet)
 
-Travis CI Build: [![Build Status](https://travis-ci.org/callmebackdraft/MEJN.svg?branch=master)](https://travis-ci.org/callmebackdraft/MEJN)
+Travis CI Build: [![Build Status](https://travis-ci.com/CallMeBackdraft2/MensErgerJeNiet.svg?token=DsHqn39mo6wAZp3vPDVa&branch=develop)](https://travis-ci.com/CallMeBackdraft2/MensErgerJeNiet)
