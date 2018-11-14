@@ -315,7 +315,6 @@ public class FourPlayerController {
     private void ShowError(Exception e) {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setHeaderText(e.getMessage());
-
         a.show();
     }
 
