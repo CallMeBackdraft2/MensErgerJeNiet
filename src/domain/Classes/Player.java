@@ -45,6 +45,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return id + " " +  name + " as " + playerColor;
+        return name + " as " + playerColor;
     }
 }

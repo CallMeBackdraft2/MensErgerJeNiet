@@ -15,7 +15,7 @@ public class LogicFactory {
     public static Game getLocalFourPlayerGame(Lobby lobby){
         return new LocalFourPlayerGame(lobby);
     }
-    
+
     public static Game getLocalFourPlayerGameTest(){
 
         return new LocalFourPlayerGame(true);

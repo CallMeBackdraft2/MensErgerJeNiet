@@ -49,7 +49,6 @@ public class MainMenuController {
             public void handle(ActionEvent event) {
                 LobbyController controller = new LobbyController();
                 //todo de-hardcode this and get player date from something like log-on or registration
-                controller.setLobby(new Lobby(new Player(0, "Dennis")));
 
                 JavaFXSceneFactory.generateStage(controller, getClass().getResource("guifiles/LobbyView.fxml"), false, "Spellobby", 429, 431).show();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
