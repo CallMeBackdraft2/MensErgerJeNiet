@@ -49,6 +49,12 @@ public class LocalFourPlayerGame implements Game {
     }
 
     @Override
+    public void skipTurn(){
+        switchTurn();
+        diceRolled=false;
+    }
+
+    @Override
     public int rollDice() {
         if (diceRolled && !debugMode) {
             throw new IllegalArgumentException("move your pawn");
@@ -123,6 +129,8 @@ public class LocalFourPlayerGame implements Game {
                 } else {
                     switchTurn();
                 }
+            } else{
+                throw new IllegalArgumentException("Not your turn");
             }
 
         } else {

@@ -9,6 +9,8 @@ import java.util.List;
 public interface Game {
     boolean isDiceRolled();
 
+    void skipTurn();
+
     int rollDice();
     void movePawn(String pawnId);
     List<Tile> getTiles();
