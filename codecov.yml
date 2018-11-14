@@ -2,3 +2,6 @@ coverage:
   precision: 2
   round: nearest
   range: "40...70"
+
+codecov:
+  token: 07381139-b38c-4e53-ac23-3bc69b95e866
