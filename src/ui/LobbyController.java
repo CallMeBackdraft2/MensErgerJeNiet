@@ -168,10 +168,6 @@ public class LobbyController {
                 });
 
                 playerColor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                    System.out.println((newValue.toString().trim().isEmpty() ? 1 : 0));
-                    System.out.println((username.textProperty().getValue().trim().isEmpty() ? 1 : 0));
-
-
                     loginButton.setDisable(!(((newValue.toString().trim().isEmpty() ? 1 : 0) + (username.textProperty().getValue().trim().isEmpty() ? 1 : 0)) == 0));
                 });
 
@@ -224,7 +220,6 @@ public class LobbyController {
     }
 
     private void checkPlayerCount() {
-        System.out.println("Checking PLayer count");
         if ((gameLobby.getPlayers().size() == 4 && gameLobby.getGameMode() == GameMode.FOURPLAYERBOARD) || (gameLobby.getPlayers().size() == 6 && gameLobby.getGameMode() == GameMode.SIXPLAYERBOARD)){
             btnReady.setDisable(false);
         } else {
