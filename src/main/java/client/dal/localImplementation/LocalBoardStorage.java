@@ -19,21 +19,20 @@ public class LocalBoardStorage implements BoardStorage {
     public void init(GameMode gameMode) {
 
         gameBoard = new GameBoard(gameMode);
-        BoardReader.Load("Boards/"+ gameMode.name() + ".map",gameBoard.getPlayingField());
+        BoardReader.load("Boards/"+ gameMode.name() + ".map",gameBoard.getPlayingField());
     }
 
     @Override
     public List<Tile> getTiles() {
-        List<Tile> tiles = gameBoard.getPlayingField().getTiles();
-        return tiles;
+        return gameBoard.getPlayingField().getTiles();
     }
 
 
 
     @Override
-    public Pawn[] getPlayerPawns(int PlayerId) {
+    public Pawn[] getPlayerPawns(int playerId) {
        return Arrays.copyOf( gameBoard.getPlayingField().getPawns()
-                .stream().filter(p -> p.getPlayerColor().getValue() == PlayerId).toArray(),4,Pawn[].class);
+                .stream().filter(p -> p.getPlayerColor().getValue() == playerId).toArray(),4,Pawn[].class);
     }
 
     @Override

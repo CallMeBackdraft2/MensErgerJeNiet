@@ -9,7 +9,9 @@ import java.io.FileReader;
 
 public class BoardReader {
 
-    public static void Load(String path, PlayingField playingField) {
+    private BoardReader(){}
+
+    public static void load(String path, PlayingField playingField) {
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
@@ -17,9 +19,6 @@ public class BoardReader {
                 String[] para = line.split("\\s+");
                 String idString = para[0];
 
-
-                int id = Integer.parseInt(idString.substring(3, 5));
-                String typeString = idString.substring(0, 3);
                 String color = para[1];
                 int x = Integer.parseInt(para[2]);
                 int y = Integer.parseInt(para[3]);

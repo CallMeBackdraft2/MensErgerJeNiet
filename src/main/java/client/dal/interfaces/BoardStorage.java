@@ -11,7 +11,7 @@ public interface BoardStorage {
 
     void init(GameMode gameMode);
     List<Tile> getTiles();
-    Pawn[] getPlayerPawns(int PlayerId);
+    Pawn[] getPlayerPawns(int playerId);
     List<Pawn> getPawns();
     int getTileAmountOf(String id);
     void movePawn(String pawnId, String tileId);
