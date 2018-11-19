@@ -1,5 +1,3 @@
-package ut;
-
 import client.logic.interfaces.Game;
 import client.logicFactories.LogicFactory;
 import org.junit.Assert;

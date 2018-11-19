@@ -1,5 +1,3 @@
-package ut;
-
 import client.dal.interfaces.BoardStorage;
 import client.dalFactories.DALFactory;
 import client.domain.Classes.Pawn;
