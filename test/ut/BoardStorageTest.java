@@ -1,13 +1,10 @@
 package ut;
 
-import com.sun.prism.paint.Color;
-import dal.interfaces.BoardStorage;
-import dal.localImplementation.LocalBoardStorage;
-import dalFactories.DALFactory;
-import domain.Classes.Pawn;
-import domain.Enums.GameMode;
-import domain.Enums.PawnState;
-import domain.Enums.PlayerColor;
+import client.dal.interfaces.BoardStorage;
+import client.dalFactories.DALFactory;
+import client.domain.Classes.Pawn;
+import client.domain.Enums.GameMode;
+import client.domain.Enums.PlayerColor;
 import org.junit.Assert;
 import org.junit.*;
 import org.junit.Test;
@@ -20,9 +17,9 @@ public class BoardStorageTest {
 
     @Before
     public void Initialize() {
-        //DALFactory dal = new DALFactory();
+        //DALFactory client.dal = new DALFactory();
 
-        //local = (LocalBoardStorage) dal.getLocalBoardStorage();
+        //local = (LocalBoardStorage) client.dal.getLocalBoardStorage();
 
         local = DALFactory.getLocalBoardStorage();
         local.init(GameMode.FOURPLAYERBOARD);

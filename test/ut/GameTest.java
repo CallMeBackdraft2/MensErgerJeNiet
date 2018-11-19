@@ -1,7 +1,7 @@
 package ut;
 
-import logic.interfaces.Game;
-import logicFactories.LogicFactory;
+import client.logic.interfaces.Game;
+import client.logicFactories.LogicFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

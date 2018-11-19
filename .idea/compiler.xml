@@ -13,4 +13,9 @@
       <module name="MEJN" target="1.8" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="MEJN" options="-bootclasspath &quot;D:\HDD Program Files\IntelliJ IDEA 2018.2.1\jre64\lib\resources.jar;D:\HDD Program Files\IntelliJ IDEA 2018.2.1\jre64\lib\rt.jar;D:\HDD Program Files\IntelliJ IDEA 2018.2.1\jre64\lib\sunrsasign.jar;D:\HDD Program Files\IntelliJ IDEA 2018.2.1\jre64\lib\jsse.jar;D:\HDD Program Files\IntelliJ IDEA 2018.2.1\jre64\lib\jce.jar;D:\HDD Program Files\IntelliJ IDEA 2018.2.1\jre64\lib\charsets.jar;D:\HDD Program Files\IntelliJ IDEA 2018.2.1\jre64\lib\jfr.jar;D:\HDD Program Files\IntelliJ IDEA 2018.2.1\jre64\classes;D:/HDD Program Files/java/jre/lib/jfxrt.jar&quot;" />
+    </option>
+  </component>
 </project>
