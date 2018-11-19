@@ -1,5 +1,5 @@
 import client.logic.interfaces.Game;
-import client.logicFactories.LogicFactory;
+import client.logicfactories.LogicFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,9 +1,9 @@
 package client.ui;
 
-import client.domain.Classes.Lobby;
-import client.domain.Classes.Player;
-import client.domain.Enums.GameMode;
-import client.domain.Enums.PlayerColor;
+import client.domain.classes.Lobby;
+import client.domain.classes.Player;
+import client.domain.enums.GameMode;
+import client.domain.enums.PlayerColor;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -17,7 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
-import client.logicFactories.LogicFactory;
+import client.logicfactories.LogicFactory;
 
 import java.util.EnumSet;
 import java.util.Optional;

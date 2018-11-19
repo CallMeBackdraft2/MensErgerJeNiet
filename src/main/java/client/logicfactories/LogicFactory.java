@@ -1,10 +1,12 @@
-package client.logicFactories;
+package client.logicfactories;
 
-import client.domain.Classes.Lobby;
+import client.domain.classes.Lobby;
 import client.logic.interfaces.Game;
-import client.logic.localImplementation.LocalFourPlayerGame;
+import client.logic.localimplementation.LocalFourPlayerGame;
 
 public class LogicFactory {
+
+    private LogicFactory(){};
 
     public static Game getLocalFourPlayerGame(){
 

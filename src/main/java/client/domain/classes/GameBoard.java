@@ -1,6 +1,6 @@
-package client.domain.Classes;
+package client.domain.classes;
 
-import client.domain.Enums.GameMode;
+import client.domain.enums.GameMode;
 
 public class GameBoard {
     private GameMode gameMode;

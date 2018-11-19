@@ -1,4 +1,4 @@
-package client.domain.Enums;
+package client.domain.enums;
 
 public enum GameMode {
 

@@ -1,7 +1,7 @@
-package client.domain.Classes;
+package client.domain.classes;
 
 
-import client.domain.Enums.GameMode;
+import client.domain.enums.GameMode;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

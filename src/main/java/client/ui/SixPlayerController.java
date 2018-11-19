@@ -1,7 +1,7 @@
 package client.ui;
 
-import client.domain.Classes.Pawn;
-import client.domain.Classes.Tile;
+import client.domain.classes.Pawn;
+import client.domain.classes.Tile;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
-import client.logic.localImplementation.LocalSixPlayerGame;
+import client.logic.localimplementation.LocalSixPlayerGame;
 
 import java.util.Dictionary;
 import java.util.Hashtable;

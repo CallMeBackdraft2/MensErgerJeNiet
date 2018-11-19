@@ -1,7 +1,7 @@
-package client.domain.Classes;
+package client.domain.classes;
 
-import client.domain.Enums.PawnState;
-import client.domain.Enums.PlayerColor;
+import client.domain.enums.PawnState;
+import client.domain.enums.PlayerColor;
 
 public class Pawn {
     // Fields

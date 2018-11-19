@@ -1,7 +1,7 @@
-package client.domain.Classes;
+package client.domain.classes;
 
-import client.domain.Enums.GameMode;
-import client.domain.Enums.LobbyType;
+import client.domain.enums.GameMode;
+import client.domain.enums.LobbyType;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package client.dal.interfaces;
 
 
-import client.domain.Classes.Pawn;
-import client.domain.Classes.Tile;
-import client.domain.Enums.GameMode;
+import client.domain.classes.Pawn;
+import client.domain.classes.Tile;
+import client.domain.enums.GameMode;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 import client.dal.interfaces.BoardStorage;
-import client.dalFactories.DALFactory;
-import client.domain.Classes.Pawn;
-import client.domain.Enums.GameMode;
-import client.domain.Enums.PlayerColor;
+import client.dalfactories.DALFactory;
+import client.domain.classes.Pawn;
+import client.domain.enums.GameMode;
+import client.domain.enums.PlayerColor;
 import org.junit.Assert;
 import org.junit.*;
 import org.junit.Test;

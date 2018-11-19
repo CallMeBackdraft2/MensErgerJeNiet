@@ -1,4 +1,4 @@
-package client.domain.Enums;
+package client.domain.enums;
 
 import javafx.scene.paint.Color;
 
@@ -17,10 +17,7 @@ public enum PlayerColor {
     }
 
     public double getHue(){
-
-      double d =  PlayerColor.values()[value].toColor().getHue();
-      return d;
-
+          return PlayerColor.values()[value].toColor().getHue();
     }
 
     public static PlayerColor fromId(String id) {
@@ -38,12 +35,10 @@ public enum PlayerColor {
                 return PlayerColor.BLACK;
             case "PU":
                 return PlayerColor.PURPLE;
-
+            default:
+                System.out.println("ERROR");
+                return PlayerColor.RED;
         }
-
-        System.out.println("ERROR");
-        return PlayerColor.RED;
-
     }
 
     public Color toColor() {
@@ -62,9 +57,10 @@ public enum PlayerColor {
                 return Color.BLACK;
             case 5:
                 return Color.PURPLE;
+            default:
+                return Color.GREY;
 
         }
-        return Color.GREY;
     }
 
     public Color toColorAccent() {
@@ -83,9 +79,9 @@ public enum PlayerColor {
                 return Color.rgb(64, 64, 64);
             case 5:
                 return Color.rgb(100,23,98);
-
+            default:
+                return Color.BLACK;
         }
-        return Color.BLACK;
     }
 
     public int getValue() {

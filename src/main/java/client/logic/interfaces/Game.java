@@ -1,8 +1,8 @@
 package client.logic.interfaces;
 
-import client.domain.Classes.Pawn;
-import client.domain.Classes.Player;
-import client.domain.Classes.Tile;
+import client.domain.classes.Pawn;
+import client.domain.classes.Player;
+import client.domain.classes.Tile;
 
 import java.util.List;
 

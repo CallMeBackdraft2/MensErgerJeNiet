@@ -1,8 +1,8 @@
-package client.dal.localImplementation;
+package client.dal.localimplementation;
 
-import client.domain.Classes.Pawn;
-import client.domain.Classes.PlayingField;
-import client.domain.Classes.Tile;
+import client.domain.classes.Pawn;
+import client.domain.classes.PlayingField;
+import client.domain.classes.Tile;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

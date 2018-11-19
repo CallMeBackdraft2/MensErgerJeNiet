@@ -1,19 +1,19 @@
-package client.domain.Classes;
+package client.domain.classes;
 
 import java.util.Random;
 
 public class Dice {
     // Fields
     private Random r;
-    private int LastRolled;
+    private int lastRolled;
 
     // Properties
-    public int getLastRolled() { return LastRolled; }
+    public int getLastRolled() { return lastRolled; }
 
     // Constructor
     public Dice() {
         r =  new Random();
-        LastRolled = -1;
+        lastRolled = -1;
     }
 
     // Methods
@@ -23,7 +23,7 @@ public class Dice {
 
              number = r.nextInt(6) + 1;
 
-        this.LastRolled = number;
+        this.lastRolled = number;
         return  number;
     }
 }

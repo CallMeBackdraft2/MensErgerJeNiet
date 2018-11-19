@@ -1,10 +1,10 @@
-package client.logic.localImplementation;
+package client.logic.localimplementation;
 
 import client.dal.interfaces.BoardStorage;
-import client.dalFactories.DALFactory;
-import client.domain.Classes.*;
-import client.domain.Enums.GameMode;
-import client.domain.Enums.PlayerColor;
+import client.dalfactories.DALFactory;
+import client.domain.classes.*;
+import client.domain.enums.GameMode;
+import client.domain.enums.PlayerColor;
 import client.logic.interfaces.Game;
 
 import java.time.format.DateTimeFormatter;

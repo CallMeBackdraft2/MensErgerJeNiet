@@ -1,4 +1,4 @@
-package client.domain.Classes;
+package client.domain.classes;
 
 
 import java.util.ArrayList;

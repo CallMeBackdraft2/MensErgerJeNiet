@@ -1,8 +1,8 @@
 package client.ui;
 
-import client.domain.Classes.Pawn;
-import client.domain.Classes.Tile;
-import client.domain.Enums.PlayerColor;
+import client.domain.classes.Pawn;
+import client.domain.classes.Tile;
+import client.domain.enums.PlayerColor;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;

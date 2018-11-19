@@ -1,7 +1,7 @@
-package client.dalFactories;
+package client.dalfactories;
 
 import client.dal.interfaces.BoardStorage;
-import client.dal.localImplementation.LocalBoardStorage;
+import client.dal.localimplementation.LocalBoardStorage;
 
 public class DALFactory {
 

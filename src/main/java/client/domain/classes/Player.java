@@ -1,6 +1,6 @@
-package client.domain.Classes;
+package client.domain.classes;
 
-import client.domain.Enums.PlayerColor;
+import client.domain.enums.PlayerColor;
 
 public class Player {
     private int id;
@@ -34,10 +34,6 @@ public class Player {
     public int getPlayerScore() {
         return this.playerScore;
     }
-
-   /* public int getPawnLoc(int pawnID) {
-        return this.pawnArray[pawnID].getPawnTileId();
-    }*/
 
     public String getName() {
         return this.name;
