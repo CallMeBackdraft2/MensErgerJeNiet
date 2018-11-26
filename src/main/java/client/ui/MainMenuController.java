@@ -38,7 +38,7 @@ public class MainMenuController {
                 FourPlayerController controller = new FourPlayerController();
                 //todo de-hardcode this and get player date from something like log-on or registration
 
-                JavaFXSceneFactory.generateStage(controller, getClass().getResource("guifiles/4-Player.fxml"), false, "Speelbord", 629, 0).show();
+                JavaFXSceneFactory.generateStage(controller, getClass().getResource("src/main/java/client/ui/guifiles/4-Player.fxml"), false, "Speelbord", 629, 0).show();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });
@@ -48,14 +48,14 @@ public class MainMenuController {
                 LobbyController controller = new LobbyController();
                 //todo de-hardcode this and get player date from something like log-on or registration
 
-                JavaFXSceneFactory.generateStage(controller, getClass().getResource("guifiles/LobbyView.fxml"), false, "Spellobby", 429, 431).show();
+                JavaFXSceneFactory.generateStage(controller, getClass().getResource("src/main/java/client/ui/guifiles/LobbyView.fxml"), false, "Spellobby", 429, 431).show();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });
 
         btnFindLobby.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(new LobbyBrowserController(), getClass().getResource("guifiles/LobbyBrowser.fxml"), false, "Lobby Browser", 429, 600).show();
+                JavaFXSceneFactory.generateStage(new LobbyBrowserController(), getClass().getResource("src/main/java/client/ui/guifiles/LobbyBrowser.fxml"), false, "Lobby Browser", 429, 600).show();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });
