@@ -29,7 +29,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import client.logic.interfaces.Game;
-
 import java.io.File;
 import java.util.Dictionary;
 import java.util.Hashtable;
