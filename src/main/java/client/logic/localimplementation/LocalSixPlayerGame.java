@@ -4,8 +4,16 @@ import client.dal.interfaces.BoardStorage;
 import client.dalfactories.DALFactory;
 import client.domain.classes.*;
 import client.domain.enums.GameMode;
+import client.domain.enums.PawnState;
+import client.logic.interfaces.Game;
 
-public class LocalSixPlayerGame /*implements Game*/ {
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class LocalSixPlayerGame implements Game {
 
     Dice dice;
     boolean diceRolled;
@@ -20,7 +28,17 @@ public class LocalSixPlayerGame /*implements Game*/ {
         lobby.playerJoin(new Player(2, "TestAI2"));
         lobby.playerJoin(new Player(3, "TestAI3"));
         dice = new Dice();
-    }/*
+    }
+
+    @Override
+    public boolean isDiceRolled() {
+        return false;
+    }
+
+    @Override
+    public void skipTurn() {
+
+    }
 
     @Override
     public int rollDice() {
@@ -93,6 +111,11 @@ public class LocalSixPlayerGame /*implements Game*/ {
     @Override
     public List<Pawn> getPawns() {
         return boardStorage.getPawns();
+    }
+
+    @Override
+    public int getCurrentPlayerId() {
+        return 0;
     }
 
     @Override
@@ -220,5 +243,10 @@ public class LocalSixPlayerGame /*implements Game*/ {
     @Override
     public void startGame() {
 
-    }*/
+    }
+
+    @Override
+    public boolean getIsDone() {
+        return false;
+    }
 }

@@ -1,7 +1,9 @@
 package client.websockets;
 
+import client.logic.localimplementation.MultiplayerFourPlayerGame;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import shared.Message;
 
 import javax.websocket.*;
 import java.io.IOException;
@@ -9,7 +11,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @ClientEndpoint
-public class CommunicatorWebSocket extends Communicator{
+public class CommunicatorWebSocket extends Communicator implements Runnable{
 
     // singleton
     private static CommunicatorWebSocket instance = null;
@@ -21,13 +23,19 @@ public class CommunicatorWebSocket extends Communicator{
     private Session session;
     private String message;
     private Gson gson = null;
+    private MultiplayerFourPlayerGame game;
 
     // status of the websocket client
     boolean isRunning = false;
 
     // Private constructor (singleton pattern)
-    private CommunicatorWebSocket() {
+    public CommunicatorWebSocket() {
         gson = new Gson();
+    }
+
+    public CommunicatorWebSocket(MultiplayerFourPlayerGame game) {
+        gson = new Gson();
+        this.game = game;
     }
 
     /*
@@ -75,7 +83,7 @@ public class CommunicatorWebSocket extends Communicator{
     public void onWebSocketText(String message, Session session){
         this.message = message;
         System.out.println("[WebSocket Client message received] " + message);
-        //processMessage(message);
+        processMessage(message);
     }
 
     @OnError
@@ -93,6 +101,12 @@ public class CommunicatorWebSocket extends Communicator{
 
     private void sendMessageToServer(){
         String jsonMessage = gson.toJson("Henlo server");
+        // use async computing
+        session.getAsyncRemote().sendText(jsonMessage);
+    }
+
+    private void sendMessageToServer(String message){
+        String jsonMessage = gson.toJson(message);
         // use async computing
         session.getAsyncRemote().sendText(jsonMessage);
     }
@@ -127,55 +141,49 @@ public class CommunicatorWebSocket extends Communicator{
         }
     }
 
-    /**
+
     // process incoming json message
     private void processMessage(String jsonMessage){
         // parse incoming message
-        WebsocketMessage message;
+        //WebsocketMessage message;
+        Message message;
         try{
-            message = gson.fromJson(jsonMessage, WebsocketMessage.class);
+            message = gson.fromJson(jsonMessage, Message.class);
         }catch (JsonSyntaxException e){
             System.out.println("[WebSocket Client ERROR: cannot parse Json message " + jsonMessage);
             return;
         }
 
-        // Only operation update or updateConnectedPlayers property will be further processed
-        WebsocketMessageOperation operation;
-        operation = message.getOperation();
-        if (operation == null || operation != WebsocketMessageOperation.UPDATEPROPERTY && operation != WebsocketMessageOperation.UPDATECONNECTEDPLAYERS ) {
-            System.out.println("[WebSocket Client ERROR: update property operation expected]");
-            return;
+        switch(message.getName()){
+            case "updatePawn" :
+                String pawnId = (String)message.getData()[0];
+                String tileId = (String)message.getData()[1];
+
+                game.movePawn(pawnId, tileId);
+                break;
+            case "yourId" :
+                int playerId = (int)message.getData()[0];
+                break;
         }
-
-        // obtain property from message
-        String property = message.getProperty();
-        if(property == null || "".equals(property)){
-            System.out.println("[WebSocket Client ERROR: property not defined]");
-            return;
-        }
-
-
-        String content = message.getContent();
-        if(content == null || "".equals(content)){
-            System.out.println("[WebSocket Client ERROR: message without content]");
-            return;
-        }
-
-        // create instance of communicator message for observer
-        CommunicatorMessage communicatorMessage = new CommunicatorMessage();
-        communicatorMessage.setProperty(property);
-        communicatorMessage.setContent(content);
-
 
         // notify observers
         this.setChanged();
-        this.notifyObservers(communicatorMessage);
+        this.notifyObservers(message);
     }
-    **/
 
     public static void main(String[] args){
         CommunicatorWebSocket communicator = new CommunicatorWebSocket();
         communicator.start();
         communicator.sendMessageToServer();
+    }
+
+    @Override
+    public void run() {
+        CommunicatorWebSocket communicator = new CommunicatorWebSocket();
+        communicator.start();
+    }
+
+    public void movePawn(String pawnId, String tileId){
+        sendMessageToServer(gson.toJson(new Message("movePawn", new Object[]{ pawnId, tileId })));
     }
 }
