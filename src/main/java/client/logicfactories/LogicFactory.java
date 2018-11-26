@@ -6,7 +6,7 @@ import client.logic.localimplementation.LocalFourPlayerGame;
 
 public class LogicFactory {
 
-    private LogicFactory(){};
+    private LogicFactory(){}
 
     public static Game getLocalFourPlayerGame(){
 

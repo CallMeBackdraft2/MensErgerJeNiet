@@ -50,7 +50,7 @@ public class FourPlayerController {
     TextField messageField;
 
     @FXML
-    Circle TurnCircle;
+    Circle turnCircle;
 
     @FXML
     ListView chatListView;
@@ -90,14 +90,11 @@ public class FourPlayerController {
     }
 
     private int getRadius(String type) {
-
-        switch (type) {
-
-            case "WLK":
-                return 20;
-            default:
-                return 15;
-
+        if (type.equals("WLK")) {
+            return 20;
+        }
+        else{
+            return 15;
         }
     }
 
@@ -115,11 +112,10 @@ public class FourPlayerController {
         clearSelection();
         if (game.isYourTurn()) {
             chosenPawn = pawn;
-            Circle pawnCircle = getPawnCircle(pawn);
             Tile possibleMove = game.getPossibleMove(pawn);
             if(pawn.getPlayerColor().getValue() != game.getCurrentPlayerId()){
 
-                ShowError(new IllegalArgumentException("Not " + pawn.getPlayerColor() +"'s turn"));
+                showError(new IllegalArgumentException("Not " + pawn.getPlayerColor() +"'s turn"));
                 return;
             }
 
@@ -156,7 +152,7 @@ public class FourPlayerController {
             pawnCirle.setCenterY(tile.getLocation().getValue());
         }
 
-        TurnCircle.setFill(PlayerColor.values()[game.getCurrentPlayerId()].toColor());
+        turnCircle.setFill(PlayerColor.values()[game.getCurrentPlayerId()].toColor());
         if(game.getIsDone()){
             try {
                 Thread.sleep(2000);
@@ -170,14 +166,11 @@ public class FourPlayerController {
     private void tilePressed(Tile tile) {
 
         if (game.isYourTurn() && chosenPawn != null && tile == game.getPossibleMove(chosenPawn)) {
-
-            Circle pawn = getPawnCircle(chosenPawn);
-          try{
-            game.movePawn(chosenPawn.getFullId());
-          } catch (Exception e) {
-
-              ShowError(e);
-          }
+            try{
+                game.movePawn(chosenPawn.getFullId());
+            } catch (Exception e) {
+              showError(e);
+            }
             updateBoard();
         }
 
@@ -299,7 +292,7 @@ public class FourPlayerController {
 
             } catch (Exception e) {
 
-                ShowError(e);
+                showError(e);
             }
             //imgDice.setEffect(new ColorAdjust(((color.getHue()/360) -.5f)*2, 1, 0, 0));
             String url = "Images/Dice" + thrown + ".png";
@@ -322,7 +315,7 @@ public class FourPlayerController {
         clearSelection();
     }
 
-    private void ShowError(Exception e) {
+    private void showError(Exception e) {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setHeaderText(e.getMessage());
         a.show();

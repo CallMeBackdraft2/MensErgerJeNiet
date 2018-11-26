@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 public class LocalFourPlayerGame implements Game {
 
-    public Dice dice;
+    private Dice dice;
     Lobby lobby;
     BoardStorage boardStorage;
     int currentTurn = 0;
@@ -124,9 +124,7 @@ public class LocalFourPlayerGame implements Game {
                     throw new IllegalArgumentException("Player " + PlayerColor.values()[ getCurrentPlayerId()] + " has won");
                 }
 
-                if (dice.getLastRolled() == 6) {
-                    return;
-                } else {
+                if (dice.getLastRolled() != 6) {
                     switchTurn();
                 }
             } else{
@@ -215,7 +213,7 @@ public class LocalFourPlayerGame implements Game {
         }
 
         Tile possibleMove;
-        possibleMove = GetWalkingTilePossibleMove(pawn, curTile);
+        possibleMove = getWalkingTilePossibleMove(pawn, curTile);
 
         if (pawn.getPawnTileId().equals((pawn.getFullId().substring(0, 2) + "H04"))) {
             return null;
@@ -244,16 +242,14 @@ public class LocalFourPlayerGame implements Game {
                    return null;
                }
             }
+
             return tile;
-
         }
-
-        if (possibleMove == null) return null;
 
         return possibleMove;
     }
 
-    private Tile GetWalkingTilePossibleMove(Pawn pawn, Tile curTile) {
+    private Tile getWalkingTilePossibleMove(Pawn pawn, Tile curTile) {
         Tile possibleMove;
         List<Tile> walkables = getTiles().stream()
                 .filter(t -> t.getType().equals("WLK")).collect(Collectors.toList());
@@ -297,43 +293,43 @@ public class LocalFourPlayerGame implements Game {
 
     @Override
     public void createLobbyView() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void updateLobbyView() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void deleteLobbyView() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void joinLobby(int lobbyId) {
-
+        throw new UnsupportedOperationException();
     }
 
 
     @Override
     public void readyUp() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void addAI() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void leaveLobby() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void startGame() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override

@@ -37,7 +37,7 @@ public class LocalSixPlayerGame implements Game {
 
     @Override
     public void skipTurn() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -59,49 +59,47 @@ public class LocalSixPlayerGame implements Game {
                 selectedPawn.movePawnIntoPlay();
 
                 // Depending on the player the pawn gets placed in the correct starting position
-                if (selectedPawn.getPlayerId() == 1) {
-                    boardStorage.movePawn(pawnId, "WL01");
-                } else if (selectedPawn.getPlayerId() == 2) {
-                    boardStorage.movePawn(pawnId, "WL11");
-                } else if (selectedPawn.getPlayerId() == 3) {
-                    boardStorage.movePawn(pawnId, "WL21");
-                } else if (selectedPawn.getPlayerId() == 4) {
-                    boardStorage.movePawn(pawnId, "WL31");
+                switch (selectedPawn.getPlayerId()) {
+                    case 1:
+                        boardStorage.movePawn(pawnId, "WL01");
+                    case 2:
+                        boardStorage.movePawn(pawnId, "WL11");
+                    case 3:
+                        boardStorage.movePawn(pawnId, "WL21");
+                    case 4:
+                        boardStorage.movePawn(pawnId, "WL31");
+                    default:
+                        return;
                 }
-                return;
+
             } else if (selectedPawn.getPawnState() == PawnState.STARTPOSITION && dice.getLastRolled() != 6) {
-                throw new IllegalArgumentException("YOu just can't");
+                throw new IllegalArgumentException("You just can't");
             }
 
+
+            Pawn pawn = getPawn(pawnId);
+            Tile tile = getPossibleMove(pawn);
+
+            if (tile != null) {
+
+                boardStorage.getTile(pawn.getPawnTileId()).removePawn();
+
+                Pawn smashedPawn = tile.getPawn();
+                if (smashedPawn != null) {
+
+                    smashedPawn.setPawnTileId(smashedPawn.getFullId());
+                }
+
+                pawn.setPawnTileId(tile.getFullId());
+                tile.setPawn(pawn);
+
+            }
 
         } else {
-            throw new IllegalArgumentException("YOu just can't");
-        }
-
-
-
-      if(diceRolled) {
-        Pawn pawn = getPawn(pawnId);
-        Tile tile = getPossibleMove(pawn);
-
-        if(tile!=null) {
-
-            boardStorage.getTile( pawn.getPawnTileId()).removePawn();
-
-            Pawn smashedPawn =  tile.getPawn();
-            if(smashedPawn!=null){
-
-                smashedPawn.setPawnTileId(smashedPawn.getFullId());
-                int c=5;
-            }
-
-
-            pawn.setPawnTileId(tile.getFullId());
-            tile.setPawn(pawn);
-
+            throw new IllegalArgumentException("You just can't");
         }
     }
-}
+
 
     @Override
     public List<Tile> getTiles() {
@@ -172,10 +170,8 @@ public class LocalSixPlayerGame implements Game {
         System.out.println(walkables.get(i));
 
         Tile result = walkables.get(i);
-        if(result.getPawn()!=null){
-            if(result.getPawn().getPlayerColor() == pawn.getPlayerColor()){
-                return null;
-            }
+        if(result.getPawn() != null && result.getPawn().getPlayerColor() == pawn.getPlayerColor()){
+            return null;
         }
 
         return walkables.get(i);
@@ -183,7 +179,7 @@ public class LocalSixPlayerGame implements Game {
 
     @Override
     public boolean isYourTurn() {
-        return true;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -191,62 +187,48 @@ public class LocalSixPlayerGame implements Game {
         return boardStorage.getPawn(id);
     }
 
-    private boolean smashPawn(String smashingPawnId, String tileId) {
-
-        Pawn smashedPawn = boardStorage.getTile(tileId).getPawn();
-        Pawn smashingPawn = boardStorage.getPawn(smashingPawnId);
-
-        if (smashedPawn.getPlayerId() != smashingPawn.getPlayerId()) {
-            boardStorage.getTile(tileId).removePawn();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     @Override
     public void createLobbyView() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void updateLobbyView() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void deleteLobbyView() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void joinLobby(int lobbyId) {
-
+        throw new UnsupportedOperationException();
     }
-
 
     @Override
     public void readyUp() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void addAI() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void leaveLobby() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void startGame() {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean getIsDone() {
-        return false;
+        throw new UnsupportedOperationException();
     }
 }

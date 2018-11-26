@@ -154,12 +154,7 @@ public class LobbyController {
                 TextField username = new TextField();
                 username.setPromptText("Player Name");
                 ChoiceBox<PlayerColor> playerColor = new ChoiceBox();
-                if (gameLobby.getGameMode() == GameMode.FOURPLAYERBOARD){
-                    playerColor.setItems( FXCollections.observableArrayList(checkAvailableColors()));
-
-                } else {
-                    playerColor.setItems( FXCollections.observableArrayList(checkAvailableColors()));
-                }
+                playerColor.setItems( FXCollections.observableArrayList(checkAvailableColors()));
 
 
 
@@ -172,13 +167,11 @@ public class LobbyController {
                 Node loginButton = dialog.getDialogPane().lookupButton(addPlayerButton);
                 loginButton.setDisable(true);
 
-                username.textProperty().addListener((observable, oldValue, newValue) -> {
-                    loginButton.setDisable(!(((playerColor.getValue() == null || playerColor.getValue().toString().trim().isEmpty() ? 1 : 0) + (newValue.trim().isEmpty() ? 1 : 0)) == 0));
-                });
+                username.textProperty().addListener((observable, oldValue, newValue) -> loginButton.setDisable((((playerColor.getValue() != null ||
+                        playerColor.getValue().toString().trim().isEmpty() ? 1 : 0) + (newValue.trim().isEmpty() ? 1 : 0)) != 0)));
 
-                playerColor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                    loginButton.setDisable(!(((newValue.toString().trim().isEmpty() ? 1 : 0) + (username.textProperty().getValue().trim().isEmpty() ? 1 : 0)) == 0));
-                });
+                playerColor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
+                        loginButton.setDisable((((newValue.toString().trim().isEmpty() ? 1 : 0) + (username.textProperty().getValue().trim().isEmpty() ? 1 : 0)) != 0)));
 
                 dialog.getDialogPane().setContent(grid);
 
