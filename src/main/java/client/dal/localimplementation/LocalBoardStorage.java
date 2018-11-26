@@ -19,7 +19,7 @@ public class LocalBoardStorage implements BoardStorage {
     public void init(GameMode gameMode) {
 
         gameBoard = new GameBoard(gameMode);
-        BoardReader.load("Boards/"+ gameMode.name() + ".map",gameBoard.getPlayingField());
+        BoardReader.load("boards/"+ gameMode.name() + ".map",gameBoard.getPlayingField());
     }
 
     @Override

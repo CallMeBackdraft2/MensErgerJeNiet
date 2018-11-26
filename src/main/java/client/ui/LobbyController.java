@@ -19,6 +19,9 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import client.logicfactories.LogicFactory;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.EnumSet;
 import java.util.Optional;
 
@@ -50,6 +53,14 @@ public class LobbyController {
     @FXML
     Button btnDelPlayer;
 
+    private URL getURL(String path){
+        try {
+            return new File("src/main/java/client/ui/guifiles/" + path).toURL();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
     @FXML
@@ -98,7 +109,7 @@ public class LobbyController {
 
         btnLeaveLobby.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(new MainMenuController(), getClass().getResource("guifiles/MainMenu.fxml"), false, "Hoofdmenu").show();
+                JavaFXSceneFactory.generateStage(new MainMenuController(), getURL( "MainMenu.fxml"), false, "Hoofdmenu").show();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });
@@ -111,7 +122,7 @@ public class LobbyController {
                 } else {
                     FourPlayerController controller = new FourPlayerController();
                     controller.setGame(LogicFactory.getLocalFourPlayerGame(gameLobby));
-                    JavaFXSceneFactory.generateStage(controller, getClass().getResource("guifiles/4-Player.fxml"), false, "Speelbord", 629, 0).show();
+                    JavaFXSceneFactory.generateStage(controller, getURL( "4-Player.fxml"), false, "Speelbord", 629, 0).show();
                     ((Node) (event.getSource())).getScene().getWindow().hide();
                 }
             }

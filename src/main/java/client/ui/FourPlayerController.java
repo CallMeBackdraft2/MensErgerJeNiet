@@ -31,6 +31,8 @@ import javafx.util.Duration;
 import client.logic.interfaces.Game;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
@@ -73,6 +75,16 @@ public class FourPlayerController {
         populatePlayingField();
         playersListView.setItems(FXCollections.observableArrayList(game.getPlayers()));
     }
+
+    private URL getURL(String path){
+        try {
+            return new File("src/main/java/client/ui/" + path).toURL();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public void setGame(Game game){
         this.game = game;
@@ -257,7 +269,7 @@ public class FourPlayerController {
 
         btnLeaveGame.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(new MainMenuController(), getClass().getResource("guifiles/MainMenu.fxml"), false, "Hoofdmenu").show();
+                JavaFXSceneFactory.generateStage(new MainMenuController(), getURL("guifiles/MainMenu.fxml"), false, "Hoofdmenu").show();
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });
@@ -280,7 +292,8 @@ public class FourPlayerController {
 
     private void throwDice() {
         if (!isThrown) {
-            Image diceNone = new Image(getClass().getResourceAsStream("Images/Dice0.png"));
+            String z =getURL("Images/Dice0.png").toString();
+            Image diceNone = new Image(z);
             int thrown = -1;
             try {
                 thrown = game.rollDice();
@@ -291,16 +304,16 @@ public class FourPlayerController {
             }
             //imgDice.setEffect(new ColorAdjust(((color.getHue()/360) -.5f)*2, 1, 0, 0));
             String url = "Images/Dice" + thrown + ".png";
-            imgDice.setImage(new Image(getClass().getResourceAsStream(url)));
+            imgDice.setImage(new Image(getURL(url).toString()));
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.ZERO, new KeyValue(imgDice.imageProperty(), diceNone)),
                     new KeyFrame(Duration.ZERO, event -> {
 
                         rotateImageView(imgDice, 1440, 2.5, 1);
-                        playSound("src/client.ui/Media/DiceRollSound.mp3");
+                        playSound("src/main/java/client/ui/Media/DiceRollSound.mp3");
 
                     }),
-                    new KeyFrame(Duration.seconds(2), new KeyValue(imgDice.imageProperty(), new Image(getClass().getResourceAsStream(url)))),
+                    new KeyFrame(Duration.seconds(2), new KeyValue(imgDice.imageProperty(), new Image(getURL(url).toString()))),
                   new KeyFrame(Duration.seconds(3.5), new KeyValue(TurnCircle.fillProperty(), (PlayerColor.values()[game.getCurrentPlayerId()].toColor()))),
                 new KeyFrame(Duration.seconds(2.5),  new KeyValue(TurnCircle.fillProperty(),Color.WHITE)));
 
