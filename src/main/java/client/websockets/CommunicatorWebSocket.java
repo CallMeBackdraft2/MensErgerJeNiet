@@ -1,7 +1,7 @@
 package client.websockets;
 
 import com.google.gson.Gson;
-import shared.Message;
+import com.google.gson.JsonSyntaxException;
 
 import javax.websocket.*;
 import java.io.IOException;
@@ -9,10 +9,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @ClientEndpoint
-public class ClientWebSocketsCommunicator extends Communicator{
+public class CommunicatorWebSocket extends Communicator{
 
     // singleton
-    private static ClientWebSocketsCommunicator instance = null;
+    private static CommunicatorWebSocket instance = null;
 
     /*
      * The local websocket uri to connect to.
@@ -26,7 +26,7 @@ public class ClientWebSocketsCommunicator extends Communicator{
     boolean isRunning = false;
 
     // Private constructor (singleton pattern)
-    private ClientWebSocketsCommunicator() {
+    private CommunicatorWebSocket() {
         gson = new Gson();
     }
 
@@ -35,10 +35,10 @@ public class ClientWebSocketsCommunicator extends Communicator{
      * Ensure that only one instance of this class is created.
      * @return instance of client web socket
      */
-    public static ClientWebSocketsCommunicator getInstance(){
+    public static CommunicatorWebSocket getInstance(){
         if(instance == null){
             System.out.println("[WebSocket Client create singleton instance]");
-            instance = new ClientWebSocketsCommunicator();
+            instance = new CommunicatorWebSocket();
         }
         return instance;
     }
@@ -92,7 +92,7 @@ public class ClientWebSocketsCommunicator extends Communicator{
 
 
     private void sendMessageToServer(){
-        String jsonMessage = gson.toJson(new Message("testName",5,2,"testString"));
+        String jsonMessage = gson.toJson("Henlo server");
         // use async computing
         session.getAsyncRemote().sendText(jsonMessage);
     }
@@ -174,7 +174,7 @@ public class ClientWebSocketsCommunicator extends Communicator{
     **/
 
     public static void main(String[] args){
-        ClientWebSocketsCommunicator communicator = new ClientWebSocketsCommunicator();
+        CommunicatorWebSocket communicator = new CommunicatorWebSocket();
         communicator.start();
         communicator.sendMessageToServer();
     }
