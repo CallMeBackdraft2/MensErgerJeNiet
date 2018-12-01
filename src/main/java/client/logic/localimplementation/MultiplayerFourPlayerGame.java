@@ -30,10 +30,6 @@ public class MultiplayerFourPlayerGame implements Game {
         communicatorThread.run();
     }
 
-    @Override
-    public boolean isDiceRolled() {
-        return false;
-    }
 
     @Override
     public void skipTurn() {
@@ -93,46 +89,6 @@ public class MultiplayerFourPlayerGame implements Game {
     @Override
     public List<String> getMessages() {
         return null;
-    }
-
-    @Override
-    public void createLobbyView() {
-
-    }
-
-    @Override
-    public void updateLobbyView() {
-
-    }
-
-    @Override
-    public void deleteLobbyView() {
-
-    }
-
-    @Override
-    public void joinLobby(int lobbyId) {
-
-    }
-
-    @Override
-    public void readyUp() {
-
-    }
-
-    @Override
-    public void addAI() {
-
-    }
-
-    @Override
-    public void leaveLobby() {
-
-    }
-
-    @Override
-    public void startGame() {
-
     }
 
     @Override
