@@ -27,8 +27,8 @@ public class PlayingField {
         tiles.add(tile);
     }
 
-    public List<Tile> getTiles() {
-        return tiles;
+    public Tile[] getTiles() {
+        return tiles.toArray(new Tile[0]);
     }
 
     public Tile findTileinList(int id, String type) {

@@ -7,33 +7,23 @@ import client.domain.classes.Tile;
 import java.util.List;
 
 public interface Game {
-    boolean isDiceRolled();
 
     void skipTurn();
-
+    boolean getNeedsUpdate();
+    void setNeedsUpdate(boolean bool);
     int rollDice();
+    int getDiceRolled();
+    int getDiceAmountRolled();
+
     void movePawn(String pawnId);
-    List<Tile> getTiles();
-    Tile getPossibleMove(Pawn pawn);
+    Tile[] getTiles();
+    Tile getPossibleMove(String pawnId);
     boolean isYourTurn();
     Pawn getPawn(String homeTileID);
-    List<Pawn> getPawns();
-
+    Pawn[] getPawns();
     int getCurrentPlayerId();
-    List<Player> getPlayers();
-
-
+    Player[] getPlayers();
     void sendMessage(String message);
-    List<String> getMessages();
-    //Lobbystuff voor multiplayer iteratie
-    void createLobbyView();
-    void updateLobbyView();
-    void deleteLobbyView();
-    void joinLobby(int lobbyId);
-    void readyUp();
-    void addAI();
-    void leaveLobby();
-    void startGame();
-
+    String[] getMessages();
     boolean getIsDone();
 }

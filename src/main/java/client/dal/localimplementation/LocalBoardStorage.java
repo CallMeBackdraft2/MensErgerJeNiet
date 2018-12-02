@@ -23,7 +23,12 @@ public class LocalBoardStorage implements BoardStorage {
     }
 
     @Override
-    public List<Tile> getTiles() {
+    public List<Tile> getTilesAsList() {
+        return Arrays.asList(gameBoard.getPlayingField().getTiles());
+    }
+
+    @Override
+    public Tile[] getTiles() {
         return gameBoard.getPlayingField().getTiles();
     }
 
@@ -36,13 +41,13 @@ public class LocalBoardStorage implements BoardStorage {
     }
 
     @Override
-    public List<Pawn> getPawns() {
-        return gameBoard.getPlayingField().getPawns();
+    public Pawn[] getPawns() {
+        return gameBoard.getPlayingField().getPawns().toArray(new Pawn[0]);
     }
 
     @Override
     public int getTileAmountOf(String id) {
-        return (int)getTiles().stream().filter(t -> t.getType().equals(id)).count();
+        return (int)getTilesAsList().stream().filter(t -> t.getType().equals(id)).count();
     }
 
     @Override
@@ -65,7 +70,7 @@ public class LocalBoardStorage implements BoardStorage {
 
     @Override
     public Tile getTile(String id) {
-        Optional<Tile> optional = gameBoard.getPlayingField().getTiles()
+        Optional<Tile> optional = getTilesAsList()
                 .stream().filter(t -> t.getFullId().equals(id)).findFirst();
         if (!optional.isPresent()) {
             throw new IllegalArgumentException("No tile found with the id = " + id);

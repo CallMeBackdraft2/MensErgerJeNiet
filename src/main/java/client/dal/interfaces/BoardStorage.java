@@ -10,9 +10,10 @@ import java.util.List;
 public interface BoardStorage {
 
     void init(GameMode gameMode);
-    List<Tile> getTiles();
+    List<Tile> getTilesAsList();
+    Tile[] getTiles();
     Pawn[] getPlayerPawns(int playerId);
-    List<Pawn> getPawns();
+    Pawn[] getPawns();
     int getTileAmountOf(String id);
     void movePawn(String pawnId, String tileId);
     Pawn getPawn(String id);
