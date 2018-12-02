@@ -3,7 +3,6 @@ package client.ui;
 import client.domain.classes.Pawn;
 import client.domain.classes.Tile;
 import client.logic.interfaces.Game;
-import client.logic.localimplementation.LocalSixPlayerGame;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class SixPlayerController
@@ -41,7 +39,7 @@ public class SixPlayerController
 
     @FXML
     void initialize() {
-        game = new LocalSixPlayerGame();
+        //game = new LocalSixPlayerGame();
         populatePlayingField();
         playersListView.setItems(FXCollections.observableArrayList(game.getPlayers()));
     }
@@ -106,10 +104,10 @@ public class SixPlayerController
     }
 
     private void populatePlayingField() {
-        List<Tile> tiles = game.getTiles();
+        Tile[] tiles = game.getTiles();
 
-        for (int i = 0; i < tiles.size(); i++) {
-            Tile tile = tiles.get(i);
+        for (int i = 0; i < tiles.length; i++) {
+            Tile tile = tiles[i];
 
             Circle circle = new Circle();
             circle.setCenterX(tile.getLocation().getKey());

@@ -82,6 +82,13 @@ public class LobbyController {
                     txtfPassword.setDisable(true);
                     txtfLobbyName.setDisable(true);
                 } else {
+
+                    //Temp
+                    FourPlayerController controller = new FourPlayerController();
+                    controller.setGame(LogicFactory.getOnlineFourPlayerGame());
+                    JavaFXSceneFactory.generateStage(controller, getURL( "4-Player.fxml"), false, "Speelbord", 629, 0).show();
+
+
                     btnReady.setText("Ready");
                     gameLobby.setOnline(true);
                     btnAddPlayer.setDisable(true);
@@ -167,9 +174,10 @@ public class LobbyController {
                 Node loginButton = dialog.getDialogPane().lookupButton(addPlayerButton);
                 loginButton.setDisable(true);
 
-                username.textProperty().addListener((observable, oldValue, newValue) -> loginButton.setDisable((((playerColor.getValue() != null ||
-                        playerColor.getValue().toString().trim().isEmpty() ? 1 : 0) + (newValue.trim().isEmpty() ? 1 : 0)) != 0)));
-
+                if(playerColor.getValue()!=null) {
+                    username.textProperty().addListener((observable, oldValue, newValue) -> loginButton.setDisable((((playerColor.getValue() != null ||
+                            playerColor.getValue().toString().trim().isEmpty() ? 1 : 0) + (newValue.trim().isEmpty() ? 1 : 0)) != 0)));
+                }
                 playerColor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
                         loginButton.setDisable((((newValue.toString().trim().isEmpty() ? 1 : 0) + (username.textProperty().getValue().trim().isEmpty() ? 1 : 0)) != 0)));
 
