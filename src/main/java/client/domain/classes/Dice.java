@@ -6,6 +6,7 @@ public class Dice {
     // Fields
     private Random r;
     private int lastRolled;
+    private int amountRolled =0;
 
     // Properties
     public int getLastRolled() { return lastRolled; }
@@ -18,12 +19,22 @@ public class Dice {
 
     // Methods
     public int rollDice() {
-
+    amountRolled++;
         int number=-1;
 
              number = r.nextInt(6) + 1;
 
         this.lastRolled = number;
         return  number;
+
+    }
+
+    public int getAmountRolled() {
+        return amountRolled;
+    }
+
+    public Dice setAmountRolled(int amountRolled) {
+        this.amountRolled = amountRolled;
+        return this;
     }
 }
