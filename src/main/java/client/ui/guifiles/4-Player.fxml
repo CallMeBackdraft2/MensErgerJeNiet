@@ -20,7 +20,7 @@
             <children>
                 <AnchorPane fx:id="boardPane" layoutX="5.0" layoutY="5.0" prefHeight="590.0" prefWidth="590.0" style="-fx-background-color: FEF5B2;">
                     <children>
-                  <Circle id="TurnCircle" fx:id="TurnCircle" fill="RED" layoutX="296.0" layoutY="295.0" radius="45.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle id="TurnCircle" fx:id="turnCircle" fill="RED" layoutX="296.0" layoutY="295.0" radius="45.0" stroke="BLACK" strokeType="INSIDE" />
 
                         <!--Tiles for the Green starting base-->
                         <Circle fill="GREEN" layoutX="90.0" layoutY="90.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
