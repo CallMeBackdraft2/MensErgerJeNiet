@@ -39,14 +39,14 @@ public class GameTest {
                 break;
             }
         }
-        Assert.assertNull(game.getPossibleMove(game.getPawn("REP01")));
+        Assert.assertNull(game.getPossibleMove(game.getPawn("REP01").getFullId()));
 
         while (true) {
             if (game.rollDice() == 6 && game.getCurrentPlayerId()==1) {
                 break;
             }
         }
-        Assert.assertNotNull(game.getPossibleMove(game.getPawn("REP01")));
+        Assert.assertNotNull(game.getPossibleMove(game.getPawn("REP01").getFullId()));
 
     }
 
@@ -73,7 +73,6 @@ public class GameTest {
 
     @Test
     public void hitPawnTest() {
-        game.readyUp();
 
         for (int i = 0; i < 2; i++) {
             while (true) {
@@ -113,7 +112,6 @@ public class GameTest {
     @Test
     public void hitOwnPawnTest() {
 
-        game.readyUp();
 
         while (true) {
             if (game.rollDice() == 6 && game.getCurrentPlayerId() == 0) {
