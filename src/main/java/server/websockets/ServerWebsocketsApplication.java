@@ -4,6 +4,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
+import server.logic.GameManager;
 
 import javax.websocket.server.ServerContainer;
 
@@ -13,9 +14,14 @@ public class ServerWebsocketsApplication
 
     public static Thread webSocketThread;
 
-    public static void main(String[] args)
-    {
-        startWebSocketServer();
+    public static void main(String[] args) throws InterruptedException {
+      webSocketThread = new Thread(ServerWebsocketsApplication::startWebSocketServer);
+      webSocketThread.start();
+
+      webSocketThread.join();
+      GameManager manager= new GameManager();
+      WebsocketServerCommunicator.subscribe(manager);
+
     }
 
     // Start the web socket server

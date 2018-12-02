@@ -3,29 +3,67 @@ package server.logic;
 import server.MessageReceiver;
 import shared.Message;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.websocket.Session;
+import java.util.*;
 
 public class GameManager implements MessageReceiver {
 
 
-
-    List<MultiplayerFourPlayerGame> games = new ArrayList<>();
+    private List<ServerPlayer> notInGameSession = new ArrayList<>();
+    private List<ServerLobby> serverLobbies = new ArrayList<>();
 
     public GameManager() {
 
+
     }
 
-    public MultiplayerFourPlayerGame createNewGame(){
 
-        MultiplayerFourPlayerGame game =new MultiplayerFourPlayerGame();
-        games.add(game);
-        return game;
+    //Temp for websocket testing
+    private void tempPutInGame(){
+
+        ServerPlayer serverPlayer = notInGameSession.get(0);
+        if(serverLobbies.size()==0){
+            serverLobbies.add(new ServerLobby(serverPlayer));
+        } else {
+            serverLobbies.get(0).addPlayer(serverPlayer);
+        }
+        notInGameSession.remove(serverPlayer);
     }
 
     @Override
-    public void onMessageReceived(Message message) {
+    public void onNewSessionConnected(Session session) {
 
+        notInGameSession.add(new ServerPlayer(0, session,"testName"));
+        tempPutInGame();
+    }
+
+    private ServerLobby findServerLobby(Session session){
+        for (ServerLobby serverLobby : serverLobbies) {
+            for (ServerPlayer serverPlayer : serverLobby.serverPlayers) {
+                if(serverPlayer.getSession() == session){
+                    return serverLobby;
+                }
+            }
+        }
+        return null;
+    }
+
+
+    private ServerPlayer findServerPlayer(Session session){
+        for (ServerLobby serverLobby : serverLobbies) {
+            for (ServerPlayer serverPlayer : serverLobby.serverPlayers) {
+                if(serverPlayer.getSession() == session){
+                    return serverPlayer;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void onMessageReceived(Session session, Message message) {
+
+         Objects.requireNonNull(findServerLobby(session)).handleMessage(findServerPlayer(session),message);
 
     }
 }

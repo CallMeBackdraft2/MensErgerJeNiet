@@ -1,5 +1,6 @@
 package server.websockets;
 
+import client.logic.interfaces.Game;
 import server.MessageReceiver;
 import shared.Message;
 
@@ -20,30 +21,30 @@ public class WebsocketServerCommunicator {
 
     private static WebsocketServerCommunicator current;
 
-    public static WebsocketServerCommunicator getCurrent(){
 
-        return current;
+    public static void subscribe(MessageReceiver receiver){
+        subscribers.add(receiver);
     }
 
-    public WebsocketServerCommunicator(){
-        current = this;
-    }
 
     @OnOpen
     public void onOpen(Session session){
 
         sessions.put(session,"");
 
+        for (MessageReceiver subscriber : subscribers) {
+            subscriber.onNewSessionConnected(session);
+        }
     }
 
-    public void broadCast(Message message){
-
-    }
 
     @OnMessage
     public void onMessage(String messageJSON, Session session)
     {
         Message message = Message.fromJSON(messageJSON);
+        for (MessageReceiver subscriber : subscribers) {
+            subscriber.onMessageReceived(session,message);
+        }
         System.out.println(message);
     }
 }

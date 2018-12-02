@@ -2,8 +2,11 @@ package server;
 
 import shared.Message;
 
+import javax.websocket.Session;
+
 public interface MessageReceiver {
 
-    void onMessageReceived(Message message);
+    void onNewSessionConnected(Session session);
+    void onMessageReceived(Session session, Message message);
 
 }
