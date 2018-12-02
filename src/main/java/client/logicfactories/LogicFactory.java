@@ -3,6 +3,7 @@ package client.logicfactories;
 import client.domain.classes.Lobby;
 import client.logic.interfaces.Game;
 import client.logic.localimplementation.LocalFourPlayerGame;
+import client.logic.localimplementation.MultiplayerFourPlayerGame;
 
 public class LogicFactory {
 
@@ -23,6 +24,10 @@ public class LogicFactory {
         return new LocalFourPlayerGame(true);
 
     }
+    public static Game getOnlineFourPlayerGame(){
 
+        return new MultiplayerFourPlayerGame();
+
+    }
 
 }
