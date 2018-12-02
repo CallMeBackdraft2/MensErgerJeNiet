@@ -10,7 +10,12 @@ public class Message {
     public Message(String name, Object... data) {
         this.name = name;
         this.data = data;
+        if(data.length==0){
+            this.data =null;
+        }
     }
+
+
 
     public String getName() {
         return name;
@@ -23,6 +28,11 @@ public class Message {
     public static Message fromJSON(String json){
 
         return gson.fromJson(json,Message.class);
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 
     public String toJson(){
