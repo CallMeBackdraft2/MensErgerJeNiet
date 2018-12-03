@@ -11,10 +11,9 @@ public class GameManager implements MessageReceiver {
 
     private List<ServerPlayer> notInGameSession = new ArrayList<>();
     private List<ServerLobby> serverLobbies = new ArrayList<>();
-
-    public GameManager() {
-
-
+    private boolean isDebugMode;
+    public GameManager(boolean isDebugMode) {
+        this.isDebugMode = isDebugMode;
     }
 
 
@@ -23,7 +22,7 @@ public class GameManager implements MessageReceiver {
 
         ServerPlayer serverPlayer = notInGameSession.get(0);
         if(serverLobbies.size()==0){
-            serverLobbies.add(new ServerLobby(serverPlayer));
+            serverLobbies.add(new ServerLobby(serverPlayer,isDebugMode));
         } else {
             serverLobbies.get(0).addPlayer(serverPlayer);
         }

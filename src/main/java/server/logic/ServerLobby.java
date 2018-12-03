@@ -17,11 +17,12 @@ public class ServerLobby {
     private ServerPlayer host;
     private List<LobbyMessage> messages;
     private MultiplayerFourPlayerGame game;
+    private boolean isDebugMode;
 
-    ServerLobby(ServerPlayer host) {
+    ServerLobby(ServerPlayer host, boolean isDebugMode) {
         this.host = host;
         serverPlayers.add(host);
-
+        this.isDebugMode = isDebugMode;
         //TEMP
         startGame();
     }
@@ -49,7 +50,7 @@ public class ServerLobby {
     }
 
     private void startGame() {
-        game = new MultiplayerFourPlayerGame(this);
+        game = new MultiplayerFourPlayerGame(this,isDebugMode);
     }
 
     public void update() {

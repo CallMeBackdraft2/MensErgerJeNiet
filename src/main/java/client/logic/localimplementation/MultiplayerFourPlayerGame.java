@@ -22,6 +22,7 @@ public class MultiplayerFourPlayerGame implements Game {
     }
 
 
+
     public Message waitForResponse(String responseName) {
         while (true) {
             for (Message response : communicator.getResponses()) {

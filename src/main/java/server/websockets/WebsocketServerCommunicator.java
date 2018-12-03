@@ -42,9 +42,11 @@ public class WebsocketServerCommunicator {
     public void onMessage(String messageJSON, Session session)
     {
         Message message = Message.fromJSON(messageJSON);
+
         for (MessageReceiver subscriber : subscribers) {
             subscriber.onMessageReceived(session,message);
         }
+
         System.out.println(message);
     }
 }

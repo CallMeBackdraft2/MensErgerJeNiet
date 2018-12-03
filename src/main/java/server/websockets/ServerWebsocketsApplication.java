@@ -8,25 +8,27 @@ import server.logic.GameManager;
 
 import javax.websocket.server.ServerContainer;
 
-public class ServerWebsocketsApplication
-{
+public class ServerWebsocketsApplication {
     private static final int PORT = 1234;
 
     public static Thread webSocketThread;
 
     public static void main(String[] args) throws InterruptedException {
-      webSocketThread = new Thread(ServerWebsocketsApplication::startWebSocketServer);
-      webSocketThread.start();
-
-      webSocketThread.join();
-      GameManager manager= new GameManager();
-      WebsocketServerCommunicator.subscribe(manager);
+        startWebsocketServer();
+        GameManager manager = new GameManager(false);
+        WebsocketServerCommunicator.subscribe(manager);
 
     }
 
+    private static void startWebsocketServer() throws InterruptedException {
+        webSocketThread = new Thread(ServerWebsocketsApplication::startWebSocketServer);
+        webSocketThread.start();
+        webSocketThread.join();
+    }
+
+
     // Start the web socket server
-    private static void startWebSocketServer()
-    {
+    private static void startWebSocketServer() {
         Server webSocketServer = new Server();
         ServerConnector connector = new ServerConnector(webSocketServer);
         connector.setPort(PORT);
@@ -38,8 +40,7 @@ public class ServerWebsocketsApplication
         webSocketContext.setContextPath("/");
         webSocketServer.setHandler(webSocketContext);
 
-        try
-        {
+        try {
             // Initialize javax.websocket layer
             ServerContainer wscontainer = WebSocketServerContainerInitializer.configureContext(webSocketContext);
 
@@ -50,8 +51,7 @@ public class ServerWebsocketsApplication
             //server.dump(System.err);
 
             //webSocketServer.join();
-        } catch (Throwable t)
-        {
+        } catch (Throwable t) {
             t.printStackTrace(System.err);
         }
     }

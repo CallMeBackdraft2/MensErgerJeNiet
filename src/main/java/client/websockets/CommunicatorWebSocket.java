@@ -85,7 +85,6 @@ public class CommunicatorWebSocket extends Communicator implements Runnable {
     public void onWebSocketConnect(Session session) {
         System.out.println("[WebSocket Client open session] " + session.getRequestURI());
         this.session = session;
-        session.getAsyncRemote().sendText(new Message("getTiles").toJson());
     }
 
     @OnMessage

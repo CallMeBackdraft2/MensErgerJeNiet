@@ -22,9 +22,10 @@ public class MultiplayerFourPlayerGame extends GameLogic implements Game {
     private List<ServerPlayer> players;
 
 
-    MultiplayerFourPlayerGame(ServerLobby serverLobby) {
+    MultiplayerFourPlayerGame(ServerLobby serverLobby, boolean debugMode) {
         started = false;
         this.lobby = serverLobby;
+        this.setDebugMode(debugMode);
         players = serverLobby.serverPlayers;
         boardStorage = DALFactory.getLocalBoardStorage();
         boardStorage.init(GameMode.FOURPLAYERBOARD);

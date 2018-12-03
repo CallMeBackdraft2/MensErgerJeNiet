@@ -89,6 +89,12 @@ public class FourPlayerController {
         timeline.play();
     }
 
+    private void updateMessages(){
+        messageField.clear();
+        ObservableList<String> s = FXCollections.observableArrayList(game.getMessages());
+        chatListView.setItems(s);
+    }
+
     private URL getURL(String path) {
         try {
             return new File("src/main/java/client/ui/" + path).toURL();
@@ -298,24 +304,17 @@ public class FourPlayerController {
 
         btnThrowDice.setOnAction(event -> throwDice());
 
-        btnLeaveGame.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(new MainMenuController(), getURL("guifiles/MainMenu.fxml"), false, "Hoofdmenu").show();
-                ((Node) (event.getSource())).getScene().getWindow().hide();
-            }
+        btnLeaveGame.setOnAction(event -> {
+            JavaFXSceneFactory.generateStage(new MainMenuController(), getURL("guifiles/MainMenu.fxml"), false, "Hoofdmenu").show();
+            ((Node) (event.getSource())).getScene().getWindow().hide();
         });
 
 
-        messageField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.ENTER) {
+        messageField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
 
-                    game.sendMessage(messageField.getText());
-                    messageField.clear();
-                    ObservableList<String> s = FXCollections.observableArrayList(game.getMessages());
-                    chatListView.setItems(s);
-                }
+                game.sendMessage(messageField.getText());
+                updateMessages();
             }
         });
 
@@ -381,12 +380,7 @@ public class FourPlayerController {
         RotateTransition rotation = new RotateTransition(Duration.seconds(duration), img);
         rotation.setCycleCount(cycleAmount);
         rotation.setByAngle(degrees);
-        rotation.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                isThrown = false;
-            }
-        });
+        rotation.setOnFinished(event -> isThrown = false);
         isThrown = true;
         rotation.play();
     }
