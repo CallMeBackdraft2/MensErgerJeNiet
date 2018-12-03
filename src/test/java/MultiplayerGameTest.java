@@ -3,6 +3,7 @@ import client.logicfactories.LogicFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import server.websockets.ServerWebsocketsApplication;
 
 public class MultiplayerGameTest {
 
@@ -11,9 +12,9 @@ public class MultiplayerGameTest {
     //public abstract Game createInstance();
 
     @Before
-    public void initGame() {
+    public void initGame() throws InterruptedException {
         //game = LogicFactory.getLocalFourPlayerGameTest();
-
+        ServerWebsocketsApplication.main(new String[]{"true"});
         game = LogicFactory.getOnlineFourPlayerGame();
     }
 
