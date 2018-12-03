@@ -24,7 +24,7 @@ public class CommunicatorWebSocket extends Communicator implements Runnable {
     /*
      * The local websocket uri to connect to.
      */
-    private final String uri = "ws://localhost:1234/communicator/";
+    private final String uri = "ws://145.93.77.11:1234/communicator/";
     // status of the websocket client
     boolean isRunning = false;
 
