@@ -15,7 +15,12 @@ public class ServerWebsocketsApplication {
 
     public static void main(String[] args) throws InterruptedException {
         startWebsocketServer();
-        GameManager manager = new GameManager(false);
+        boolean bool = false;
+        if (args.length==1 ) {
+            bool = Boolean.parseBoolean(args[0]);
+
+        }
+        GameManager manager = new GameManager(bool);
         WebsocketServerCommunicator.subscribe(manager);
 
     }
