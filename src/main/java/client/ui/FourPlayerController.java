@@ -73,20 +73,26 @@ public class FourPlayerController {
     void initialize() {
         addAllEventHandlers();
         populatePlayingField();
-        playersListView.setItems(FXCollections.observableArrayList(game.getPlayers()));
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), event -> {
             if (game.getNeedsUpdate()) {
                 updateBoard();
                 updateMessages();
+                updatePlayers();
                 updateDice(false);
                 //lastAmountDiceRolled = game.getDiceAmountRolled();
                 game.setNeedsUpdate(false);
             }
         }));
-
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+        updatePlayers();
+
+    }
+
+    private void updatePlayers(){
+        playersListView.setItems(FXCollections.observableArrayList(game.getPlayers()));
+
     }
 
     private void updateMessages(){
