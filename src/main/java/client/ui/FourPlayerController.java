@@ -10,8 +10,6 @@ import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -21,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -71,31 +68,46 @@ public class FourPlayerController {
 
     @FXML
     void initialize() {
+
+
         addAllEventHandlers();
-        populatePlayingField();
+        try {
+            populatePlayingField();
+        } catch (Exception e) {
+           showError(e);
+        }
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), event -> {
-            if (game.getNeedsUpdate()) {
-                updateBoard();
-                updateMessages();
-                updatePlayers();
-                updateDice(false);
-                //lastAmountDiceRolled = game.getDiceAmountRolled();
-                game.setNeedsUpdate(false);
+            try {
+                if (game.getNeedsUpdate()) {
+                    updateBoard();
+                    updateMessages();
+                    updatePlayers();
+                    updateDice(false);
+                    //lastAmountDiceRolled = game.getDiceAmountRolled();
+                    game.setNeedsUpdate(false);
+                }
+            } catch (Exception e) {
+                showError(e);
             }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-        updatePlayers();
+        try {
+            updatePlayers();
+        } catch (Exception e) {
+            showError(e);
+        }
+
 
     }
 
-    private void updatePlayers(){
+    private void updatePlayers() throws Exception {
         playersListView.setItems(FXCollections.observableArrayList(game.getPlayers()));
 
     }
 
-    private void updateMessages(){
+    private void updateMessages() throws Exception {
         messageField.clear();
         ObservableList<String> s = FXCollections.observableArrayList(game.getMessages());
         chatListView.setItems(s);
@@ -147,7 +159,7 @@ public class FourPlayerController {
         return null;
     }
 
-    private void pawnPressed(Pawn pawn) {
+    private void pawnPressed(Pawn pawn) throws Exception {
 
         chosenPawn = pawn;
         clearSelection();
@@ -174,7 +186,7 @@ public class FourPlayerController {
 
     }
 
-    private void clearSelection() {
+    private void clearSelection() throws Exception {
 
         Tile[] tiles = game.getTiles();
         for (Tile t : tiles) {
@@ -184,7 +196,7 @@ public class FourPlayerController {
         }
     }
 
-    private void updateBoard() {
+    private void updateBoard() throws Exception {
 
         for (Pawn pawn : game.getPawns()) {
 
@@ -214,7 +226,7 @@ public class FourPlayerController {
         }
     }
 
-    private void tilePressed(Tile tile) {
+    private void tilePressed(Tile tile) throws Exception {
 
         if (game.isYourTurn() && chosenPawn != null && tile.getFullId().equals(game.getPossibleMove(chosenPawn.getPawnTileId()).getFullId())) {
             try {
@@ -265,7 +277,7 @@ public class FourPlayerController {
         return Color.GRAY;
     }
 
-    private void populatePlayingField() {
+    private void populatePlayingField() throws Exception {
 
 
         Tile[] tiles = game.getTiles();
@@ -281,7 +293,14 @@ public class FourPlayerController {
             circle.setFill(getColor(tile.getColor()));
             circle.setStroke(Color.BLACK);
             circle.setStrokeWidth(1);
-            circle.onMouseClickedProperty().set(event -> tilePressed(tile));
+            circle.onMouseClickedProperty().set(event -> {
+                try {
+                    tilePressed(tile);
+                } catch (Exception e) {
+                    showError(e);
+
+                }
+            });
 
             tileCircles.put(tile, circle);
             boardPane.getChildren().add(circle);
@@ -295,7 +314,13 @@ public class FourPlayerController {
                 pawnCircle.setCenterY(tile.getLocation().getValue());
                 pawnCircles.put(pawn, pawnCircle);
                 boardPane.getChildren().add(pawnCircle);
-                pawnCircle.onMouseClickedProperty().set(event -> pawnPressed(pawn));
+                pawnCircle.onMouseClickedProperty().set(event -> {
+                    try {
+                        pawnPressed(pawn);
+                    } catch (Exception e) {
+                        showError(e);
+                    }
+                });
 
             }
 
@@ -319,8 +344,13 @@ public class FourPlayerController {
         messageField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
 
-                game.sendMessage(messageField.getText());
-                updateMessages();
+                try {
+                    game.sendMessage(messageField.getText());
+                    updateMessages();
+
+                } catch (Exception e) {
+                    showError(e);
+                }
             }
         });
 
@@ -331,7 +361,7 @@ public class FourPlayerController {
             int thrown = -1;
             try {
                 thrown = game.rollDice();
-                updateDice(true);
+                updateDice(false);
                 clearSelection();
 
             } catch (Exception e) {
@@ -341,7 +371,7 @@ public class FourPlayerController {
         }
     }
 
-    private void updateDice(boolean effect) {
+    private void updateDice(boolean effect) throws Exception {
 
         String z = getURL("Images/Dice0.png").toString();
         Image diceNone = new Image(z);

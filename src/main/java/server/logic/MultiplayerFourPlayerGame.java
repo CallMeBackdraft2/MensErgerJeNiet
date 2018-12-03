@@ -2,7 +2,6 @@ package server.logic;
 
 import client.dal.interfaces.BoardStorage;
 import client.dalfactories.DALFactory;
-import client.domain.classes.Dice;
 import client.domain.classes.Player;
 import client.domain.enums.GameMode;
 import client.logic.interfaces.Game;
@@ -14,16 +13,12 @@ import java.util.List;
 
 public class MultiplayerFourPlayerGame extends GameLogic implements Game {
 
-    private boolean started;
-    private int currentTurn;
     private ServerLobby lobby;
     private BoardStorage boardStorage;
-    private Dice dice;
     private List<ServerPlayer> players;
-
+    private boolean needsUpdate;
 
     MultiplayerFourPlayerGame(ServerLobby serverLobby, boolean debugMode) {
-        started = false;
         this.lobby = serverLobby;
         this.setDebugMode(debugMode);
         players = serverLobby.serverPlayers;
@@ -33,13 +28,14 @@ public class MultiplayerFourPlayerGame extends GameLogic implements Game {
 
     @Override
     public boolean getNeedsUpdate() {
-        return true;
+        return needsUpdate;
     }
 
     @Override
     public void setNeedsUpdate(boolean bool) {
-
+        needsUpdate  =true;
     }
+
 
     @Override
     public Player[] getPlayers() {
@@ -61,18 +57,31 @@ public class MultiplayerFourPlayerGame extends GameLogic implements Game {
     }
 
     @Override
-    public void movePawn(String pawnId) {
-        super.movePawn(pawnId);
-        lobby.update();
+    public void movePawn(String pawnId) throws Exception {
+       if(checkPlayerTurn()) {
+           super.movePawn(pawnId);
+           lobby.update();
+       }
     }
 
 
 
     @Override
-    public int rollDice() {
-        int i = super.rollDice();
-        lobby.update();
-        return i;
+    public int rollDice() throws Exception {
+        if(checkPlayerTurn()) {
+            int i = super.rollDice();
+            lobby.update();
+            return i;
+        } else {
+            return -1;
+        }
+    }
+
+    private boolean checkPlayerTurn() throws Exception {
+        if(getCallerId() != getCurrentPlayerId()) {
+            throw new Exception("Not your turn");
+        }
+        return true;
     }
 
 

@@ -16,14 +16,14 @@ public class GameTest {
     }
 
     @Test
-    public void testRollDice() {
+    public void testRollDice() throws Exception {
         int roll = game.rollDice();
 
         Assert.assertTrue(roll > -1 && roll < 7);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testIllegalMove() {
+    public void testIllegalMove() throws Exception {
         while (true) {
             if (game.rollDice() != 6) {
                 break;
@@ -33,7 +33,7 @@ public class GameTest {
     }
 
     @Test
-    public void possibleMovesTest() {
+    public void possibleMovesTest() throws Exception {
         while (true) {
             if (game.rollDice() != 6 && game.getCurrentPlayerId()==1) {
                 break;
@@ -51,17 +51,17 @@ public class GameTest {
     }
 
     @Test
-    public void testGetPawns() {
+    public void testGetPawns() throws Exception {
         Assert.assertNotNull(game.getPawns());
     }
 
     @Test
-    public void testGetTiles() {
+    public void testGetTiles() throws Exception {
         Assert.assertNotNull(game.getTiles());
     }
 
     @Test
-    public void movePawn() {
+    public void movePawn() throws Exception {
         while (true) {
             if (game.rollDice() == 6 && game.getCurrentPlayerId() == 3) {
                 break;
@@ -72,7 +72,7 @@ public class GameTest {
     }
 
     @Test
-    public void hitPawnTest() {
+    public void hitPawnTest() throws Exception {
 
         for (int i = 0; i < 2; i++) {
             while (true) {
@@ -110,7 +110,7 @@ public class GameTest {
     }
 
     @Test
-    public void hitOwnPawnTest() {
+    public void hitOwnPawnTest() throws Exception {
 
 
         while (true) {
@@ -134,7 +134,7 @@ public class GameTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void winTest(){
+    public void winTest() throws Exception {
 
         //Move red pawn 1 to home base
         for (int i = 0; i < 7; i++) {

@@ -92,7 +92,11 @@ public class CommunicatorWebSocket extends Communicator implements Runnable {
         this.message = messageText;
         Message message = Message.fromJSON(messageText);
         if (message.getName().equals("update")) {
-            game.setNeedsUpdate(true);
+            try {
+                game.setNeedsUpdate(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         } else responses.add(message);
     }

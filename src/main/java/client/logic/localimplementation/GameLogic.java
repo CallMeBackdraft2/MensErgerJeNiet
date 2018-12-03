@@ -35,7 +35,7 @@ public class GameLogic {
     }
 
 
-    public int rollDice() {
+    public int rollDice() throws Exception {
         if (diceRolled && !debugMode) {
             throw new IllegalArgumentException("move your pawn");
         }
@@ -68,7 +68,7 @@ public class GameLogic {
         }
     }
 
-    public void movePawn(String pawnId) {
+    public void movePawn(String pawnId) throws Exception {
 
         if (diceRolled || debugMode) {
             Pawn pawn = getPawn(pawnId);
@@ -264,8 +264,7 @@ public class GameLogic {
         return callerId;
     }
 
-    public GameLogic setCallerId(int callerId) {
+    public void setCallerId(int callerId) {
         this.callerId = callerId;
-        return this;
     }
 }

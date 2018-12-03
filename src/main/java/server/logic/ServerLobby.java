@@ -69,6 +69,7 @@ public class ServerLobby {
     void handleMessage(ServerPlayer player, Message message) {
 
         String methodName = message.getName();
+        game.setCallerId(player.getId());
         boolean found = false;
         for (Method method : game.getClass().getMethods()) {
             if (method.getName().equals(methodName)) {
@@ -81,6 +82,7 @@ public class ServerLobby {
                 if (method.getName().equals(methodName)) {
                     found =true;
                     handle(this,player, message, methodName, method);
+
                 }
             }
         }

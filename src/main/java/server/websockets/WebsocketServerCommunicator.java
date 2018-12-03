@@ -26,7 +26,9 @@ public class WebsocketServerCommunicator {
         subscribers.add(receiver);
     }
 
-
+    public static void unSubscribe(MessageReceiver receiver){
+        subscribers.remove(receiver);
+    }
     @OnOpen
     public void onOpen(Session session){
 

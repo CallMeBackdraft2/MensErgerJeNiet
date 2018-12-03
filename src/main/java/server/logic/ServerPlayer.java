@@ -8,6 +8,14 @@ import javax.websocket.Session;
 public class ServerPlayer {
 
     private int id;
+    private Session session;
+    private String username;
+
+    public ServerPlayer(int id, Session session, String username) {
+        this.id = id;
+        this.session = session;
+        this.username = username;
+    }
 
     public int getId() {
         return id;
@@ -16,15 +24,6 @@ public class ServerPlayer {
     public ServerPlayer setId(int id) {
         this.id = id;
         return this;
-    }
-
-    private Session session;
-    private String username;
-
-    public ServerPlayer(int id, Session session, String username) {
-        this.id = id;
-        this.session = session;
-        this.username = username;
     }
 
     public Session getSession() {

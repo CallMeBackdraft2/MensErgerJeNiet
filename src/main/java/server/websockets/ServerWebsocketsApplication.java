@@ -12,29 +12,43 @@ public class ServerWebsocketsApplication {
     private static final int PORT = 1234;
 
     public static Thread webSocketThread;
+    public static GameManager manager;
+    private static Server webSocketServer;
 
     public static void main(String[] args) throws InterruptedException {
-        startWebsocketServer();
+
+        wws();
+
         boolean bool = false;
         if (args.length==1 ) {
             bool = Boolean.parseBoolean(args[0]);
 
         }
-        GameManager manager = new GameManager(bool);
+        manager = new GameManager(bool);
         WebsocketServerCommunicator.subscribe(manager);
 
     }
 
-    private static void startWebsocketServer() throws InterruptedException {
+    public static void stop() throws Exception {
+        WebsocketServerCommunicator.unSubscribe(manager);
+        webSocketServer.stop();
+        webSocketThread.interrupt();
+        webSocketThread = null;
+        int i=0;
+
+    }
+
+    private static void wws() throws InterruptedException {
         webSocketThread = new Thread(ServerWebsocketsApplication::startWebSocketServer);
         webSocketThread.start();
         webSocketThread.join();
     }
 
 
+
     // Start the web socket server
     private static void startWebSocketServer() {
-        Server webSocketServer = new Server();
+        webSocketServer = new Server();
         ServerConnector connector = new ServerConnector(webSocketServer);
         connector.setPort(PORT);
         webSocketServer.addConnector(connector);

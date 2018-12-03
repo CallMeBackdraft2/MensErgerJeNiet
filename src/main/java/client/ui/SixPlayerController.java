@@ -38,7 +38,7 @@ public class SixPlayerController
     private HashMap<Pawn, Circle> pawnCircles = new HashMap<>();
 
     @FXML
-    void initialize() {
+    void initialize() throws Exception {
         //game = new LocalSixPlayerGame();
         populatePlayingField();
         playersListView.setItems(FXCollections.observableArrayList(game.getPlayers()));
@@ -103,7 +103,7 @@ public class SixPlayerController
         }
     }
 
-    private void populatePlayingField() {
+    private void populatePlayingField() throws Exception {
         Tile[] tiles = game.getTiles();
 
         for (int i = 0; i < tiles.length; i++) {

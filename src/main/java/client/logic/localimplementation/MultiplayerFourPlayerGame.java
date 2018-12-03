@@ -1,6 +1,8 @@
 package client.logic.localimplementation;
 
-import client.domain.classes.*;
+import client.domain.classes.Pawn;
+import client.domain.classes.Player;
+import client.domain.classes.Tile;
 import client.logic.interfaces.Game;
 import client.websockets.CommunicatorWebSocket;
 import com.google.gson.Gson;
@@ -22,16 +24,18 @@ public class MultiplayerFourPlayerGame implements Game {
     }
 
 
-
-    public Message waitForResponse(String responseName) {
+    public Message waitForResponse(String responseName) throws Exception {
         while (true) {
             for (Message response : communicator.getResponses()) {
                 if (response.getName().equals(responseName)) {
 
                     communicator.getResponses().remove(response);
                     return response;
-                } else if(response.getName().equals("Exception")){
-                    System.out.println(response.getData()[0]);
+                } else if (response.getName().equals("Exception")) {
+                    communicator.getResponses().remove(response);
+                    Gson gson = new Gson();
+                    throw new Exception(gson.fromJson(gson.toJson(response.getData()),Exception.class));
+
                 }
             }
             try {
@@ -42,7 +46,7 @@ public class MultiplayerFourPlayerGame implements Game {
         }
     }
 
-    private <T> T call(Class<T> tClass, Object... args) {
+    private <T> T call(Class<T> tClass, Object... args) throws Exception {
 
         StackTraceElement[] elements = Thread.currentThread().getStackTrace();
         String methodName = elements[2].getMethodName();
@@ -54,7 +58,7 @@ public class MultiplayerFourPlayerGame implements Game {
         }
 
         CommunicatorWebSocket.getInstance().sendMessage(new Message(methodName, args));
-        if(tClass == void.class){
+        if (tClass == void.class) {
             return null;
         }
         Object responseData = waitForResponse(methodName).getData()[0];
@@ -67,88 +71,87 @@ public class MultiplayerFourPlayerGame implements Game {
     }
 
 
-
     @Override
-    public void skipTurn() {
+    public void skipTurn() throws Exception {
         call(void.class);
     }
 
     @Override
-    public boolean getNeedsUpdate() {
+    public boolean getNeedsUpdate() throws Exception {
         return needsUpdate;
     }
 
+    public void setNeedsUpdate(boolean needsUpdate) throws Exception {
+        this.needsUpdate = needsUpdate;
+    }
+
     @Override
-    public int rollDice() {
+    public int rollDice() throws Exception {
         return call(int.class);
     }
 
     @Override
-    public int getDiceRolled() {
-       return call(int.class);
-    }
-
-    @Override
-    public int getDiceAmountRolled() {
+    public int getDiceRolled() throws Exception {
         return call(int.class);
     }
 
     @Override
-    public void movePawn(String pawnId) {
+    public int getDiceAmountRolled() throws Exception {
+        return call(int.class);
+    }
+
+    @Override
+    public void movePawn(String pawnId) throws Exception {
         call(void.class, pawnId);
     }
 
     @Override
-    public Tile[] getTiles() {
+    public Tile[] getTiles() throws Exception {
         return call(Tile[].class);
     }
 
     @Override
-    public Tile getPossibleMove(String pawnId) {
-       return call(Tile.class,pawnId);
+    public Tile getPossibleMove(String pawnId) throws Exception {
+        return call(Tile.class, pawnId);
     }
 
     @Override
-    public boolean isYourTurn() {
-       return true;
+    public boolean isYourTurn() throws Exception {
+        return true;
     }
 
     @Override
-    public Pawn getPawn(String homeTileID) {
-      return   call(Pawn.class,homeTileID);
+    public Pawn getPawn(String homeTileID) throws Exception {
+        return call(Pawn.class, homeTileID);
     }
 
     @Override
-    public Pawn[] getPawns() {
+    public Pawn[] getPawns() throws Exception {
         return call(Pawn[].class);
     }
 
     @Override
-    public int getCurrentPlayerId() {
-       return call(int.class);
+    public int getCurrentPlayerId() throws Exception {
+        return call(int.class);
     }
 
     @Override
-    public Player[] getPlayers() {
-       return call(Player[].class);
+    public Player[] getPlayers() throws Exception {
+        return call(Player[].class);
     }
 
     @Override
-    public void sendMessage(String message) {
-            call(void.class,message);
+    public void sendMessage(String message) throws Exception {
+        call(void.class, message);
     }
 
     @Override
-    public String[] getMessages() {
+    public String[] getMessages() throws Exception {
         return call(String[].class);
     }
 
     @Override
-    public boolean getIsDone() {
+    public boolean getIsDone() throws Exception {
         return false;
-    }
-
-    public void setNeedsUpdate(boolean needsUpdate) {
-        this.needsUpdate = needsUpdate;
     }
 }
