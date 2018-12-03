@@ -14,6 +14,7 @@ public class MultiplayerGameTest {
     public void initGame() {
         //game = LogicFactory.getLocalFourPlayerGameTest();
 
+        game = LogicFactory.getOnlineFourPlayerGame();
     }
 
     @Test
