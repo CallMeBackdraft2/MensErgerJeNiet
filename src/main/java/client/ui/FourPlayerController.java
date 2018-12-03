@@ -78,7 +78,7 @@ public class FourPlayerController {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
             if (game.getNeedsUpdate()) {
                 updateBoard();
-
+                updateMessages();
                 updateDice(false);
                 //lastAmountDiceRolled = game.getDiceAmountRolled();
                 game.setNeedsUpdate(false);

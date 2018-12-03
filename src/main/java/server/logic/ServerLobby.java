@@ -15,7 +15,7 @@ public class ServerLobby {
 
     List<ServerPlayer> serverPlayers = new ArrayList<>();
     private ServerPlayer host;
-    private List<LobbyMessage> messages;
+    private List<LobbyMessage> messages = new ArrayList<>();
     private MultiplayerFourPlayerGame game;
     private boolean isDebugMode;
 
@@ -58,31 +58,46 @@ public class ServerLobby {
             Message message = new Message("update");
             player.getSession().getAsyncRemote().sendText(message.toJson());
         }
-
     }
 
     public void sendChatMessage(ServerPlayer player, String message) {
         messages.add(new LobbyMessage(player.toPlayer(), message, LocalDateTime.now()));
+        update();
+
     }
 
     void handleMessage(ServerPlayer player, Message message) {
 
         String methodName = message.getName();
+        boolean found = false;
         for (Method method : game.getClass().getMethods()) {
             if (method.getName().equals(methodName)) {
-                try {
-                    Object returned = method.invoke(game, message.getData());
-                        player.getSession().getAsyncRemote().sendText(new Message(methodName, returned).toJson());
-
-                } catch (Exception e) {
-                    Message exceptionMessage = new Message("Exception",e);
-                    player.getSession().getAsyncRemote().sendText(exceptionMessage.toJson());
+                found =true;
+                handle(game,player, message, methodName, method);
+            }
+        }
+        if(!found){
+            for (Method method : this.getClass().getMethods()) {
+                if (method.getName().equals(methodName)) {
+                    found =true;
+                    handle(this,player, message, methodName, method);
                 }
             }
         }
 
 //        update();
 
+    }
+
+    private void handle(Object target, ServerPlayer player, Message message, String methodName, Method method) {
+        try {
+            Object returned = method.invoke(target, message.getData());
+                player.getSession().getAsyncRemote().sendText(new Message(methodName, returned).toJson());
+
+        } catch (Exception e) {
+            Message exceptionMessage = new Message("Exception",e);
+            player.getSession().getAsyncRemote().sendText(exceptionMessage.toJson());
+        }
     }
 
 }
