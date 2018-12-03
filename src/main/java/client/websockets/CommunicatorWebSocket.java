@@ -1,6 +1,7 @@
 package client.websockets;
 
 import client.logic.localimplementation.MultiplayerFourPlayerGame;
+import client.ui.Main;
 import com.google.gson.Gson;
 import shared.Message;
 
@@ -113,7 +114,7 @@ public class CommunicatorWebSocket extends Communicator implements Runnable {
         System.out.println("[WebSocket Client start]");
         try {
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-            container.connectToServer(this, new URI(uri));
+            container.connectToServer(this, new URI(Main.arguments[0]));
         } catch (DeploymentException | URISyntaxException | IOException e) {
             e.printStackTrace();
         }
