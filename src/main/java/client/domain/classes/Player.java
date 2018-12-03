@@ -7,7 +7,6 @@ public class Player {
     private String name;
     private PlayerColor playerColor;
     private int playerScore;
-    private boolean guest;
 
     public Player(int id, String name) {
         this.id = id;

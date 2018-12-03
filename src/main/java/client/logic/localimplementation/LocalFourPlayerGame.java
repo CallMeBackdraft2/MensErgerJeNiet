@@ -38,7 +38,7 @@ public class LocalFourPlayerGame extends GameLogic implements Game {
 
     @Override
     public void setNeedsUpdate(boolean bool) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override

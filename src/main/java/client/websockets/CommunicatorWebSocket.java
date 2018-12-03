@@ -111,7 +111,6 @@ public class CommunicatorWebSocket extends Communicator implements Runnable {
     public void onWebSocketClose(CloseReason reason) {
         System.out.print("[WebSocket Client close session] " + session.getRequestURI());
         System.out.println(" for reason " + reason);
-        session = null;
     }
 
     private void startClient() {

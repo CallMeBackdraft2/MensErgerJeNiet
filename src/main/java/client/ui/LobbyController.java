@@ -75,42 +75,14 @@ public class LobbyController {
         cbLobbyType.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                if(newValue == (Number)0){
-                    btnReady.setText("Start Game");
-                    gameLobby.setOnline(false);
-                    btnAddPlayer.setDisable(false);
-                    txtfPassword.setDisable(true);
-                    txtfLobbyName.setDisable(true);
-                } else {
-
-                    //Temp
-                    FourPlayerController controller = new FourPlayerController();
-                    controller.setGame(LogicFactory.getOnlineFourPlayerGame());
-                    JavaFXSceneFactory.generateStage(controller, getURL( "4-Player.fxml"), false, "Speelbord", 629, 0).show();
-
-
-                    btnReady.setText("Ready");
-                    gameLobby.setOnline(true);
-                    btnAddPlayer.setDisable(true);
-                    txtfPassword.setDisable(false);
-                    txtfLobbyName.setDisable(false);
-                }
+                changeLobbyType(newValue);
             }
         });
 
         cbGameMode.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                if(newValue == (Number)0){
-                    gameLobby.setGameMode(GameMode.FOURPLAYERBOARD);
-                    imgvBoardView.setImage(new Image(getClass().getResourceAsStream("Images/4playerboard.JPG")));
-                    checkPlayerCount();
-                } else {
-                    gameLobby.setGameMode(GameMode.SIXPLAYERBOARD);
-                    imgvBoardView.setImage(new Image(getClass().getResourceAsStream("Images/6playerboard.JPG")));
-                    checkPlayerCount();
-                }
-
+                changedGameMode(newValue);
             }
         });
 
@@ -174,43 +146,84 @@ public class LobbyController {
                 Node loginButton = dialog.getDialogPane().lookupButton(addPlayerButton);
                 loginButton.setDisable(true);
 
-                if(playerColor.getValue()!=null) {
-                    username.textProperty().addListener((observable, oldValue, newValue) -> loginButton.setDisable((((playerColor.getValue() != null ||
-                            playerColor.getValue().toString().trim().isEmpty() ? 1 : 0) + (newValue.trim().isEmpty() ? 1 : 0)) != 0)));
-                }
-                playerColor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
-                        loginButton.setDisable((((newValue.toString().trim().isEmpty() ? 1 : 0) + (username.textProperty().getValue().trim().isEmpty() ? 1 : 0)) != 0)));
-
-                dialog.getDialogPane().setContent(grid);
-
-                dialog.setResultConverter(dialogButton -> {
-                    if (dialogButton == addPlayerButton) {
-                        return new Pair<String, PlayerColor>(username.getText(), playerColor.getValue());
-                    }
-                    return null;
-                });
-
-                Optional<Pair<String, PlayerColor>> result = dialog.showAndWait();
-
-                result.ifPresent(player -> {
-                    Player newPlayer = new Player(0,player.getKey());
-                    newPlayer.setPlayerColor(player.getValue());
-                    try {
-                        gameLobby.playerJoin(newPlayer);
-                    } catch (IllegalArgumentException exc) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Max Player Amount");
-                        alert.setHeaderText("You tried exceeding the maximum allowed players for this gamemode");
-                        alert.setContentText(exc.getMessage());
-                        alert.showAndWait();
-                    }
-                    updatePlayerList();
-                    checkPlayerCount();
-                });
-
-
+                handleAddPlayer(dialog, addPlayerButton, grid, username, playerColor, loginButton);
             }
         });
+    }
+
+    private void handleAddPlayer(Dialog<Pair<String, PlayerColor>> dialog, ButtonType addPlayerButton, GridPane grid, TextField username, ChoiceBox<PlayerColor> playerColor, Node loginButton) {
+        if(playerColor.getValue()!=null) {
+            username.textProperty().addListener((observable, oldValue, newValue) -> loginButton.setDisable((((playerColor.getValue() != null ||
+                    playerColor.getValue().toString().trim().isEmpty() ? 1 : 0) + (newValue.trim().isEmpty() ? 1 : 0)) != 0)));
+        }
+        playerColor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) ->
+                loginButton.setDisable((((newValue.toString().trim().isEmpty() ? 1 : 0) + (username.textProperty().getValue().trim().isEmpty() ? 1 : 0)) != 0)));
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == addPlayerButton) {
+                return new Pair<String, PlayerColor>(username.getText(), playerColor.getValue());
+            }
+            return null;
+        });
+
+        Optional<Pair<String, PlayerColor>> result = dialog.showAndWait();
+
+        result.ifPresent(player -> {
+            Player newPlayer = new Player(0,player.getKey());
+            newPlayer.setPlayerColor(player.getValue());
+            tryJoinNewPlayer(newPlayer);
+            updatePlayerList();
+            checkPlayerCount();
+        });
+    }
+
+    private void tryJoinNewPlayer(Player newPlayer) {
+        try {
+            gameLobby.playerJoin(newPlayer);
+        } catch (IllegalArgumentException exc) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Max Player Amount");
+            alert.setHeaderText("You tried exceeding the maximum allowed players for this gamemode");
+            alert.setContentText(exc.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    private void changedGameMode(Number newValue) {
+        if(newValue == (Number)0){
+            gameLobby.setGameMode(GameMode.FOURPLAYERBOARD);
+            imgvBoardView.setImage(new Image(getClass().getResourceAsStream("Images/4playerboard.JPG")));
+            checkPlayerCount();
+        } else {
+            gameLobby.setGameMode(GameMode.SIXPLAYERBOARD);
+            imgvBoardView.setImage(new Image(getClass().getResourceAsStream("Images/6playerboard.JPG")));
+            checkPlayerCount();
+        }
+    }
+
+    private void changeLobbyType(Number newValue) {
+        if(newValue == (Number)0){
+            btnReady.setText("Start Game");
+            gameLobby.setOnline(false);
+            btnAddPlayer.setDisable(false);
+            txtfPassword.setDisable(true);
+            txtfLobbyName.setDisable(true);
+        } else {
+
+            //Temp
+            FourPlayerController controller = new FourPlayerController();
+            controller.setGame(LogicFactory.getOnlineFourPlayerGame());
+            JavaFXSceneFactory.generateStage(controller, getURL( "4-Player.fxml"), false, "Speelbord", 629, 0).show();
+
+
+            btnReady.setText("Ready");
+            gameLobby.setOnline(true);
+            btnAddPlayer.setDisable(true);
+            txtfPassword.setDisable(false);
+            txtfLobbyName.setDisable(false);
+        }
     }
 
     private EnumSet<PlayerColor> checkAvailableColors(){
