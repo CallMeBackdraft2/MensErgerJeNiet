@@ -1,6 +1,5 @@
 package server.websockets;
 
-import client.logic.interfaces.Game;
 import server.MessageReceiver;
 import shared.Message;
 

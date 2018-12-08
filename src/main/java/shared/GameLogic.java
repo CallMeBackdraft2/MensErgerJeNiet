@@ -1,4 +1,4 @@
-package client.logic.localimplementation;
+package shared;
 
 import client.dal.interfaces.BoardStorage;
 import client.dalfactories.DALFactory;
@@ -226,7 +226,7 @@ public class GameLogic {
     }
 
     public int getDiceAmountRolled(){
-        return dice.rollDice();
+        return dice.getAmountRolled();
     }
 
 

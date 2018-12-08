@@ -1,4 +1,4 @@
-import client.logic.interfaces.Game;
+import shared.interfaces.Game;
 import client.logicfactories.LogicFactory;
 import org.junit.*;
 import server.websockets.ServerWebsocketsApplication;

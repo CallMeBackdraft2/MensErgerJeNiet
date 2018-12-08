@@ -3,7 +3,8 @@ package client.logic.localimplementation;
 import client.domain.classes.Lobby;
 import client.domain.classes.LobbyMessage;
 import client.domain.classes.Player;
-import client.logic.interfaces.Game;
+import shared.interfaces.Game;
+import shared.GameLogic;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

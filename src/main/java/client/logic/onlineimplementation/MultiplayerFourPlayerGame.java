@@ -1,9 +1,11 @@
-package client.logic.localimplementation;
+package client.logic.onlineimplementation;
 
 import client.domain.classes.Pawn;
 import client.domain.classes.Player;
 import client.domain.classes.Tile;
-import client.logic.interfaces.Game;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import shared.interfaces.Game;
 import client.websockets.CommunicatorWebSocket;
 import com.google.gson.Gson;
 import shared.Message;
@@ -34,7 +36,10 @@ public class MultiplayerFourPlayerGame implements Game {
                 } else if (response.getName().equals("Exception")) {
                     communicator.getResponses().remove(response);
                     Gson gson = new Gson();
-                    throw new Exception(gson.fromJson(gson.toJson(response.getData()),Exception.class));
+                    JsonElement e = gson.toJsonTree(response.getData());
+
+                    JsonArray a = e.getAsJsonArray();
+                    throw new Exception(a.get(0).getAsJsonObject().get("detailMessage").getAsString());
 
                 }
             }
@@ -117,7 +122,7 @@ public class MultiplayerFourPlayerGame implements Game {
 
     @Override
     public boolean isYourTurn() throws Exception {
-        return true;
+        return call(boolean.class);
     }
 
     @Override
@@ -152,6 +157,6 @@ public class MultiplayerFourPlayerGame implements Game {
 
     @Override
     public boolean getIsDone() throws Exception {
-        return false;
+        return call(boolean.class);
     }
 }

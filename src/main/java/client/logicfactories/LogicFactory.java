@@ -1,9 +1,9 @@
 package client.logicfactories;
 
 import client.domain.classes.Lobby;
-import client.logic.interfaces.Game;
+import shared.interfaces.Game;
 import client.logic.localimplementation.LocalFourPlayerGame;
-import client.logic.localimplementation.MultiplayerFourPlayerGame;
+import client.logic.onlineimplementation.MultiplayerFourPlayerGame;
 
 public class LogicFactory {
 

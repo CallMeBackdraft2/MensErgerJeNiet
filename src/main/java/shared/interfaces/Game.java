@@ -1,10 +1,8 @@
-package client.logic.interfaces;
+package shared.interfaces;
 
 import client.domain.classes.Pawn;
 import client.domain.classes.Player;
 import client.domain.classes.Tile;
-
-import java.util.List;
 
 public interface Game {
 

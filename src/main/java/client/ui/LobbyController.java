@@ -94,6 +94,9 @@ public class LobbyController {
                     btnAddPlayer.setDisable(true);
                     txtfPassword.setDisable(false);
                     txtfLobbyName.setDisable(false);
+
+                    btnReady.getScene().getWindow().hide();
+
                 }
             }
         });

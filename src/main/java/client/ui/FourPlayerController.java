@@ -3,7 +3,7 @@ package client.ui;
 import client.domain.classes.Pawn;
 import client.domain.classes.Tile;
 import client.domain.enums.PlayerColor;
-import client.logic.interfaces.Game;
+import shared.interfaces.Game;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
@@ -30,6 +30,7 @@ import javafx.util.Duration;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -80,10 +81,14 @@ public class FourPlayerController {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), event -> {
             try {
                 if (game.getNeedsUpdate()) {
+                    clearSelection();
+
                     updateBoard();
                     updateMessages();
                     updatePlayers();
-                    updateDice(false);
+                    int newLastAmountRolled = game.getDiceAmountRolled();
+                    updateDice(lastAmountDiceRolled != newLastAmountRolled);
+                    lastAmountDiceRolled = newLastAmountRolled;
                     //lastAmountDiceRolled = game.getDiceAmountRolled();
                     game.setNeedsUpdate(false);
                 }
@@ -161,15 +166,15 @@ public class FourPlayerController {
 
     private void pawnPressed(Pawn pawn) throws Exception {
 
-        chosenPawn = pawn;
-        clearSelection();
+
         if (game.isYourTurn()) {
+            clearSelection();
             chosenPawn = pawn;
             Tile possibleMove = game.getPossibleMove(pawn.getFullId());
             if (pawn.getPlayerColor().getValue() != game.getCurrentPlayerId()) {
 
-                showError(new IllegalArgumentException("Not " + pawn.getPlayerColor() + "'s turn"));
-                return;
+                //showError(new IllegalArgumentException("Not " + pawn.getPlayerColor() + "'s turn"));
+                //return;
             }
 
             if (possibleMove == null) {
@@ -182,14 +187,12 @@ public class FourPlayerController {
 
 
         }
-        updateBoard();
 
     }
 
     private void clearSelection() throws Exception {
 
-        Tile[] tiles = game.getTiles();
-        for (Tile t : tiles) {
+        for (Tile t :  Collections.list( tileCircles.keys())) {
 
             getTileCircle(t).setStrokeWidth(1);
             getTileCircle(t).setStroke(Color.BLACK);
@@ -361,7 +364,7 @@ public class FourPlayerController {
             int thrown = -1;
             try {
                 thrown = game.rollDice();
-                updateDice(false);
+                //updateDice(false);
                 clearSelection();
 
             } catch (Exception e) {
@@ -373,11 +376,12 @@ public class FourPlayerController {
 
     private void updateDice(boolean effect) throws Exception {
 
+        System.out.println(effect);
         String z = getURL("Images/Dice0.png").toString();
         Image diceNone = new Image(z);
         //imgDice.setEffect(new ColorAdjust(((color.getHue()/360) -.5f)*2, 1, 0, 0));
         String url = "Images/Dice" + game.getDiceRolled() + ".png";
-        imgDice.setImage(new Image(getURL(url).toString()));
+      //  imgDice.setImage(new Image(getURL(url).toString()));
         if (effect) {
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.ZERO, new KeyValue(imgDice.imageProperty(), diceNone)),
@@ -391,6 +395,7 @@ public class FourPlayerController {
                     new KeyFrame(Duration.seconds(3.5), new KeyValue(turnCircle.fillProperty(), (PlayerColor.values()[game.getCurrentPlayerId()].toColor()))),
                     new KeyFrame(Duration.seconds(2.5), new KeyValue(turnCircle.fillProperty(), Color.WHITE)));
 
+            turnCircle.fillProperty().set(Color.WHITE);
             timeline.play();
 
         } else {

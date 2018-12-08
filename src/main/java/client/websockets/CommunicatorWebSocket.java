@@ -1,6 +1,6 @@
 package client.websockets;
 
-import client.logic.localimplementation.MultiplayerFourPlayerGame;
+import client.logic.onlineimplementation.MultiplayerFourPlayerGame;
 import client.ui.Main;
 import com.google.gson.Gson;
 import shared.Message;

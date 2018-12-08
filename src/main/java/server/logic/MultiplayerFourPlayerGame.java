@@ -4,8 +4,8 @@ import client.dal.interfaces.BoardStorage;
 import client.dalfactories.DALFactory;
 import client.domain.classes.Player;
 import client.domain.enums.GameMode;
-import client.logic.interfaces.Game;
-import client.logic.localimplementation.GameLogic;
+import shared.interfaces.Game;
+import shared.GameLogic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +64,10 @@ public class MultiplayerFourPlayerGame extends GameLogic implements Game {
        }
     }
 
-
+    @Override
+    public boolean isYourTurn() {
+        return getCallerId() == getCurrentPlayerId();
+    }
 
     @Override
     public int rollDice() throws Exception {

@@ -41,6 +41,7 @@ public class ServerLobby {
     public void addPlayer(ServerPlayer serverPlayer) {
         serverPlayer.setId(serverPlayers.size());
         serverPlayers.add(serverPlayer);
+        update();
     }
 
     public void sendToAll(Message message) {
@@ -91,14 +92,18 @@ public class ServerLobby {
 
     }
 
+
+
     private void handle(Object target, ServerPlayer player, Message message, String methodName, Method method) {
         try {
             Object returned = method.invoke(target, message.getData());
                 player.getSession().getAsyncRemote().sendText(new Message(methodName, returned).toJson());
 
-        } catch (Exception e) {
-            Message exceptionMessage = new Message("Exception",e);
+        } catch (InvocationTargetException e) {
+            Message exceptionMessage = new Message("Exception",e.getTargetException());
             player.getSession().getAsyncRemote().sendText(exceptionMessage.toJson());
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 
