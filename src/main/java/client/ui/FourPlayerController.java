@@ -275,9 +275,10 @@ public class FourPlayerController {
                 return Color.PINK;
             case "BLUE":
                 return Color.BLUE;
+            default:
+                return Color.GRAY;
 
         }
-        return Color.GRAY;
     }
 
     private void populatePlayingField() throws Exception {

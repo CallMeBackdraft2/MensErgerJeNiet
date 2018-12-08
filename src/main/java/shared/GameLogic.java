@@ -189,9 +189,9 @@ public class GameLogic {
 
             Tile tile =  boardStorage.getTile((pawn.getFullId().substring(0, 2) + "H0" + t));
             if(tile.getPawn()!=null){
-               if( tile.getPawn().getPlayerColor() == pawn.getPlayerColor()){
+                if( tile.getPawn().getPlayerColor() == pawn.getPlayerColor()){
                    return null;
-               }
+                }
             }
 
             return tile;
