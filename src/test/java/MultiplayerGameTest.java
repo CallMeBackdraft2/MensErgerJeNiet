@@ -1,3 +1,4 @@
+import client.ui.Main;
 import shared.interfaces.Game;
 import client.logicfactories.LogicFactory;
 import org.junit.*;
@@ -13,13 +14,13 @@ public class MultiplayerGameTest {
     public void initGame() {
         //game = LogicFactory.getLocalFourPlayerGameTest();
 
+        Main.arguments = new String[]{"ws://localhost:1234/communicator/"};
         try {
             ServerWebsocketsApplication.main(new String[]{"true"});
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         game = LogicFactory.getOnlineFourPlayerGame();
-
     }
 
     @After
@@ -36,7 +37,7 @@ public class MultiplayerGameTest {
         Assert.assertTrue(roll > -1 && roll < 7);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = Exception.class)
     public void testIllegalMove() throws Exception {
 
         while (true) {
@@ -148,8 +149,10 @@ public class MultiplayerGameTest {
         Assert.assertEquals('P', game.getPawn("REP01").getPawnTileId().charAt(2));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void winTest() throws Exception {
+        try {
+
 
         //Move red pawn 1 to home base
         for (int i = 0; i < 7; i++) {
@@ -231,5 +234,11 @@ public class MultiplayerGameTest {
         Assert.assertEquals("REH04",game.getPawn("REP04").getPawnTileId());
 
         Assert.assertTrue(game.getIsDone());
+
+        //Did not reach a win exception
+        Assert.fail();
+        } catch (Exception e){
+        Assert.assertEquals("Player RED has won", e.getMessage());
+    }
     }
 }

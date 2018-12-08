@@ -66,7 +66,7 @@ public class MultiplayerFourPlayerGame extends GameLogic implements Game {
 
     @Override
     public boolean isYourTurn() {
-        return getCallerId() == getCurrentPlayerId();
+        return getCallerId() == getCurrentPlayerId() && !isDebugMode();
     }
 
     @Override
@@ -81,7 +81,7 @@ public class MultiplayerFourPlayerGame extends GameLogic implements Game {
     }
 
     private boolean checkPlayerTurn() throws Exception {
-        if(getCallerId() != getCurrentPlayerId()) {
+        if(getCallerId() != getCurrentPlayerId() && !isDebugMode()) {
             throw new Exception("Not your turn");
         }
         return true;

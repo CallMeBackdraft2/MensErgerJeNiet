@@ -20,7 +20,6 @@ public class GameLogic {
     private boolean diceRolled;
     private boolean isDone;
     private int callerId;
-
     public GameLogic() {
         boardStorage = DALFactory.getLocalBoardStorage();
         boardStorage.init(GameMode.FOURPLAYERBOARD);
@@ -28,12 +27,20 @@ public class GameLogic {
 
     }
 
-    public void skipTurn(){
-        switchTurn();
-        diceRolled=false;
-
+    public boolean isDebugMode() {
+        return debugMode;
     }
 
+    public GameLogic setDebugMode(boolean debugMode) {
+        this.debugMode = debugMode;
+        return this;
+    }
+
+    public void skipTurn() {
+        switchTurn();
+        diceRolled = false;
+
+    }
 
     public int rollDice() throws Exception {
         if (diceRolled && !debugMode) {
@@ -99,14 +106,14 @@ public class GameLogic {
                 diceRolled = false;
 
                 if (checkWincondition()) {
-                    isDone=true;
-                    throw new IllegalArgumentException("Player " + PlayerColor.values()[ getCurrentPlayerId()] + " has won");
+                    isDone = true;
+                    throw new IllegalArgumentException("Player " + PlayerColor.values()[getCurrentPlayerId()] + " has won");
                 }
 
                 if (dice.getLastRolled() != 6) {
                     switchTurn();
                 }
-            } else{
+            } else {
                 throw new IllegalArgumentException("Not your turn");
             }
 
@@ -120,15 +127,15 @@ public class GameLogic {
     private boolean checkWincondition() {
 
 
-        for(int i=0;i<4;i++){
-            Pawn[] pawns =  boardStorage.getPlayerPawns(i);
-            boolean won= true;
+        for (int i = 0; i < 4; i++) {
+            Pawn[] pawns = boardStorage.getPlayerPawns(i);
+            boolean won = true;
             for (Pawn pawn : pawns) {
                 if (pawn.getPawnTileId().charAt(2) != 'H') {
                     won = false;
                 }
             }
-            if(won){
+            if (won) {
                 return true;
             }
         }
@@ -187,10 +194,10 @@ public class GameLogic {
             }
 
 
-            Tile tile =  boardStorage.getTile((pawn.getFullId().substring(0, 2) + "H0" + t));
-            if(tile.getPawn()!=null){
-                if( tile.getPawn().getPlayerColor() == pawn.getPlayerColor()){
-                   return null;
+            Tile tile = boardStorage.getTile((pawn.getFullId().substring(0, 2) + "H0" + t));
+            if (tile.getPawn() != null) {
+                if (tile.getPawn().getPlayerColor() == pawn.getPlayerColor()) {
+                    return null;
                 }
             }
 
@@ -219,16 +226,15 @@ public class GameLogic {
         return possibleMove;
     }
 
-    public int getDiceRolled(){
+    public int getDiceRolled() {
 
         return dice.getLastRolled();
 
     }
 
-    public int getDiceAmountRolled(){
+    public int getDiceAmountRolled() {
         return dice.getAmountRolled();
     }
-
 
     public boolean isYourTurn() {
         return true;
@@ -253,11 +259,6 @@ public class GameLogic {
 
     public boolean getIsDone() {
         return isDone;
-    }
-
-    public GameLogic setDebugMode(boolean debugMode) {
-        this.debugMode = debugMode;
-        return this;
     }
 
     public int getCallerId() {
