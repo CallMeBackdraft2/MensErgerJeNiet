@@ -30,10 +30,7 @@ import javafx.util.Duration;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.*;
 
 
 public class FourPlayerController {
@@ -181,9 +178,9 @@ public class FourPlayerController {
 
                 return;
             }
-            getTileCircle(possibleMove).setStrokeWidth(10);
+            Objects.requireNonNull(getTileCircle(possibleMove)).setStrokeWidth(10);
 
-            getTileCircle(possibleMove).setStroke(pawn.getPlayerColor().toColorAccent());
+            Objects.requireNonNull(getTileCircle(possibleMove)).setStroke(pawn.getPlayerColor().toColorAccent());
 
 
         }
@@ -194,8 +191,8 @@ public class FourPlayerController {
 
         for (Tile t :  Collections.list( tileCircles.keys())) {
 
-            getTileCircle(t).setStrokeWidth(1);
-            getTileCircle(t).setStroke(Color.BLACK);
+            Objects.requireNonNull(getTileCircle(t)).setStrokeWidth(1);
+            Objects.requireNonNull(getTileCircle(t)).setStroke(Color.BLACK);
         }
     }
 
@@ -203,28 +200,24 @@ public class FourPlayerController {
 
         for (Pawn pawn : game.getPawns()) {
 
-            Circle pawnCirle = getPawnCircle(pawn);
+            Circle pawnCircle = getPawnCircle(pawn);
             Tile tile = null;
             for (Tile t : game.getTiles()) {
                 if (t.getFullId().equals(pawn.getPawnTileId())) {
                     tile = t;
                 }
             }
-            if (tile == null) {
-                int c = 4;
-            }
-            pawnCirle.setCenterX(tile.getLocation().getKey());
-            pawnCirle.setCenterY(tile.getLocation().getValue());
+
+            assert tile != null;
+            assert pawnCircle != null;
+            pawnCircle.setCenterX(tile.getLocation().getKey());
+            pawnCircle.setCenterY(tile.getLocation().getValue());
         }
 
 
         turnCircle.setFill(PlayerColor.values()[game.getCurrentPlayerId()].toColor());
         if (game.getIsDone()) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Thread.sleep(2000);
             btnLeaveGame.fire();
         }
     }
@@ -362,9 +355,8 @@ public class FourPlayerController {
 
     private void throwDice() {
         if (!isThrown) {
-            int thrown = -1;
             try {
-                thrown = game.rollDice();
+                game.rollDice();
                 //updateDice(false);
                 clearSelection();
 
@@ -378,7 +370,7 @@ public class FourPlayerController {
     private void updateDice(boolean effect) throws Exception {
 
         System.out.println(effect);
-        String z = getURL("Images/Dice0.png").toString();
+        String z = Objects.requireNonNull(getURL("Images/Dice0.png")).toString();
         Image diceNone = new Image(z);
         //imgDice.setEffect(new ColorAdjust(((color.getHue()/360) -.5f)*2, 1, 0, 0));
         String url = "Images/Dice" + game.getDiceRolled() + ".png";
@@ -388,11 +380,11 @@ public class FourPlayerController {
                     new KeyFrame(Duration.ZERO, new KeyValue(imgDice.imageProperty(), diceNone)),
                     new KeyFrame(Duration.ZERO, event -> {
 
-                        rotateImageView(imgDice, 1440, 2.5, 1);
-                        playSound("src/main/java/client/ui/Media/DiceRollSound.mp3");
+                        rotateImageView(imgDice);
+                        playRollDiceSound();
 
                     }),
-                    new KeyFrame(Duration.seconds(2), new KeyValue(imgDice.imageProperty(), new Image(getURL(url).toString()))),
+                    new KeyFrame(Duration.seconds(2), new KeyValue(imgDice.imageProperty(), new Image(Objects.requireNonNull(getURL(url)).toString()))),
                     new KeyFrame(Duration.seconds(3.5), new KeyValue(turnCircle.fillProperty(), (PlayerColor.values()[game.getCurrentPlayerId()].toColor()))),
                     new KeyFrame(Duration.seconds(2.5), new KeyValue(turnCircle.fillProperty(), Color.WHITE)));
 
@@ -400,7 +392,7 @@ public class FourPlayerController {
             timeline.play();
 
         } else {
-            imgDice.imageProperty().set(new Image(getURL(url).toString()));
+            imgDice.imageProperty().set(new Image(Objects.requireNonNull(getURL(url)).toString()));
             turnCircle.fillProperty().set(PlayerColor.values()[game.getCurrentPlayerId()].toColor());
         }
 
@@ -413,15 +405,15 @@ public class FourPlayerController {
     }
 
 
-    private void playSound(String path) {
-        MediaPlayer soundplayer = new MediaPlayer(new Media(new File(new File(path).getAbsolutePath()).toURI().toString()));
+    private void playRollDiceSound() {
+        MediaPlayer soundplayer = new MediaPlayer(new Media(new File(new File("src/main/java/client/ui/Media/DiceRollSound.mp3").getAbsolutePath()).toURI().toString()));
         soundplayer.play();
     }
 
-    private void rotateImageView(ImageView img, int degrees, double duration, int cycleAmount) {
-        RotateTransition rotation = new RotateTransition(Duration.seconds(duration), img);
-        rotation.setCycleCount(cycleAmount);
-        rotation.setByAngle(degrees);
+    private void rotateImageView(ImageView img) {
+        RotateTransition rotation = new RotateTransition(Duration.seconds(2.5), img);
+        rotation.setCycleCount(1);
+        rotation.setByAngle(1440);
         rotation.setOnFinished(event -> isThrown = false);
         isThrown = true;
         rotation.play();

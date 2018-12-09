@@ -26,7 +26,7 @@ public class MultiplayerFourPlayerGame implements Game {
     }
 
 
-    public Message waitForResponse(String responseName) throws Exception {
+    private Message waitForResponse(String responseName) throws Exception {
         while (true) {
             for (Message response : communicator.getResponses()) {
                 if (response.getName().equals(responseName)) {
@@ -43,11 +43,8 @@ public class MultiplayerFourPlayerGame implements Game {
 
                 }
             }
-            try {
                 Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+
         }
     }
 

@@ -8,7 +8,9 @@ import client.domain.classes.Tile;
 import client.domain.enums.GameMode;
 import client.domain.enums.PlayerColor;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -87,28 +89,12 @@ public class GameLogic {
                 if (possibleMove != null) {
 
                     boardStorage.getTile(pawn.getPawnTileId()).removePawn();
-                    Pawn smashedPawn = possibleMove.getPawn();
-
-                    if (smashedPawn != null) {
-
-                        // Places the smashed pawn to the starting tile
-                        smashedPawn.setPawnTileId(smashedPawn.getFullId());
-                        smashedPawn.setStepsTaken(0);
-                    }
-                    if (!pawn.getPawnTileId().equals(pawn.getFullId())) {
-                        pawn.setStepsTaken(pawn.getStepsTaken() + dice.getLastRolled());
-                    }
-                    pawn.setPawnTileId(possibleMove.getFullId());
-
-                    possibleMove.setPawn(pawn);
+                    checkPawnSmash(pawn, possibleMove);
                 }
 
                 diceRolled = false;
 
-                if (checkWincondition()) {
-                    isDone = true;
-                    throw new IllegalArgumentException("Player " + PlayerColor.values()[getCurrentPlayerId()] + " has won");
-                }
+                checkWinCondition();
 
                 if (dice.getLastRolled() != 6) {
                     switchTurn();
@@ -122,6 +108,30 @@ public class GameLogic {
         }
 
 
+    }
+
+    private void checkWinCondition() {
+        if (checkWincondition()) {
+            isDone = true;
+            throw new IllegalArgumentException("Player " + PlayerColor.values()[getCurrentPlayerId()] + " has won");
+        }
+    }
+
+    private void checkPawnSmash(Pawn pawn, Tile possibleMove) {
+        Pawn smashedPawn = possibleMove.getPawn();
+
+        if (smashedPawn != null) {
+
+            // Places the smashed pawn to the starting tile
+            smashedPawn.setPawnTileId(smashedPawn.getFullId());
+            smashedPawn.setStepsTaken(0);
+        }
+        if (!pawn.getPawnTileId().equals(pawn.getFullId())) {
+            pawn.setStepsTaken(pawn.getStepsTaken() + dice.getLastRolled());
+        }
+        pawn.setPawnTileId(possibleMove.getFullId());
+
+        possibleMove.setPawn(pawn);
     }
 
     private boolean checkWincondition() {
@@ -165,7 +175,11 @@ public class GameLogic {
                 Stream<Tile> stream = boardStorage.getTilesAsList().stream()
                         .filter(t -> t.getColor().equals(pawn.getPlayerColor().toString()) && t.getType().equals("WLK"));
 
-                return stream.findFirst().get();
+                Optional<Tile> tile = stream.findFirst();
+                if(tile.isPresent()){
+
+                    return tile.get();
+                }
             }
             return null;
         }
