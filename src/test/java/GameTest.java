@@ -217,4 +217,63 @@ public class GameTest {
 
         Assert.assertTrue(game.getIsDone());
     }
+
+    @Test
+    public void homeBaseTest() throws Exception {
+        //Move red pawn 3 to home base
+        for (int i = 0; i < 8; i++) {
+            while (true) {
+                if (game.rollDice() == 6 && game.getCurrentPlayerId()==0) {
+                    break;
+                }
+            }
+            game.movePawn("REP03" );
+        }
+
+        //Move red pawn 4 to home base
+        for (int i = 0; i < 6; i++) {
+            while (true) {
+                if (game.rollDice() == 6 && game.getCurrentPlayerId()==0) {
+                    break;
+                }
+            }
+            game.movePawn("REP04" );
+        }
+
+        while (true) {
+            if (game.rollDice() == 5 && game.getCurrentPlayerId()==0) {
+                break;
+            }
+        }
+        game.movePawn("REP04" );
+
+        while (true) {
+            if (game.rollDice() == 4 && game.getCurrentPlayerId()==0) {
+                break;
+            }
+        }
+        game.movePawn("REP04" );
+
+        while (true) {
+            if (game.rollDice() == 4 && game.getCurrentPlayerId()==0) {
+                break;
+            }
+        }
+        game.movePawn("REP04" );
+
+        //Try to move pawn 3 beyond pawn 4
+        while (true) {
+            if (game.rollDice() == 3 && game.getCurrentPlayerId()==0) {
+                break;
+            }
+        }
+        game.movePawn("REP03" );
+
+        Assert.assertEquals("REH03",game.getPawn("REP03").getPawnTileId());
+        Assert.assertEquals("REH04",game.getPawn("REP04").getPawnTileId());
+        //System.out.println(game.getPawn("REP01").getPawnTileId());
+        //System.out.println(game.getPawn("REP02").getPawnTileId());
+        //System.out.println(game.getPawn("REP03").getPawnTileId());
+        //System.out.println(game.getPawn("REP04").getPawnTileId());
+    }
 }
