@@ -333,6 +333,8 @@ public class FourPlayerController {
             event.consume();
         });
 
+
+
         btnThrowDice.setOnAction(event -> throwDice());
 
         btnLeaveGame.setOnAction(event -> {
@@ -422,6 +424,7 @@ public class FourPlayerController {
         rotation.setOnFinished(event -> isThrown = false);
         isThrown = true;
         rotation.play();
+        rotation.setOnFinished(event -> imgDice.setRotate(0));
     }
 
 

@@ -8,7 +8,6 @@ import client.domain.classes.Tile;
 import client.domain.enums.GameMode;
 import client.domain.enums.PlayerColor;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,6 +21,7 @@ public class GameLogic {
     private boolean diceRolled;
     private boolean isDone;
     private int callerId;
+
     public GameLogic() {
         boardStorage = DALFactory.getLocalBoardStorage();
         boardStorage.init(GameMode.FOURPLAYERBOARD);
@@ -176,7 +176,7 @@ public class GameLogic {
                         .filter(t -> t.getColor().equals(pawn.getPlayerColor().toString()) && t.getType().equals("WLK"));
 
                 Optional<Tile> tile = stream.findFirst();
-                if(tile.isPresent()){
+                if (tile.isPresent()) {
 
                     return tile.get();
                 }
@@ -192,8 +192,11 @@ public class GameLogic {
         }
         if (pawn.getStepsTaken() + dice.getLastRolled() >= boardStorage.getTileAmountOf("WLK")) {
 
-            int amountToWalk = pawn.getStepsTaken() + dice.getLastRolled() - boardStorage.getTileAmountOf("WLK");
+            if(boardStorage.getTile(pawn.getPawnTileId()).getType().endsWith("H") && getHomeBaseLockedOf(pawn.getFullId().substring(0,2),curTile.getNummerId())){
+                return null;
+            }
 
+            int amountToWalk = pawn.getStepsTaken() + dice.getLastRolled() - boardStorage.getTileAmountOf("WLK");
             int t = 1;
             int dir = 1;
             amountToWalk = amountToWalk % 6;
@@ -220,6 +223,17 @@ public class GameLogic {
 
         return possibleMove;
     }
+
+    private boolean getHomeBaseLockedOf(String tileColor, int base) {
+        if (boardStorage.getTile(tileColor + "H0" +base).getPawn() !=null) {
+                    if(base==4) {
+                        return true;
+                    }else
+                        return getHomeBaseLockedOf(tileColor,base+1);
+        }
+        return false;
+    }
+
 
     private Tile getWalkingTilePossibleMove(Pawn pawn, Tile curTile) {
         Tile possibleMove;

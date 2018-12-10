@@ -1,5 +1,6 @@
 package client.ui;
 
+import client.logicfactories.LogicFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -40,11 +41,12 @@ public class MainMenuController {
 
     void initialize() {
         btnQuickPlay.setOnAction(event -> {
-                FourPlayerController controller = new FourPlayerController();
-                //todo de-hardcode this and get player date from something like log-on or registration
-                JavaFXSceneFactory.generateStage(controller, getURL("4-Player.fxml"), false, "Speelbord", 629, 0).show();
-                ((Node) (event.getSource())).getScene().getWindow().hide();
+            //Temp
+            FourPlayerController controller = new FourPlayerController();
+            controller.setGame(LogicFactory.getOnlineFourPlayerGame());
+            JavaFXSceneFactory.generateStage(controller, getURL( "4-Player.fxml"), false, "Speelbord", 629, 0).show();
 
+            btnQuickPlay.getScene().getWindow().hide();
         });
 
         btnCreateLobby.setOnAction(event -> {
