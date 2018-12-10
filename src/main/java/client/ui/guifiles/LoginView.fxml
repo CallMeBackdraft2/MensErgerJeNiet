@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0"
-            prefWidth="527.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LoginViewController">
+            prefWidth="527.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ui.LoginViewController">
     <children>
         <ImageView fitHeight="580.0" fitWidth="635.0" layoutX="-43.0" layoutY="-87.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../Images/parchment-texture.jpg" />
