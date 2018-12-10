@@ -3,6 +3,8 @@ package client.ui;
 import client.domain.classes.Pawn;
 import client.domain.classes.Tile;
 import client.domain.enums.PlayerColor;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import shared.interfaces.Game;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -60,6 +62,7 @@ public class FourPlayerController {
     private Dictionary<Pawn, Circle> pawnCircles = new Hashtable<>();
 
 
+    private boolean isAnimating;
     private boolean isThrown;
     private Pawn chosenPawn;
     private int lastAmountDiceRolled = 0;
@@ -75,7 +78,7 @@ public class FourPlayerController {
            showError(e);
         }
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), event -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(16), event -> {
             try {
                 if (game.getNeedsUpdate()) {
                     clearSelection();
@@ -164,7 +167,7 @@ public class FourPlayerController {
     private void pawnPressed(Pawn pawn) throws Exception {
 
 
-        if (game.isYourTurn()) {
+        if (game.isYourTurn() && !isAnimating) {
             clearSelection();
             chosenPawn = pawn;
             Tile possibleMove = game.getPossibleMove(pawn.getFullId());
@@ -390,6 +393,8 @@ public class FourPlayerController {
 
             turnCircle.fillProperty().set(Color.WHITE);
             timeline.play();
+            isAnimating=true;
+            timeline.setOnFinished(event -> isAnimating=false);
 
         } else {
             imgDice.imageProperty().set(new Image(Objects.requireNonNull(getURL(url)).toString()));
