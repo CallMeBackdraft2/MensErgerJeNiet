@@ -46,7 +46,7 @@ public class GameLogic {
 
     public int rollDice() throws Exception {
         if (diceRolled && !debugMode) {
-            throw new IllegalArgumentException("move your pawn");
+            throw new IllegalArgumentException("Move your pawn");
         }
         dice.rollDice();
         boolean canMove = false;
@@ -272,18 +272,7 @@ public class GameLogic {
         return boardStorage.getPawn(id);
     }
 
-    private boolean smashPawn(String smashingPawnId, String tileId) {
 
-        Pawn smashedPawn = boardStorage.getTile(tileId).getPawn();
-        Pawn smashingPawn = boardStorage.getPawn(smashingPawnId);
-
-        if (smashedPawn.getPlayerId() != smashingPawn.getPlayerId()) {
-            boardStorage.getTile(tileId).removePawn();
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public boolean getIsDone() {
         return isDone;
