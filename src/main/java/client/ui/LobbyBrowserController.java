@@ -7,12 +7,16 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 
-class LobbyBrowserController {
+import java.io.File;
+import java.net.MalformedURLException;
+
+public class LobbyBrowserController {
     Player player;
 
-    @FXML Button btnGoToMain;
+    @FXML
+    Button btnGoToMain;
 
-    public LobbyBrowserController(Player player){
+    public LobbyBrowserController(Player player) {
         this.player = player;
     }
 
@@ -20,8 +24,12 @@ class LobbyBrowserController {
     void initialize() {
         btnGoToMain.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                JavaFXSceneFactory.generateStage(new MainMenuController(player), getClass().getResource("guifiles/MainMenu.fxml"), false, "Hoofdmenu").show();
-                ((Node) (event.getSource())).getScene().getWindow().hide();
+                try {
+                    JavaFXSceneFactory.generateStage(new MainMenuController(player), new File("src/main/java/client/ui/guifiles/MainMenu.fxml").toURI().toURL(), false, "Hoofdmenu").show();
+                    btnGoToMain.getScene().getWindow().hide();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

@@ -24,5 +24,4 @@
       <Label layoutX="189.0" layoutY="261.0" text="Gebruikersnaam:" />
       <Label layoutX="189.0" layoutY="304.0" text="Wachtwoord:" />
     </children>
-
 </AnchorPane>
