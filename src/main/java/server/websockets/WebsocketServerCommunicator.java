@@ -48,6 +48,5 @@ public class WebsocketServerCommunicator {
             subscriber.onMessageReceived(session,message);
         }
 
-        System.out.println(message);
     }
 }

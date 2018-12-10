@@ -227,7 +227,7 @@ public class FourPlayerController {
 
     private void tilePressed(Tile tile) throws Exception {
 
-        if (game.isYourTurn() && chosenPawn != null && tile.getFullId().equals(game.getPossibleMove(chosenPawn.getPawnTileId()).getFullId())) {
+        if (game.isYourTurn() && chosenPawn != null && tile.getFullId().equals(game.getPossibleMove(chosenPawn.getFullId()).getFullId())) {
             try {
                 game.movePawn(chosenPawn.getFullId());
             } catch (Exception e) {
@@ -297,9 +297,9 @@ public class FourPlayerController {
                 try {
                     tilePressed(tile);
                 } catch (Exception e) {
-                    showError(e);
-
+                    e.printStackTrace();
                 }
+
             });
 
             tileCircles.put(tile, circle);
@@ -359,7 +359,7 @@ public class FourPlayerController {
     }
 
     private void throwDice() {
-        if (!isThrown) {
+
             try {
                 game.rollDice();
                 //updateDice(false);
@@ -369,12 +369,11 @@ public class FourPlayerController {
 
                 showError(e);
             }
-        }
+
     }
 
     private void updateDice(boolean effect) throws Exception {
 
-        System.out.println(effect);
         String z = Objects.requireNonNull(getURL("Images/Dice0.png")).toString();
         Image diceNone = new Image(z);
         //imgDice.setEffect(new ColorAdjust(((color.getHue()/360) -.5f)*2, 1, 0, 0));

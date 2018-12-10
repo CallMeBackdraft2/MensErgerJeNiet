@@ -166,7 +166,7 @@ public class GameLogic {
 
     public Tile getPossibleMove(String pawnId) {
 
-        Pawn pawn = boardStorage.getPawn(pawnId);
+            Pawn pawn = boardStorage.getPawn(pawnId);
         Tile curTile = boardStorage.getTile(pawn.getPawnTileId());
         if (curTile.getType().charAt(2) == 'P') {
 

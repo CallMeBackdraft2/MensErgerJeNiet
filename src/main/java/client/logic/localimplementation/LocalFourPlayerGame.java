@@ -31,15 +31,17 @@ public class LocalFourPlayerGame extends GameLogic implements Game {
         this.lobby = lobby;
     }
 
+    boolean needsUpdate = false;
 
     @Override
     public boolean getNeedsUpdate() {
-        return false;
+        return needsUpdate;
     }
 
     @Override
     public void setNeedsUpdate(boolean bool) {
-        throw new UnsupportedOperationException();
+
+        needsUpdate = bool;
     }
 
     @Override
@@ -65,4 +67,20 @@ public class LocalFourPlayerGame extends GameLogic implements Game {
         return messages.toArray(new String[0]);
     }
 
+    @Override
+    public int rollDice() throws Exception {
+        needsUpdate=true;
+        return super.rollDice();
+    }
+
+    @Override
+    public void movePawn(String pawnId) throws Exception {
+        needsUpdate = true;
+        super.movePawn(pawnId);
+    }
+
+    @Override
+    public boolean isYourTurn() {
+        return true;
+    }
 }
