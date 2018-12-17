@@ -1,8 +1,6 @@
 package client.ui;
 
 import client.domain.classes.Player;
-import client.logicfactories.LogicFactory;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
