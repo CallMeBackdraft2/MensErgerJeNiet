@@ -32,7 +32,13 @@ public class LoginViewController {
         });
 
         bttn_register.setOnAction(event -> {
-
+            RegisterViewController controller = new RegisterViewController();
+            try {
+                JavaFXSceneFactory.generateStage(controller, new File("src/main/java/client/ui/guifiles/RegisterView.fxml").toURI().toURL(), false, "Registreer").show();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            bttn_register.getScene().getWindow().hide();
         });
     }
 }
