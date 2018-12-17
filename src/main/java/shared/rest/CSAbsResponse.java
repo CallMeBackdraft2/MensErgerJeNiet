@@ -1,4 +1,4 @@
-package rest.shared;
+package shared.rest;
 
 public class CSAbsResponse {
 

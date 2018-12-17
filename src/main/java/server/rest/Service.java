@@ -1,8 +1,8 @@
 package server.rest;
 
 import com.google.gson.Gson;
-import rest.shared.CSAbsResponse;
-import rest.shared.SLoginResponse;
+import shared.rest.CSAbsResponse;
+import shared.rest.SLoginResponse;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
