@@ -1,9 +1,14 @@
 package client.ui;
 
+import client.domain.classes.Player;
+import client.logicfactories.LogicFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
+import java.io.File;
+import java.net.MalformedURLException;
 
 public class LoginViewController {
     @FXML Button bttn_register;
@@ -11,11 +16,23 @@ public class LoginViewController {
     @FXML TextField txt_password;
     @FXML TextField txt_username;
 
-    public void bttn_register_click(ActionEvent event) {
+    @FXML
+    void initialize(){
+        bttn_login.setOnAction(event -> {
+            // Todo: Login verificatie Via REST
 
-    }
+            Player player = new Player(txt_username.getText());
+            MainMenuController controller = new MainMenuController(player);
+            try {
+                JavaFXSceneFactory.generateStage(controller, new File("src/main/java/client/ui/guifiles/MainMenu.fxml").toURI().toURL(), false, "Hoofdmenu").show();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            bttn_login.getScene().getWindow().hide();
+        });
 
-    public void bttn_login_click(ActionEvent event){
+        bttn_register.setOnAction(event -> {
 
+        });
     }
 }

@@ -136,7 +136,6 @@ public class GameLogic {
 
     private boolean checkWincondition() {
 
-
         for (int i = 0; i < 4; i++) {
             Pawn[] pawns = boardStorage.getPlayerPawns(i);
             boolean won = true;

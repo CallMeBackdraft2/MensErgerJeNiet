@@ -11,7 +11,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        JavaFXSceneFactory.generateStage(new MainMenuController(), new File("src/main/java/client/ui/guifiles/MainMenu.fxml").toURI().toURL(), false, "Hoofdmenu").show();
+        JavaFXSceneFactory.generateStage(new LoginViewController(), new File("src/main/java/client/ui/guifiles/LoginView.fxml").toURI().toURL(), false, "Log in").show();
     }
 
 

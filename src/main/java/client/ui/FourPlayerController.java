@@ -1,6 +1,7 @@
 package client.ui;
 
 import client.domain.classes.Pawn;
+import client.domain.classes.Player;
 import client.domain.classes.Tile;
 import client.domain.enums.PlayerColor;
 import javafx.event.ActionEvent;
@@ -36,25 +37,18 @@ import java.util.*;
 
 
 public class FourPlayerController {
-    @FXML
-    ImageView imgDice;
-    @FXML
-    Button btnLeaveGame;
-    @FXML
-    Button btnThrowDice;
-    @FXML
-    AnchorPane boardPane;
-    @FXML
-    TextField messageField;
+    @FXML ImageView imgDice;
+    @FXML Button btnLeaveGame;
+    @FXML Button btnThrowDice;
+    @FXML AnchorPane boardPane;
+    @FXML TextField messageField;
 
-    @FXML
-    Circle turnCircle;
+    @FXML Circle turnCircle;
 
-    @FXML
-    ListView chatListView;
-    @FXML
-    ListView playersListView;
+    @FXML ListView chatListView;
+    @FXML ListView playersListView;
 
+    Player player;
     Game game;
     Circle selectedPawn = null;
 
@@ -67,14 +61,18 @@ public class FourPlayerController {
     private Pawn chosenPawn;
     private int lastAmountDiceRolled = 0;
 
+    public  FourPlayerController(Player player){
+        this.player = player;
+    }
+
     @FXML
     void initialize() {
-
 
         addAllEventHandlers();
         try {
             populatePlayingField();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
            showError(e);
         }
 
@@ -92,7 +90,8 @@ public class FourPlayerController {
                     //lastAmountDiceRolled = game.getDiceAmountRolled();
                     game.setNeedsUpdate(false);
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 showError(e);
             }
         }));
@@ -120,7 +119,7 @@ public class FourPlayerController {
 
     private URL getURL(String path) {
         try {
-            return new File("src/main/java/client/ui/" + path).toURL();
+            return new File("src/main/java/client/ui/" + path).toURI().toURL();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -338,7 +337,7 @@ public class FourPlayerController {
         btnThrowDice.setOnAction(event -> throwDice());
 
         btnLeaveGame.setOnAction(event -> {
-            JavaFXSceneFactory.generateStage(new MainMenuController(), getURL("guifiles/MainMenu.fxml"), false, "Hoofdmenu").show();
+            JavaFXSceneFactory.generateStage(new MainMenuController(player), getURL("guifiles/MainMenu.fxml"), false, "Hoofdmenu").show();
             ((Node) (event.getSource())).getScene().getWindow().hide();
         });
 

@@ -12,7 +12,10 @@ public class Player {
         this.id = id;
         this.name = name;
         this.playerColor = PlayerColor.values()[id];
+    }
 
+    public Player(String name){
+        this.name = name;
     }
 
     //public setters

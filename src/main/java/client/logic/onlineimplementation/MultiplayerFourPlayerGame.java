@@ -20,7 +20,6 @@ public class MultiplayerFourPlayerGame implements Game {
     public MultiplayerFourPlayerGame() {
 
         communicator = new CommunicatorWebSocket(this);
-
         Thread communicatorThread = new Thread(communicator);
         communicatorThread.run();
     }

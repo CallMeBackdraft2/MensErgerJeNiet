@@ -26,7 +26,7 @@ public class Lobby {
        players = new ArrayList<>();
        messages = new ArrayList<>();
        gameMode = GameMode.FOURPLAYERBOARD;
-        players.add(host);
+       players.add(host);
    }
 
     public List<LobbyMessage> getMessages() {
