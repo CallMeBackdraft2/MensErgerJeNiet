@@ -47,8 +47,6 @@ public class Service {
 
         String id =  generateUUID(username,password);
         playerHashMap.put(id,new Player(username));
-
-
         return Response.status(200).entity(id).build();
     }
 }

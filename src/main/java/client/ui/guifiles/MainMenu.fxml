@@ -5,19 +5,20 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="538.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="538.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fitHeight="580.0" fitWidth="635.0" layoutX="-43.0" layoutY="-87.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../Images/parchment-texture.jpg" />
         </ImageView>
-        <Button fx:id="btnCreateLobby" layoutX="155.0" layoutY="268.0" mnemonicParsing="false" prefHeight="30" prefWidth="90" text="Create Lobby" />
-        <Button fx:id="btnJoinLobby" layoutX="155.0" layoutY="316.0" mnemonicParsing="false" prefHeight="30" prefWidth="90" text="Join Lobby" />
-        <Button fx:id="btnFindLobby" layoutX="298.0" layoutY="316.0" mnemonicParsing="false" prefHeight="30" prefWidth="90" text="Find Game" />
-        <Button fx:id="btnQuickPlay" layoutX="298.0" layoutY="268.0" mnemonicParsing="false" prefHeight="30" prefWidth="90" text="Quick Play" />
+        <Button fx:id="btnCreateLobby" layoutX="88.0" layoutY="268.0" mnemonicParsing="false" prefHeight="30" prefWidth="90" text="Create Lobby" />
+        <Button fx:id="btnJoinLobby" layoutX="88.0" layoutY="316.0" mnemonicParsing="false" prefHeight="30" prefWidth="90" text="Join Lobby" />
+        <Button fx:id="btnFindLobby" layoutX="231.0" layoutY="316.0" mnemonicParsing="false" prefHeight="30" prefWidth="90" text="Find Game" />
+        <Button fx:id="btnQuickPlay" layoutX="231.0" layoutY="268.0" mnemonicParsing="false" prefHeight="30" prefWidth="90" text="Quick Play" />
         <ImageView fitHeight="206.0" fitWidth="428.0" layoutX="100.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../Images/mens-erger-je-niet.png" />
             </image>
         </ImageView>
+      <Button fx:id="btnScenarios" layoutX="360.0" layoutY="268.0" mnemonicParsing="false" prefHeight="30" prefWidth="90" text="Scenarios" />
     </children>
 </AnchorPane>

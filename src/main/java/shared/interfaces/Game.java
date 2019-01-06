@@ -13,6 +13,7 @@ public interface Game {
     int getDiceRolled() throws Exception;
     int getDiceAmountRolled() throws Exception;
     void movePawn(String pawnId) throws Exception;
+    void movePawnDebug(String pawnId, String tileId) throws Exception;
     Tile[] getTiles() throws Exception;
     Tile getPossibleMove(String pawnId) throws Exception;
     boolean isYourTurn() throws Exception;

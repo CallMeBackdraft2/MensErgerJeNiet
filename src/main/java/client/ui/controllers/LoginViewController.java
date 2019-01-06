@@ -1,6 +1,7 @@
-package client.ui;
+package client.ui.controllers;
 
 import client.domain.classes.Player;
+import client.ui.JavaFXSceneFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -15,7 +16,7 @@ public class LoginViewController {
     @FXML TextField txt_username;
 
     @FXML
-    void initialize(){
+    public void initialize(){
         bttn_login.setOnAction(event -> {
             // Todo: Login verificatie Via REST
 

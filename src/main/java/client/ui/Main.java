@@ -1,5 +1,6 @@
 package client.ui;
 
+import client.ui.controllers.LoginViewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
