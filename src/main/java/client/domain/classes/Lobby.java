@@ -14,9 +14,17 @@ public class Lobby {
     private boolean isOnline;
     private List<Player> players;
     private List<LobbyMessage> messages;
+    private int lobbyId;
 
 
     public Lobby( ) {
+        players = new ArrayList<>();
+        messages = new ArrayList<>();
+        gameMode = GameMode.FOURPLAYERBOARD;
+    }
+
+    public Lobby(int lobbyId) {
+        this.lobbyId = lobbyId;
         players = new ArrayList<>();
         messages = new ArrayList<>();
         gameMode = GameMode.FOURPLAYERBOARD;
