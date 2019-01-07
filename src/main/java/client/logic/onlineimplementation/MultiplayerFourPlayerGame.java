@@ -107,6 +107,11 @@ public class MultiplayerFourPlayerGame implements Game {
     }
 
     @Override
+    public void movePawnDebug(String pawnId, String tileId) throws Exception {
+        call(void.class, pawnId,tileId);
+    }
+
+    @Override
     public Tile[] getTiles() throws Exception {
         return call(Tile[].class);
     }

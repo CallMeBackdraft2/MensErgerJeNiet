@@ -1,10 +1,9 @@
-package client.ui;
+package client.ui.controllers;
 
-import javafx.event.ActionEvent;
+import client.ui.JavaFXSceneFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import org.eclipse.persistence.sessions.Login;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -17,7 +16,7 @@ public class RegisterViewController {
     @FXML TextField txt_repeatPassword;
 
     @FXML
-    void initialize() {
+    public void initialize() {
         bttn_register.setOnAction(event -> {
 
         });

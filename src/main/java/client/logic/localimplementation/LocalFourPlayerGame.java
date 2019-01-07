@@ -1,5 +1,6 @@
 package client.logic.localimplementation;
 
+import client.domain.classes.FakeDice;
 import client.domain.classes.Lobby;
 import client.domain.classes.LobbyMessage;
 import client.domain.classes.Player;
@@ -29,6 +30,8 @@ public class LocalFourPlayerGame extends GameLogic implements Game {
     public LocalFourPlayerGame(Lobby lobby) {
         super();
         this.lobby = lobby;
+        setDebugMode(true);
+        setDice(new FakeDice(new int[]{1,6,1,10}));
     }
 
     boolean needsUpdate = false;

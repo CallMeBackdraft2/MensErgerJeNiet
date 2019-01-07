@@ -3,6 +3,7 @@ package shared;
 import client.dal.interfaces.BoardStorage;
 import client.dalfactories.DALFactory;
 import client.domain.classes.Dice;
+import client.domain.classes.FairDice;
 import client.domain.classes.Pawn;
 import client.domain.classes.Tile;
 import client.domain.enums.GameMode;
@@ -25,7 +26,7 @@ public class GameLogic {
     public GameLogic() {
         boardStorage = DALFactory.getLocalBoardStorage();
         boardStorage.init(GameMode.FOURPLAYERBOARD);
-        dice = new Dice();
+        dice = new FairDice();
 
     }
 
@@ -36,6 +37,12 @@ public class GameLogic {
     public GameLogic setDebugMode(boolean debugMode) {
         this.debugMode = debugMode;
         return this;
+    }
+
+    public void setDice(Dice dice){
+        if(debugMode){
+            this.dice = dice;
+        }
     }
 
     public void skipTurn() {
@@ -165,7 +172,7 @@ public class GameLogic {
 
     public Tile getPossibleMove(String pawnId) {
 
-            Pawn pawn = boardStorage.getPawn(pawnId);
+        Pawn pawn = boardStorage.getPawn(pawnId);
         Tile curTile = boardStorage.getTile(pawn.getPawnTileId());
         if (curTile.getType().charAt(2) == 'P') {
 
@@ -271,6 +278,12 @@ public class GameLogic {
         return boardStorage.getPawn(id);
     }
 
+    public void movePawnDebug(String pawnId, String tileId) throws Exception{
+        if(!debugMode){
+            throw new Exception("Not in debug mode");
+        }
+        getPawn(pawnId).setPawnTileId(tileId);
+    }
 
 
     public boolean getIsDone() {

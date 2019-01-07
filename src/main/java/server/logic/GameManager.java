@@ -1,6 +1,6 @@
 package server.logic;
 
-import server.MessageReceiver;
+import server.websockets.MessageReceiver;
 import shared.Message;
 
 import javax.websocket.Session;

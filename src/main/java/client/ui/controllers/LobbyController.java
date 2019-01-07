@@ -1,14 +1,12 @@
-package client.ui;
+package client.ui.controllers;
 
 import client.domain.classes.Lobby;
 import client.domain.classes.Player;
 import client.domain.enums.GameMode;
 import client.domain.enums.PlayerColor;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import client.ui.FourPlayerController;
+import client.ui.JavaFXSceneFactory;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -57,7 +55,7 @@ public class LobbyController {
     }
 
     @FXML
-    void initialize() {
+    public void initialize() {
         player.setPlayerColor(PlayerColor.RED);
         updatePlayerList();
 

@@ -14,12 +14,12 @@ public class JavaFXSceneFactory {
 
     }
 
-    static Stage generateStage(Object controller, URL fxmlPath, boolean resizable, String stageTitle) {
+   public static Stage generateStage(Object controller, URL fxmlPath, boolean resizable, String stageTitle) {
         return getStage(controller, fxmlPath, resizable, stageTitle);
     }
 
 
-    static Stage generateStage(Object controller, URL fxmlPath, boolean resizable, String stageTitle, int customHeight, int customWidth) {
+    public  static Stage generateStage(Object controller, URL fxmlPath, boolean resizable, String stageTitle, int customHeight, int customWidth) {
         Stage result = getStage(controller, fxmlPath, resizable, stageTitle);
         if (customHeight != 0) {
             result.setHeight(customHeight);
