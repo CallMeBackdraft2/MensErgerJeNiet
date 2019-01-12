@@ -2,8 +2,11 @@ package server.logic;
 
 import client.domain.classes.LobbyMessage;
 import com.google.gson.Gson;
+import server.websockets.Responder;
 import shared.Message;
+import shared.interfaces.Game;
 
+import javax.websocket.Session;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
@@ -13,17 +16,19 @@ import java.util.List;
 
 public class ServerLobby {
 
-    List<ServerPlayer> serverPlayers = new ArrayList<>();
+    public List<ServerPlayer> serverPlayers = new ArrayList<>();
     private ServerPlayer host;
     private List<LobbyMessage> messages = new ArrayList<>();
     private MultiplayerFourPlayerGame game;
     private boolean isDebugMode;
+    public Responder responder;
 
     ServerLobby(ServerPlayer host, boolean isDebugMode) {
         this.host = host;
         serverPlayers.add(host);
         this.isDebugMode = isDebugMode;
         //TEMP
+
         startGame();
     }
 
@@ -52,6 +57,8 @@ public class ServerLobby {
 
     private void startGame() {
         game = new MultiplayerFourPlayerGame(this,isDebugMode);
+        responder = new Responder(game, Game.class);
+
     }
 
     public void update() {
@@ -66,6 +73,13 @@ public class ServerLobby {
         update();
 
     }
+
+
+    void newHandle(ServerPlayer player, Message message){
+        game.setCallerId(player.getId());
+        responder.callAndRespond(message,player.getSession());
+    }
+
 
     void handleMessage(ServerPlayer player, Message message) {
 

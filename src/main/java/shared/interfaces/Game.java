@@ -6,8 +6,11 @@ import client.domain.classes.Tile;
 
 public interface Game {
 
-    void skipTurn() throws Exception;
+
+
     boolean getNeedsUpdate() throws Exception;
+    void skipTurn() throws Exception;
+    Player[] getPlayers() throws Exception;
     void setNeedsUpdate(boolean bool) throws Exception;
     int rollDice() throws Exception;
     int getDiceRolled() throws Exception;
@@ -20,7 +23,6 @@ public interface Game {
     Pawn getPawn(String homeTileID) throws Exception;
     Pawn[] getPawns() throws Exception;
     int getCurrentPlayerId() throws Exception;
-    Player[] getPlayers() throws Exception;
     void sendMessage(String message) throws Exception;
     String[] getMessages() throws Exception;
     boolean getIsDone() throws Exception;

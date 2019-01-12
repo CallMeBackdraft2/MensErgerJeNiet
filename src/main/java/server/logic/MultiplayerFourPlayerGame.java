@@ -12,7 +12,7 @@ public class MultiplayerFourPlayerGame extends GameLogic implements Game {
 
     private ServerLobby lobby;
     private List<ServerPlayer> players;
-    private boolean needsUpdate;
+
 
     MultiplayerFourPlayerGame(ServerLobby serverLobby, boolean debugMode) {
         this.lobby = serverLobby;
@@ -21,14 +21,17 @@ public class MultiplayerFourPlayerGame extends GameLogic implements Game {
 
     }
 
+
+
+
     @Override
     public boolean getNeedsUpdate() {
-        return needsUpdate;
+        return false;
     }
 
     @Override
     public void setNeedsUpdate(boolean bool) {
-        needsUpdate  =true;
+
     }
 
 

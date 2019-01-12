@@ -81,13 +81,13 @@ public class LobbyController {
             FourPlayerController controller = new FourPlayerController(player);
 
             if (lobby.isOnline()){
-                controller.setGame(LogicFactory.getOnlineFourPlayerGame());
                 JavaFXSceneFactory.generateStage(controller, getURL( "4-Player.fxml"), false, "Speelbord", 629, 0).show();
+                controller.setGame(LogicFactory.getOnlineFourPlayerGame());
 
             }
             else {
-                controller.setGame(LogicFactory.getLocalFourPlayerGame(lobby));
                 JavaFXSceneFactory.generateStage(controller, getURL( "4-Player.fxml"), false, "Speelbord", 629, 0).show();
+                controller.setGame(LogicFactory.getLocalFourPlayerGame(lobby));
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             }
         });

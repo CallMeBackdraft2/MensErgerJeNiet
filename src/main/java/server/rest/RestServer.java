@@ -12,14 +12,14 @@ public class RestServer {
         ServletContextHandler context = new
                 ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
-        Server jettyServer = new Server(8091);
+        Server jettyServer = new Server(8090);
         jettyServer.setHandler(context);
         ServletHolder jerseyServlet =
                 context.addServlet(ServletContainer.class, "/*");
         jerseyServlet.setInitOrder(0);
         // Tells the Jersey Servlet which REST service/class to load.
         jerseyServlet.setInitParameter("jersey.config.server.provider.classnames",
-                LobbyRESTService.class.getCanonicalName());
+                Service.class.getCanonicalName());
         try {
             jettyServer.start();
             jettyServer.join();

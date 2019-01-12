@@ -26,11 +26,11 @@ public class HomeBaseScenario implements Scenario {
         for (int i = 0; i < 8; i++) {
             game.movePawn("REP02");
         }
-        /**
+
         for (int i = 0; i < 7; i++) {
             game.movePawn("REP03");
         }
-        game.rollDice();
+       /** game.rollDice();
         game.movePawn("REP03");
 
         game.rollDice();
@@ -42,8 +42,8 @@ public class HomeBaseScenario implements Scenario {
             game.movePawn("REP04");
         }
         **/
-        game.setDebugMode(false);
-        //game.rollDice();
+      //  game.setDebugMode(false);
+        game.rollDice();
         //game.movePawn("REP04");
         return game;
     }

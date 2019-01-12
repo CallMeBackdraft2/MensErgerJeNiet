@@ -4,6 +4,7 @@ import client.logic.onlineimplementation.MultiplayerFourPlayerGame;
 import client.ui.Main;
 import com.google.gson.Gson;
 import shared.Message;
+import shared.interfaces.Game;
 
 import javax.websocket.*;
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class CommunicatorWebSocket extends Communicator implements Runnable {
     private static Session session;
     private static String message;
     private static Gson gson = null;
-    private static MultiplayerFourPlayerGame game;
+    private static Game game;
     private static List<Message> responses = new ArrayList<>();
     /*
      * The local websocket uri to connect to.
@@ -30,14 +31,12 @@ public class CommunicatorWebSocket extends Communicator implements Runnable {
     boolean isRunning = false;
 
     // Private constructor (singleton pattern)
-    public CommunicatorWebSocket() {
+    private CommunicatorWebSocket() {
+        instance = this;
         gson = new Gson();
     }
 
-    public CommunicatorWebSocket(MultiplayerFourPlayerGame game) {
-        gson = new Gson();
-        this.game = game;
-    }
+
 
     /*
      * Get singleton instance of this class.
@@ -46,8 +45,9 @@ public class CommunicatorWebSocket extends Communicator implements Runnable {
      */
     public static CommunicatorWebSocket getInstance() {
         if (instance == null) {
-            System.out.println("[WebSocket Client create singleton instance]");
             instance = new CommunicatorWebSocket();
+            instance.start();
+
         }
         return instance;
     }
@@ -57,8 +57,16 @@ public class CommunicatorWebSocket extends Communicator implements Runnable {
         communicator.start();
     }
 
+    public static void setGame(Game game) {
+        CommunicatorWebSocket.game = game;
+    }
+
     public void sendMessage(Message message) {
 
+        if(session==null){
+            responses.add(new Message("Exception", new Exception("No connection to server")));
+            return;
+        }
         session.getAsyncRemote().sendText(message.toJson());
     }
 
@@ -94,12 +102,14 @@ public class CommunicatorWebSocket extends Communicator implements Runnable {
         Message message = Message.fromJSON(messageText);
         if (message.getName().equals("update")) {
             try {
+                if(game!=null)
                 game.setNeedsUpdate(true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-        } else responses.add(message);
+        }
+        responses.add(message);
     }
 
     @OnError

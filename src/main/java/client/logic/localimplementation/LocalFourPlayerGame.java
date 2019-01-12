@@ -36,6 +36,7 @@ public class LocalFourPlayerGame extends GameLogic implements Game {
 
     boolean needsUpdate = false;
 
+
     @Override
     public boolean getNeedsUpdate() {
         return needsUpdate;

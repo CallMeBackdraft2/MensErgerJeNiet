@@ -1,6 +1,7 @@
 package client.ui.controllers;
 
 import client.domain.classes.Player;
+import client.logic.onlineimplementation.ConnectionCaller;
 import client.ui.JavaFXSceneFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,7 +10,9 @@ import javafx.scene.control.TextField;
 import java.io.File;
 import java.net.MalformedURLException;
 
+
 public class LoginViewController {
+    private ConnectionCaller connectionCaller;
     @FXML Button bttn_register;
     @FXML Button bttn_login;
     @FXML TextField txt_password;
@@ -17,17 +20,27 @@ public class LoginViewController {
 
     @FXML
     public void initialize(){
-        bttn_login.setOnAction(event -> {
-            // Todo: Login verificatie Via REST
 
-            Player player = new Player(txt_username.getText());
-            MainMenuController controller = new MainMenuController(player);
+       connectionCaller  = new ConnectionCaller();
+        bttn_login.setOnAction(event -> {
+
+            boolean succes =true;
             try {
-                JavaFXSceneFactory.generateStage(controller, new File("src/main/java/client/ui/guifiles/MainMenu.fxml").toURI().toURL(), false, "Hoofdmenu").show();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
+                  connectionCaller.login(txt_username.getText(),txt_password.getText()) ;
+            } catch (Exception e) {
+                succes =false;
+                MessageShower.showError(e);
             }
-            bttn_login.getScene().getWindow().hide();
+
+            if(succes) {
+                Player player = new Player(txt_username.getText());
+                MainMenuController controller = new MainMenuController(player);
+                try {
+                    JavaFXSceneFactory.generateStage(controller, new File("src/main/java/client/ui/guifiles/MainMenu.fxml").toURI().toURL(), false, "Hoofdmenu").show();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+            }
         });
 
         bttn_register.setOnAction(event -> {

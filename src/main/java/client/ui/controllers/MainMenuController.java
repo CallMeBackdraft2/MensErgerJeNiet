@@ -42,8 +42,8 @@ public class MainMenuController {
         btnQuickPlay.setOnAction(event -> {
             //Temp
             FourPlayerController controller = new FourPlayerController(player);
-            controller.setGame(LogicFactory.getOnlineFourPlayerGame());
             JavaFXSceneFactory.generateStage(controller, getURL( "4-Player.fxml"), false, "Speelbord", 629, 0).show();
+            controller.setGame(LogicFactory.getOnlineFourPlayerGame());
             hide();
         });
 

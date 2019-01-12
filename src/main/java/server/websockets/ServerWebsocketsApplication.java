@@ -34,7 +34,7 @@ public class ServerWebsocketsApplication {
         webSocketServer.stop();
         webSocketThread.interrupt();
         webSocketThread = null;
-        int i=0;
+
 
     }
 
