@@ -12,7 +12,6 @@ public class ServerWebsocketsApplication {
     private static final int PORT = 1234;
 
     public static Thread webSocketThread;
-    public static GameManager manager;
     private static Server webSocketServer;
 
     public static void main(String[] args) throws InterruptedException {
@@ -24,13 +23,12 @@ public class ServerWebsocketsApplication {
             bool = Boolean.parseBoolean(args[0]);
 
         }
-        manager = new GameManager(bool);
-        WebsocketServerCommunicator.subscribe(manager);
+        WebsocketServerCommunicator.subscribe(GameManager.getInstance());
 
     }
 
     public static void stop() throws Exception {
-        WebsocketServerCommunicator.unSubscribe(manager);
+        WebsocketServerCommunicator.unSubscribe(GameManager.getInstance());
         webSocketServer.stop();
         webSocketThread.interrupt();
         webSocketThread = null;

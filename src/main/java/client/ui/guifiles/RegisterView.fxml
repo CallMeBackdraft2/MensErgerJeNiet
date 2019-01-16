@@ -7,6 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.scene.control.PasswordField?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0" prefWidth="534.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fitHeight="580.0" fitWidth="635.0" layoutX="-43.0" layoutY="-87.0" pickOnBounds="true" preserveRatio="true">
@@ -18,8 +19,8 @@
             </image>
         </ImageView>
       <TextField fx:id="txt_username" layoutX="249.0" layoutY="280.0" />
-      <TextField fx:id="txt_password" layoutX="249.0" layoutY="307.0" />
-      <TextField fx:id="txt_repeatPassword" layoutX="249.0" layoutY="334.0" />
+      <PasswordField fx:id="txt_password" layoutX="249.0" layoutY="307.0" />
+      <PasswordField fx:id="txt_repeatPassword" layoutX="249.0" layoutY="334.0" />
       <Label layoutX="152.0" layoutY="284.0" text="Gebruikersnaam:" />
       <Label layoutX="170.0" layoutY="311.0" text="Wachtwoord:" />
       <Label layoutX="129.0" layoutY="338.0" text="Herhaal wachtwoord:" />

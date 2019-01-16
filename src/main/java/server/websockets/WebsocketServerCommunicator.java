@@ -41,7 +41,7 @@ public class WebsocketServerCommunicator {
     @OnOpen
     public void onOpen(Session session) {
 
-        sessionData.put(session,new ServerPlayer(0,session,"sss"));
+        sessionData.put(session,new ServerPlayer(session));
 
         for (MessageReceiver subscriber : subscribers) {
             subscriber.onNewSessionConnected(session);

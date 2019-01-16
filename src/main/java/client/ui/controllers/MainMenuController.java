@@ -1,6 +1,6 @@
 package client.ui.controllers;
 
-import client.domain.classes.Lobby;
+import client.domain.classes.LobbyView;
 import client.domain.classes.Player;
 import client.logicfactories.LogicFactory;
 import client.ui.FourPlayerController;
@@ -48,13 +48,15 @@ public class MainMenuController {
         });
 
         btnCreateLobby.setOnAction(event -> {
-            LobbyController controller = new LobbyController(player, new Lobby(player));
+            LobbyController controller = new LobbyController(player, new LobbyView(player));
             JavaFXSceneFactory.generateStage(controller,getURL("LobbyView.fxml"), false, "Spellobby", 429, 431).show();
             hide();
         });
 
         btnFindLobby.setOnAction(event -> {
-            JavaFXSceneFactory.generateStage(new LobbyBrowserController(player),  getURL("LobbyBrowser.fxml"), false, "Lobby Browser", 429, 600).show();
+            LobbyBrowserController controller = new LobbyBrowserController(player) ;
+            JavaFXSceneFactory.generateStage(controller,  getURL("LobbyBrowser.fxml"), false, "Lobby Browser", 429, 600).show();
+            controller.realInit();
             hide();
         });
 

@@ -26,7 +26,6 @@ public class RestCommunicator {
 
     public RestResponse getRequest(String controller, String method, String... parameters) {
 
-
         String path = getPath(controller, method, parameters);
         CloseableHttpResponse response;
 

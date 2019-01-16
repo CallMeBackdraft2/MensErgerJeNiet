@@ -1,7 +1,7 @@
 package client.logic.localimplementation;
 
 import client.domain.classes.FakeDice;
-import client.domain.classes.Lobby;
+import client.domain.classes.LobbyView;
 import client.domain.classes.LobbyMessage;
 import client.domain.classes.Player;
 import shared.interfaces.Game;
@@ -14,12 +14,12 @@ import java.util.List;
 
 public class LocalFourPlayerGame extends GameLogic implements Game {
 
-    Lobby lobby;
+    LobbyView lobby;
 
     public LocalFourPlayerGame(boolean debugMode) {
         super();
 
-        lobby = new Lobby();
+        lobby = new LobbyView();
         lobby.playerJoin(new Player(0, "TestHuman"));
         lobby.playerJoin(new Player(1, "TestAI1"));
         lobby.playerJoin(new Player(2, "TestAI2"));
@@ -27,7 +27,7 @@ public class LocalFourPlayerGame extends GameLogic implements Game {
         setDebugMode(debugMode);
     }
 
-    public LocalFourPlayerGame(Lobby lobby) {
+    public LocalFourPlayerGame(LobbyView lobby) {
         super();
         this.lobby = lobby;
         setDebugMode(true);

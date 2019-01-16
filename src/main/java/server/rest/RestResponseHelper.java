@@ -1,6 +1,6 @@
 package server.rest;
 
-import client.domain.classes.Lobby;
+import client.domain.classes.LobbyView;
 import com.google.gson.Gson;
 import shared.rest.LobbyResponse;
 
@@ -19,12 +19,12 @@ public class RestResponseHelper {
         return output;
     }
 
-    public static String getSingleLobbyResponse(Lobby lobbyFromRest)
+    public static String getSingleLobbyResponse(LobbyView lobbyFromRest)
     {
         LobbyResponse response = new LobbyResponse();
         response.setSuccess(true);
-        List<Lobby> lobbies = new ArrayList<>();
-        Lobby lobby = lobbyFromRest;
+        List<LobbyView> lobbies = new ArrayList<>();
+        LobbyView lobby = lobbyFromRest;
         lobbies.add(lobby);
         response.setLobbies(lobbies);
         String output = gson.toJson(response);
@@ -41,7 +41,7 @@ public class RestResponseHelper {
         return output;
     }
 
-    public static String getAllLobbiesResponse(List<Lobby> allLobbies)
+    public static String getAllLobbiesResponse(List<LobbyView> allLobbies)
     {
         LobbyResponse response = new LobbyResponse();
         response.setSuccess(true);

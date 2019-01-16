@@ -1,6 +1,5 @@
 package client.websockets;
 
-import client.logic.onlineimplementation.MultiplayerFourPlayerGame;
 import client.ui.Main;
 import com.google.gson.Gson;
 import shared.Message;
@@ -22,6 +21,7 @@ public class CommunicatorWebSocket extends Communicator implements Runnable {
     private static String message;
     private static Gson gson = null;
     private static Game game;
+    private static boolean needsUpdate;
     private static List<Message> responses = new ArrayList<>();
     /*
      * The local websocket uri to connect to.
@@ -35,7 +35,6 @@ public class CommunicatorWebSocket extends Communicator implements Runnable {
         instance = this;
         gson = new Gson();
     }
-
 
 
     /*
@@ -61,9 +60,17 @@ public class CommunicatorWebSocket extends Communicator implements Runnable {
         CommunicatorWebSocket.game = game;
     }
 
+    public static boolean isNeedsUpdate() {
+        return needsUpdate;
+    }
+
+    public static void setNeedsUpdate(boolean needsUpdate) {
+        CommunicatorWebSocket.needsUpdate = needsUpdate;
+    }
+
     public void sendMessage(Message message) {
 
-        if(session==null){
+        if (session == null) {
             responses.add(new Message("Exception", new Exception("No connection to server")));
             return;
         }
@@ -102,8 +109,9 @@ public class CommunicatorWebSocket extends Communicator implements Runnable {
         Message message = Message.fromJSON(messageText);
         if (message.getName().equals("update")) {
             try {
-                if(game!=null)
-                game.setNeedsUpdate(true);
+                if (game != null)
+                    game.setNeedsUpdate(true);
+                needsUpdate  =true;
             } catch (Exception e) {
                 e.printStackTrace();
             }

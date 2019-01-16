@@ -1,6 +1,6 @@
 package client.rest;
 
-import client.domain.classes.Lobby;
+import client.domain.classes.LobbyView;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import org.apache.http.HttpEntity;
@@ -26,19 +26,19 @@ public class LobbyClient {
 
     }
 
-    public Lobby getLobby(int lobbyId) {
+    public LobbyView getLobby(int lobbyId) {
         String queryGet = "/lobby/" + lobbyId;
         LobbyResponse response = executeQueryGet(queryGet);
         return response.getLobbies().get(0);
     }
 
-    public List<Lobby> getAllLobbies() {
+    public List<LobbyView> getAllLobbies() {
         String queryGet = "/lobby/all";
         LobbyResponse response = executeQueryGet(queryGet);
         return response.getLobbies();
     }
 
-    public Lobby addLobby(Lobby lobby) {
+    public LobbyView addLobby(LobbyView lobby) {
         String queryPost = "/lobby";
         LobbyResponse response = executeQueryPost(lobby,queryPost);
         return response.getLobbies().get(0);
@@ -61,7 +61,7 @@ public class LobbyClient {
         return executeHttpUriRequest(httpGet);
     }
 
-    private LobbyResponse executeQueryPost(Lobby lobbyRequest, String queryPost) {
+    private LobbyResponse executeQueryPost(LobbyView lobbyRequest, String queryPost) {
 
         // Build the query for the REST service
         final String query = url + queryPost;

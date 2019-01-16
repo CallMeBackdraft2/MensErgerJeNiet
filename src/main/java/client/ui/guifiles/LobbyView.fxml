@@ -9,24 +9,20 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fitHeight="400.0" fitWidth="431.0" pickOnBounds="true">
             <Image url="@../Images/parchment-texture.jpg" />
         </ImageView>
         <ChoiceBox fx:id="cbLobbyType" layoutX="270.0" layoutY="31.0" prefWidth="150.0" />
-        <ListView fx:id="lvPlayerList" layoutX="271.0" layoutY="115.0" prefHeight="240.0" prefWidth="150.0" />
-        <TextField fx:id="txtfPassword" disable="true" layoutX="271.0" layoutY="73.0" />
+        <ListView fx:id="lvPlayerList" layoutX="271.0" layoutY="106.0" prefHeight="249.0" prefWidth="150.0" />
         <Label layoutX="270.0" layoutY="14.0" text="Lobby Type:" />
-        <Label layoutX="270.0" layoutY="56.0" text="Password:" />
         <Button fx:id="btnLeaveLobby" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Leave Lobby" />
-        <Button fx:id="btnReady" layoutX="334.0" layoutY="361.0" mnemonicParsing="false" text="Ready" />
-        <Label layoutX="270.0" layoutY="98.0" text="Player List:" />
-        <ImageView fx:id="imgvBoardView" fitHeight="240.0" fitWidth="240.0" layoutX="14.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+        <Button fx:id="btnReady" layoutX="333.0" layoutY="361.0" mnemonicParsing="false" text="Ready" />
+        <Label layoutX="274.0" layoutY="89.0" text="Player List:" />
+        <ImageView fx:id="imgvBoardView" fitHeight="258.0" fitWidth="240.0" layoutX="14.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../Images/4playerboard.JPG" />
         </ImageView>
-        <ChoiceBox fx:id="cbGameMode" layoutX="14.0" layoutY="73.0" prefHeight="25.0" prefWidth="240.0" />
-        <Label layoutX="14.0" layoutY="56.0" text="Game Mode:" />
         <TextField fx:id="txtfLobbyName" disable="true" layoutX="14.0" layoutY="31.0" prefHeight="25.0" prefWidth="240.0" />
         <Label layoutX="14.0" layoutY="14.0" text="Lobby Name:" />
       <Button fx:id="btnAddPlayer" layoutX="120.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Add Player" />

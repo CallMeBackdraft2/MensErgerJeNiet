@@ -4,6 +4,7 @@ import client.logic.onlineimplementation.ConnectionCaller;
 import client.ui.JavaFXSceneFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.File;
@@ -17,9 +18,9 @@ public class RegisterViewController {
     @FXML
     TextField txt_username;
     @FXML
-    TextField txt_password;
+    PasswordField txt_password;
     @FXML
-    TextField txt_repeatPassword;
+    PasswordField txt_repeatPassword;
     private ConnectionCaller connectionCaller;
 
     @FXML

@@ -1,14 +1,14 @@
 package client.rest;
 
-import client.domain.classes.Lobby;
+import client.domain.classes.LobbyView;
 
 public class LobbyClientMain {
 
     public static void main(String[] args) {
         LobbyClient client = new LobbyClient();
-        Lobby l = new Lobby(1);
+        LobbyView l = new LobbyView(1);
         client.addLobby(l);
-        Lobby b = new Lobby(2);
+        LobbyView b = new LobbyView(2);
         client.addLobby(b);
 
     }

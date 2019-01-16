@@ -40,7 +40,10 @@ public class LoginViewController {
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
+                bttn_register.getScene().getWindow().hide();
+
             }
+
         });
 
         bttn_register.setOnAction(event -> {

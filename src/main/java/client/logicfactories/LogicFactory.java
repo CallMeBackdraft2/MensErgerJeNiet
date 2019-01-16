@@ -1,6 +1,6 @@
 package client.logicfactories;
 
-import client.domain.classes.Lobby;
+import client.domain.classes.LobbyView;
 import shared.interfaces.Game;
 import client.logic.localimplementation.LocalFourPlayerGame;
 import client.logic.onlineimplementation.MultiplayerFourPlayerGame;
@@ -15,7 +15,7 @@ public class LogicFactory {
 
     }
 
-    public static Game getLocalFourPlayerGame(Lobby lobby){
+    public static Game getLocalFourPlayerGame(LobbyView lobby){
         return new LocalFourPlayerGame(lobby);
     }
 

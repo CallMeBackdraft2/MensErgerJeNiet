@@ -1,6 +1,6 @@
 package server.rest;
 
-import client.domain.classes.Lobby;
+import client.domain.classes.LobbyView;
 import server.logic.LobbyManager;
 
 import javax.ws.rs.*;
@@ -17,7 +17,7 @@ public class LobbyRESTService {
     @Path("/lobby")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response addLobby(Lobby lobby) {
+    public Response addLobby(LobbyView lobby) {
 
         System.out.println("[Server addLobby]");
 
@@ -43,7 +43,7 @@ public class LobbyRESTService {
 
         // Find lobby
         int lobbyId = Integer.parseInt(lobbyIdAsString);
-        Lobby lobby = LobbyManager.getInstance().getLobbies().get(lobbyId);
+        LobbyView lobby = LobbyManager.getInstance().getLobbies().get(lobbyId);
 
         // Check whether lobby exists
         if (lobby == null) {
@@ -63,7 +63,7 @@ public class LobbyRESTService {
         System.out.println("[Server getAllLobbies]");
 
         // Get all pets from the store
-        List<Lobby> allLobbiesFromRest = LobbyManager.getInstance().getLobbies();
+        List<LobbyView> allLobbiesFromRest = LobbyManager.getInstance().getLobbies();
 
         // Define response
         return Response.status(200).entity(RestResponseHelper.getAllLobbiesResponse(allLobbiesFromRest)).build();

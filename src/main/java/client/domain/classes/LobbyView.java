@@ -8,41 +8,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-
-public class Lobby {
+public class LobbyView {
 
     private GameMode gameMode;
     private boolean isOnline;
     private List<Player> players;
     private List<LobbyMessage> messages;
     private int lobbyId;
+    private String name;
 
-
-    public Lobby( ) {
+    public LobbyView() {
+        name = "Unnamed Lobby";
         players = new ArrayList<>();
         messages = new ArrayList<>();
         gameMode = GameMode.FOURPLAYERBOARD;
     }
-
-    public Lobby(int lobbyId) {
+    public LobbyView(int lobbyId) {
         this.lobbyId = lobbyId;
         players = new ArrayList<>();
         messages = new ArrayList<>();
         gameMode = GameMode.FOURPLAYERBOARD;
     }
+    public LobbyView(Player host) {
+        players = new ArrayList<>();
+        messages = new ArrayList<>();
+        gameMode = GameMode.FOURPLAYERBOARD;
+        players.add(host);
+    }
 
-   public Lobby(Player host) {
-       players = new ArrayList<>();
-       messages = new ArrayList<>();
-       gameMode = GameMode.FOURPLAYERBOARD;
-       players.add(host);
-   }
+
 
     public List<LobbyMessage> getMessages() {
 
         return messages;
 
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public LobbyView setMessages(List<LobbyMessage> messages) {
+        this.messages = messages;
+        return this;
     }
 
     public void addMessage(Player player, String message) {
@@ -52,12 +60,11 @@ public class Lobby {
 
     public void playerJoin(Player player) {
         if (gameMode.equals(GameMode.FOURPLAYERBOARD)) {
-            if (players.size() + 1 >= 5){
+            if (players.size() + 1 >= 5) {
                 throw new IllegalArgumentException("Maximal of 4 players allowed");
             }
-        }
-        else {
-            if (players.size() + 1 >= 7){
+        } else {
+            if (players.size() + 1 >= 7) {
                 throw new IllegalArgumentException("Maximal of 6 players allowed");
             }
         }
@@ -68,10 +75,11 @@ public class Lobby {
         players.remove(player);
     }
 
-
     public List<Player> getPlayers() {
         return players;
     }
+
+
 
     public Player getPlayerByIndex(int index) {
         return players.get(index);
@@ -82,17 +90,31 @@ public class Lobby {
         return gameMode;
     }
 
-    public Lobby setGameMode(GameMode gameMode) {
+    public void setGameMode(GameMode gameMode) {
         this.gameMode = gameMode;
-        return this;
+
     }
 
     public boolean isOnline() {
         return isOnline;
     }
 
-    public Lobby setOnline(boolean online) {
+    public void setOnline(boolean online) {
         isOnline = online;
-        return this;
+    }
+
+    @Override
+    public String toString() {
+
+        return name + " (player count = " + players.size() + ")";
+
+    }
+
+    public void setName(String name) {
+    this.name = name;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players=players;
     }
 }

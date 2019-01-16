@@ -13,10 +13,13 @@ public class Receiver {
     private CommunicatorWebSocket communicator;
 
     public Receiver() {
-        communicator = CommunicatorWebSocket.getInstance();
     }
 
     public <T> T call(Class<T> tClass, Object... args) throws Exception {
+
+        if(communicator==null){
+            communicator = CommunicatorWebSocket.getInstance();
+        }
 
         StackTraceElement[] elements = Thread.currentThread().getStackTrace();
         String methodName = elements[2].getMethodName();

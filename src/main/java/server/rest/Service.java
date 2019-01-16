@@ -20,6 +20,13 @@ public class Service {
     public Response login(@PathParam("username") String username,
                           @PathParam("password") String password) {
 
+
+        if(playerHashMap.values().isEmpty()){
+            String testUsername = "b";
+            String testPassword = "b";
+            register(testUsername,testPassword);
+        }
+
         boolean valid = true;
         String message = "";
 

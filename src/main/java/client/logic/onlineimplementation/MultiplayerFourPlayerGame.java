@@ -28,11 +28,11 @@ public class MultiplayerFourPlayerGame implements Game {
 
     @Override
     public boolean getNeedsUpdate() throws Exception {
-        return needsUpdate;
+        return CommunicatorWebSocket.isNeedsUpdate();
     }
 
     public void setNeedsUpdate(boolean needsUpdate) throws Exception {
-        this.needsUpdate = needsUpdate;
+        CommunicatorWebSocket.setNeedsUpdate(needsUpdate);
     }
 
     @Override

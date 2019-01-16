@@ -7,7 +7,7 @@ public class MessageShower {
     public static void showError(Exception e){
 
         Alert a = new Alert(Alert.AlertType.ERROR);
-
+        e.printStackTrace();
         a.setHeaderText(e.getMessage());
         a.show();
 

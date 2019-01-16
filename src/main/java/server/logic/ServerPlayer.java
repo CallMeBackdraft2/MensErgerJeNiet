@@ -11,10 +11,10 @@ public class ServerPlayer {
     private Session session;
     private String username;
 
-    public ServerPlayer(int id, Session session, String username) {
-        this.id = id;
+
+    public ServerPlayer( Session session) {
         this.session = session;
-        this.username = username;
+
     }
 
     public int getId() {
@@ -42,4 +42,6 @@ public class ServerPlayer {
     public Player toPlayer() {
         return new Player(id, username);
     }
+
+
 }
