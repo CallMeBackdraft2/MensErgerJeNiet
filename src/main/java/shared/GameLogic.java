@@ -39,8 +39,8 @@ public class GameLogic {
         return this;
     }
 
-    public void setDice(Dice dice){
-        if(debugMode){
+    public void setDice(Dice dice) {
+        if (debugMode) {
             this.dice = dice;
         }
     }
@@ -193,19 +193,30 @@ public class GameLogic {
         Tile possibleMove;
         possibleMove = getWalkingTilePossibleMove(pawn, curTile);
 
-        if (pawn.getPawnTileId().equals((pawn.getFullId().substring(0, 2) + "H04"))) {
-            return null;
-        }
+
         if (pawn.getStepsTaken() + dice.getLastRolled() >= boardStorage.getTileAmountOf("WLK")) {
 
-            if(boardStorage.getTile(pawn.getPawnTileId()).getType().endsWith("H") && getHomeBaseLockedOf(pawn.getFullId().substring(0,2),curTile.getNummerId())){
-                return null;
+
+            int minHomeLocked = getMinHomeBaseLocked(pawn.getFullId().substring(0, 2));
+
+            if (curTile.getType().endsWith("H")) {
+                if (getHomeBaseLockedOf(curTile.getFullId().substring(0, 2), Integer.parseInt(pawn.getPawnTileId().substring(4)))) {
+                  //  return null;
+                }
             }
 
-            int amountToWalk = pawn.getStepsTaken() + dice.getLastRolled() - boardStorage.getTileAmountOf("WLK");
-            int t = 1;
+            int t;
+            int amountToWalk = dice.getLastRolled();
+
+            if (curTile.getType().equals("WLK")) {
+
+                t = 1;
+                amountToWalk -= boardStorage.getTileAmountOf("WLK") - pawn.getStepsTaken();
+            } else {
+                t = Integer.parseInt(pawn.getPawnTileId().substring(4));
+            }
             int dir = 1;
-            amountToWalk = amountToWalk % 6;
+            // amountToWalk = amountToWalk % 6;
             while (amountToWalk > 0) {
                 if (t == 4) {
                     dir = -1;
@@ -215,27 +226,63 @@ public class GameLogic {
                 t += dir;
                 amountToWalk--;
             }
-
-
-            Tile tile = boardStorage.getTile((pawn.getFullId().substring(0, 2) + "H0" + t));
-            if (tile.getPawn() != null) {
-                if (tile.getPawn().getPlayerColor() == pawn.getPlayerColor()) {
+            possibleMove = boardStorage.getTile(pawn.getFullId().substring(0, 2) + "H0" + t);
+            if (possibleMove.getPawn() != null) {
+                if (possibleMove.getPawn().getPlayerColor() == pawn.getPlayerColor()) {
                     return null;
                 }
             }
+        /*
+            if (pawn.getStepsTaken() + dice.getLastRolled() >= boardStorage.getTileAmountOf("WLK")) {
 
-            return tile;
+
+
+                int amountToWalk = pawn.getStepsTaken() + dice.getLastRolled() - boardStorage.getTileAmountOf("WLK");
+                int t = 1;
+                int dir = 1;
+                amountToWalk = amountToWalk % 6;
+                while (amountToWalk > 0) {
+                    if (t == 4) {
+                        dir = -1;
+                    } else if (t == 1) {
+                        dir = 1;
+                    }
+                    t += dir;
+                    amountToWalk--;
+                }
+
+
+                Tile tile = boardStorage.getTile((pawn.getFullId().substring(0, 2) + "H0" + t));
+                if (tile.getPawn() != null) {
+                    if (tile.getPawn().getPlayerColor() == pawn.getPlayerColor()) {
+                        return null;
+                    }
+                }
+
+                return tile;
+            }*/
+
+
         }
 
         return possibleMove;
     }
 
+
+    private int getMinHomeBaseLocked(String tileColor) {
+        for (int i = 1; i <= 4; i++) {
+            boolean locked = getHomeBaseLockedOf(tileColor, i);
+            if (locked) return i;
+        }
+        return -1;
+    }
+
     private boolean getHomeBaseLockedOf(String tileColor, int base) {
-        if (boardStorage.getTile(tileColor + "H0" +base).getPawn() !=null) {
-                    if(base==4) {
-                        return true;
-                    }else
-                        return getHomeBaseLockedOf(tileColor,base+1);
+        if (boardStorage.getTile(tileColor + "H0" + base).getPawn() != null) {
+            if (base == 4) {
+                return true;
+            } else
+                return getHomeBaseLockedOf(tileColor, base + 1);
         }
         return false;
     }
@@ -278,8 +325,8 @@ public class GameLogic {
         return boardStorage.getPawn(id);
     }
 
-    public void movePawnDebug(String pawnId, String tileId) throws Exception{
-        if(!debugMode){
+    public void movePawnDebug(String pawnId, String tileId) throws Exception {
+        if (!debugMode) {
             throw new Exception("Not in debug mode");
         }
         getPawn(pawnId).setPawnTileId(tileId);

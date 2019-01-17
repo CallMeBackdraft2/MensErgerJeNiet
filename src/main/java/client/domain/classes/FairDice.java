@@ -24,7 +24,6 @@ public class FairDice implements Dice {
     // Methods
     public int rollDice() {
         amountRolled++;
-        if(amountRolled==1){lastRolled = 6; return lastRolled;}
         int number = r.nextInt(6) + 1;
         this.lastRolled = number;
         return number;
