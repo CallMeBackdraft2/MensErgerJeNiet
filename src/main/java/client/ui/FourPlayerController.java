@@ -428,7 +428,9 @@ public class FourPlayerController {
 
     private void showError(Exception e) {
 
-
+        if(e.getMessage().isEmpty()){
+            return;
+        }
         Alert a = new Alert(Alert.AlertType.INFORMATION);
 
         if(e.getMessage()!=null && e.getMessage().endsWith("has won")){
